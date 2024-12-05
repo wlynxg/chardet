@@ -1,5 +1,6 @@
 package chardet
 
-type CharSetProbe interface {
+type ICharSetProbe interface {
 	Feed([]byte) ProbingState
+	Reset()
 }

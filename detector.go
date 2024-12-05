@@ -12,9 +12,10 @@ type Result struct {
 }
 
 type UniversalDetector struct {
-	done       bool
-	gotData    bool
-	inputState InputState
+	done        bool
+	gotData     bool
+	hasWinBytes bool
+	inputState  InputState
 
 	highByteDetector *regexp.Regexp
 	escDetector      *regexp.Regexp
@@ -22,6 +23,7 @@ type UniversalDetector struct {
 
 	escCharsetProbe *EscCharSetProbe
 	langFilter      LangFilter
+	charsetProbes   []interface{}
 
 	result *Result
 }
@@ -35,6 +37,26 @@ func NewUniversalDetector() *UniversalDetector {
 		highByteDetector: highByteDetector,
 		escDetector:      escDetector,
 		lastChars:        []byte{},
+	}
+}
+
+func (u *UniversalDetector) Reset() {
+	u.result = &Result{}
+	u.done = false
+	u.gotData = false
+	u.hasWinBytes = false
+	u.inputState = PureAsciiInputState
+	u.lastChars = []byte{}
+
+	if u.escCharsetProbe != nil {
+		u.escCharsetProbe.Reset()
+	}
+
+	for _, p := range u.charsetProbes {
+		if p != nil {
+			// TODO: charsetProbes Reset
+			// p.Reset()
+		}
 	}
 }
 
@@ -90,15 +112,30 @@ func (u *UniversalDetector) Feed(data []byte) {
 		}
 	}
 
-	u.lastChars = append(u.lastChars, data[len(data)-1:]...)
+	u.lastChars = append(u.lastChars, data[len(data)-1])
 
 	// If we've seen escape sequences, use the EscCharSetProbe, which
 	// uses a simple state machine to check for known escape sequences in
 	// HZ and ISO-2022 encodings, since those are the only encodings that
 	// use such sequences.
-	if u.inputState == EcsAsciiInputState {
+	switch u.inputState {
+	case EcsAsciiInputState:
 		if u.escCharsetProbe == nil {
 			u.escCharsetProbe = NewEscCharSetProbe(u.langFilter)
 		}
+
+		if u.escCharsetProbe.Feed(data) == FoundItProbingState {
+			u.result = &Result{
+				Encoding:   u.escCharsetProbe.CharsetName(),
+				Confidence: u.escCharsetProbe.Confidence(),
+				Language:   u.escCharsetProbe.Language(),
+			}
+			u.done = true
+		}
+	case HighByteInputState:
+		if u.charsetProbes == nil {
+			u.charsetProbes = []interface{}{}
+		}
+	default:
 	}
 }

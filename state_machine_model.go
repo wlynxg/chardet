@@ -1,0 +1,800 @@
+package chardet
+
+type StateMachineModel struct {
+	Name         string
+	Language     string
+	ClassTable   []byte
+	ClassFactor  byte
+	StateTable   []byte
+	CharLenTable []byte
+}
+
+func HzSmModel() *StateMachineModel {
+	hzCls := []byte{
+		1, 0, 0, 0, 0, 0, 0, 0, // 00 - 07
+		0, 0, 0, 0, 0, 0, 0, 0, // 08 - 0f
+		0, 0, 0, 0, 0, 0, 0, 0, // 10 - 17
+		0, 0, 0, 1, 0, 0, 0, 0, // 18 - 1f
+		0, 0, 0, 0, 0, 0, 0, 0, // 20 - 27
+		0, 0, 0, 0, 0, 0, 0, 0, // 28 - 2f
+		0, 0, 0, 0, 0, 0, 0, 0, // 30 - 37
+		0, 0, 0, 0, 0, 0, 0, 0, // 38 - 3f
+		0, 0, 0, 0, 0, 0, 0, 0, // 40 - 47
+		0, 0, 0, 0, 0, 0, 0, 0, // 48 - 4f
+		0, 0, 0, 0, 0, 0, 0, 0, // 50 - 57
+		0, 0, 0, 0, 0, 0, 0, 0, // 58 - 5f
+		0, 0, 0, 0, 0, 0, 0, 0, // 60 - 67
+		0, 0, 0, 0, 0, 0, 0, 0, // 68 - 6f
+		0, 0, 0, 0, 0, 0, 0, 0, // 70 - 77
+		0, 0, 0, 4, 0, 5, 2, 0, // 78 - 7f
+		1, 1, 1, 1, 1, 1, 1, 1, // 80 - 87
+		1, 1, 1, 1, 1, 1, 1, 1, // 88 - 8f
+		1, 1, 1, 1, 1, 1, 1, 1, // 90 - 97
+		1, 1, 1, 1, 1, 1, 1, 1, // 98 - 9f
+		1, 1, 1, 1, 1, 1, 1, 1, // a0 - a7
+		1, 1, 1, 1, 1, 1, 1, 1, // a8 - af
+		1, 1, 1, 1, 1, 1, 1, 1, // b0 - b7
+		1, 1, 1, 1, 1, 1, 1, 1, // b8 - bf
+		1, 1, 1, 1, 1, 1, 1, 1, // c0 - c7
+		1, 1, 1, 1, 1, 1, 1, 1, // c8 - cf
+		1, 1, 1, 1, 1, 1, 1, 1, // d0 - d7
+		1, 1, 1, 1, 1, 1, 1, 1, // d8 - df
+		1, 1, 1, 1, 1, 1, 1, 1, // e0 - e7
+		1, 1, 1, 1, 1, 1, 1, 1, // e8 - ef
+		1, 1, 1, 1, 1, 1, 1, 1, // f0 - f7
+		1, 1, 1, 1, 1, 1, 1, 1, // f8 - ff
+	}
+
+	hzSt := []byte{
+		StartMachineState, ErrorMachineState, 3, StartMachineState, StartMachineState, StartMachineState, ErrorMachineState, ErrorMachineState, // 00-07
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, // 08-0f
+		ItsMeMachineState, ItsMeMachineState, ErrorMachineState, ErrorMachineState, StartMachineState, StartMachineState, 4, ErrorMachineState, // 10-17
+		5, ErrorMachineState, 6, ErrorMachineState, 5, 5, 4, ErrorMachineState, // 18-1f
+		4, ErrorMachineState, 4, 4, 4, ErrorMachineState, 4, ErrorMachineState, // 20-27
+		4, ItsMeMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, // 28-2f
+	}
+
+	hzCharLenTable := []byte{0, 0, 0, 0, 0, 0}
+
+	return &StateMachineModel{
+		Name:         HzModelName,
+		Language:     ChineseLanguage,
+		ClassTable:   hzCls,
+		ClassFactor:  6,
+		StateTable:   hzSt,
+		CharLenTable: hzCharLenTable,
+	}
+}
+
+func Iso2022cnSmModel() *StateMachineModel {
+	Iso2022cnCls := []byte{
+		2, 0, 0, 0, 0, 0, 0, 0, // 00 - 07
+		0, 0, 0, 0, 0, 0, 0, 0, // 08 - 0f
+		0, 0, 0, 0, 0, 0, 0, 0, // 10 - 17
+		0, 0, 0, 1, 0, 0, 0, 0, // 18 - 1f
+		0, 0, 0, 0, 0, 0, 0, 0, // 20 - 27
+		0, 3, 0, 0, 0, 0, 0, 0, // 28 - 2f
+		0, 0, 0, 0, 0, 0, 0, 0, // 30 - 37
+		0, 0, 0, 0, 0, 0, 0, 0, // 38 - 3f
+		0, 0, 0, 4, 0, 0, 0, 0, // 40 - 47
+		0, 0, 0, 0, 0, 0, 0, 0, // 48 - 4f
+		0, 0, 0, 0, 0, 0, 0, 0, // 50 - 57
+		0, 0, 0, 0, 0, 0, 0, 0, // 58 - 5f
+		0, 0, 0, 0, 0, 0, 0, 0, // 60 - 67
+		0, 0, 0, 0, 0, 0, 0, 0, // 68 - 6f
+		0, 0, 0, 0, 0, 0, 0, 0, // 70 - 77
+		0, 0, 0, 0, 0, 0, 0, 0, // 78 - 7f
+		2, 2, 2, 2, 2, 2, 2, 2, // 80 - 87
+		2, 2, 2, 2, 2, 2, 2, 2, // 88 - 8f
+		2, 2, 2, 2, 2, 2, 2, 2, // 90 - 97
+		2, 2, 2, 2, 2, 2, 2, 2, // 98 - 9f
+		2, 2, 2, 2, 2, 2, 2, 2, // a0 - a7
+		2, 2, 2, 2, 2, 2, 2, 2, // a8 - af
+		2, 2, 2, 2, 2, 2, 2, 2, // b0 - b7
+		2, 2, 2, 2, 2, 2, 2, 2, // b8 - bf
+		2, 2, 2, 2, 2, 2, 2, 2, // c0 - c7
+		2, 2, 2, 2, 2, 2, 2, 2, // c8 - cf
+		2, 2, 2, 2, 2, 2, 2, 2, // d0 - d7
+		2, 2, 2, 2, 2, 2, 2, 2, // d8 - df
+		2, 2, 2, 2, 2, 2, 2, 2, // e0 - e7
+		2, 2, 2, 2, 2, 2, 2, 2, // e8 - ef
+		2, 2, 2, 2, 2, 2, 2, 2, // f0 - f7
+		2, 2, 2, 2, 2, 2, 2, 2, // f8 - ff
+	}
+
+	Iso2022cnSt := []byte{
+		StartMachineState, 3, ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, // 00-07
+		StartMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 08-0f
+		ErrorMachineState, ErrorMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, // 10-17
+		ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, 4, ErrorMachineState, // 18-1f
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 20-27
+		5, 6, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 28-2f
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 30-37
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ErrorMachineState, StartMachineState, // 38-3f
+	}
+
+	Iso2022cnCharLenTable := []byte{0, 0, 0, 0, 0, 0, 0, 0, 0}
+
+	return &StateMachineModel{
+		Name:         Iso2022cnModelName,
+		Language:     ChineseLanguage,
+		ClassTable:   Iso2022cnCls,
+		ClassFactor:  9,
+		StateTable:   Iso2022cnSt,
+		CharLenTable: Iso2022cnCharLenTable,
+	}
+}
+
+func Iso2022jpSmModel() *StateMachineModel {
+	Iso2022jpCls := []byte{
+		2, 0, 0, 0, 0, 0, 0, 0, // 00 - 07
+		0, 0, 0, 0, 0, 0, 2, 2, // 08 - 0f
+		0, 0, 0, 0, 0, 0, 0, 0, // 10 - 17
+		0, 0, 0, 1, 0, 0, 0, 0, // 18 - 1f
+		0, 0, 0, 0, 7, 0, 0, 0, // 20 - 27
+		3, 0, 0, 0, 0, 0, 0, 0, // 28 - 2f
+		0, 0, 0, 0, 0, 0, 0, 0, // 30 - 37
+		0, 0, 0, 0, 0, 0, 0, 0, // 38 - 3f
+		6, 0, 4, 0, 8, 0, 0, 0, // 40 - 47
+		0, 9, 5, 0, 0, 0, 0, 0, // 48 - 4f
+		0, 0, 0, 0, 0, 0, 0, 0, // 50 - 57
+		0, 0, 0, 0, 0, 0, 0, 0, // 58 - 5f
+		0, 0, 0, 0, 0, 0, 0, 0, // 60 - 67
+		0, 0, 0, 0, 0, 0, 0, 0, // 68 - 6f
+		0, 0, 0, 0, 0, 0, 0, 0, // 70 - 77
+		0, 0, 0, 0, 0, 0, 0, 0, // 78 - 7f
+		2, 2, 2, 2, 2, 2, 2, 2, // 80 - 87
+		2, 2, 2, 2, 2, 2, 2, 2, // 88 - 8f
+		2, 2, 2, 2, 2, 2, 2, 2, // 90 - 97
+		2, 2, 2, 2, 2, 2, 2, 2, // 98 - 9f
+		2, 2, 2, 2, 2, 2, 2, 2, // a0 - a7
+		2, 2, 2, 2, 2, 2, 2, 2, // a8 - af
+		2, 2, 2, 2, 2, 2, 2, 2, // b0 - b7
+		2, 2, 2, 2, 2, 2, 2, 2, // b8 - bf
+		2, 2, 2, 2, 2, 2, 2, 2, // c0 - c7
+		2, 2, 2, 2, 2, 2, 2, 2, // c8 - cf
+		2, 2, 2, 2, 2, 2, 2, 2, // d0 - d7
+		2, 2, 2, 2, 2, 2, 2, 2, // d8 - df
+		2, 2, 2, 2, 2, 2, 2, 2, // e0 - e7
+		2, 2, 2, 2, 2, 2, 2, 2, // e8 - ef
+		2, 2, 2, 2, 2, 2, 2, 2, // f0 - f7
+		2, 2, 2, 2, 2, 2, 2, 2, // f8 - ff
+	}
+
+	Iso2022jpSt := []byte{
+		StartMachineState, 3, ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, // 00-07
+		StartMachineState, StartMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 08-0f
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, // 10-17
+		ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ErrorMachineState, ErrorMachineState, // 18-1f
+		ErrorMachineState, 5, ErrorMachineState, ErrorMachineState, ErrorMachineState, 4, ErrorMachineState, ErrorMachineState, // 20-27
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, 6, ItsMeMachineState, ErrorMachineState, ItsMeMachineState, ErrorMachineState, // 28-2f
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ItsMeMachineState, // 30-37
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 38-3f
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ErrorMachineState, StartMachineState, StartMachineState, // 40-47
+	}
+
+	Iso2022jpCharLenTable := []byte{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+
+	return &StateMachineModel{
+		Name:         Iso2022jpModelName,
+		Language:     JapaneseLanguage,
+		ClassTable:   Iso2022jpCls,
+		ClassFactor:  10,
+		StateTable:   Iso2022jpSt,
+		CharLenTable: Iso2022jpCharLenTable,
+	}
+}
+
+func Iso2022krSmModel() *StateMachineModel {
+	Iso2022krCls := []byte{
+		2, 0, 0, 0, 0, 0, 0, 0, // 00 - 07
+		0, 0, 0, 0, 0, 0, 0, 0, // 08 - 0f
+		0, 0, 0, 0, 0, 0, 0, 0, // 10 - 17
+		0, 0, 0, 1, 0, 0, 0, 0, // 18 - 1f
+		0, 0, 0, 0, 3, 0, 0, 0, // 20 - 27
+		0, 4, 0, 0, 0, 0, 0, 0, // 28 - 2f
+		0, 0, 0, 0, 0, 0, 0, 0, // 30 - 37
+		0, 0, 0, 0, 0, 0, 0, 0, // 38 - 3f
+		0, 0, 0, 5, 0, 0, 0, 0, // 40 - 47
+		0, 0, 0, 0, 0, 0, 0, 0, // 48 - 4f
+		0, 0, 0, 0, 0, 0, 0, 0, // 50 - 57
+		0, 0, 0, 0, 0, 0, 0, 0, // 58 - 5f
+		0, 0, 0, 0, 0, 0, 0, 0, // 60 - 67
+		0, 0, 0, 0, 0, 0, 0, 0, // 68 - 6f
+		0, 0, 0, 0, 0, 0, 0, 0, // 70 - 77
+		0, 0, 0, 0, 0, 0, 0, 0, // 78 - 7f
+		2, 2, 2, 2, 2, 2, 2, 2, // 80 - 87
+		2, 2, 2, 2, 2, 2, 2, 2, // 88 - 8f
+		2, 2, 2, 2, 2, 2, 2, 2, // 90 - 97
+		2, 2, 2, 2, 2, 2, 2, 2, // 98 - 9f
+		2, 2, 2, 2, 2, 2, 2, 2, // a0 - a7
+		2, 2, 2, 2, 2, 2, 2, 2, // a8 - af
+		2, 2, 2, 2, 2, 2, 2, 2, // b0 - b7
+		2, 2, 2, 2, 2, 2, 2, 2, // b8 - bf
+		2, 2, 2, 2, 2, 2, 2, 2, // c0 - c7
+		2, 2, 2, 2, 2, 2, 2, 2, // c8 - cf
+		2, 2, 2, 2, 2, 2, 2, 2, // d0 - d7
+		2, 2, 2, 2, 2, 2, 2, 2, // d8 - df
+		2, 2, 2, 2, 2, 2, 2, 2, // e0 - e7
+		2, 2, 2, 2, 2, 2, 2, 2, // e8 - ef
+		2, 2, 2, 2, 2, 2, 2, 2, // f0 - f7
+		2, 2, 2, 2, 2, 2, 2, 2, // f8 - ff
+	}
+
+	Iso2022krSt := []byte{
+		StartMachineState, 3, ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, ErrorMachineState, ErrorMachineState, // 00-07
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, // 08-0f
+		ItsMeMachineState, ItsMeMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, 4, ErrorMachineState, ErrorMachineState, // 10-17
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, 5, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 18-1f
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, // 20-27
+	}
+
+	Iso2022krCharLenTable := []byte{0, 0, 0, 0, 0, 0}
+
+	return &StateMachineModel{
+		Name:         "",
+		Language:     "",
+		ClassTable:   Iso2022krCls,
+		ClassFactor:  0,
+		StateTable:   Iso2022krSt,
+		CharLenTable: Iso2022krCharLenTable,
+	}
+}
+
+func UTF8SmModel() *StateMachineModel {
+	Utf8Cls := []byte{
+		1, 1, 1, 1, 1, 1, 1, 1, // 00 - 07  //allow 0x00 as a legal value
+		1, 1, 1, 1, 1, 1, 0, 0, // 08 - 0f
+		1, 1, 1, 1, 1, 1, 1, 1, // 10 - 17
+		1, 1, 1, 0, 1, 1, 1, 1, // 18 - 1f
+		1, 1, 1, 1, 1, 1, 1, 1, // 20 - 27
+		1, 1, 1, 1, 1, 1, 1, 1, // 28 - 2f
+		1, 1, 1, 1, 1, 1, 1, 1, // 30 - 37
+		1, 1, 1, 1, 1, 1, 1, 1, // 38 - 3f
+		1, 1, 1, 1, 1, 1, 1, 1, // 40 - 47
+		1, 1, 1, 1, 1, 1, 1, 1, // 48 - 4f
+		1, 1, 1, 1, 1, 1, 1, 1, // 50 - 57
+		1, 1, 1, 1, 1, 1, 1, 1, // 58 - 5f
+		1, 1, 1, 1, 1, 1, 1, 1, // 60 - 67
+		1, 1, 1, 1, 1, 1, 1, 1, // 68 - 6f
+		1, 1, 1, 1, 1, 1, 1, 1, // 70 - 77
+		1, 1, 1, 1, 1, 1, 1, 1, // 78 - 7f
+		2, 2, 2, 2, 3, 3, 3, 3, // 80 - 87
+		4, 4, 4, 4, 4, 4, 4, 4, // 88 - 8f
+		4, 4, 4, 4, 4, 4, 4, 4, // 90 - 97
+		4, 4, 4, 4, 4, 4, 4, 4, // 98 - 9f
+		5, 5, 5, 5, 5, 5, 5, 5, // a0 - a7
+		5, 5, 5, 5, 5, 5, 5, 5, // a8 - af
+		5, 5, 5, 5, 5, 5, 5, 5, // b0 - b7
+		5, 5, 5, 5, 5, 5, 5, 5, // b8 - bf
+		0, 0, 6, 6, 6, 6, 6, 6, // c0 - c7
+		6, 6, 6, 6, 6, 6, 6, 6, // c8 - cf
+		6, 6, 6, 6, 6, 6, 6, 6, // d0 - d7
+		6, 6, 6, 6, 6, 6, 6, 6, // d8 - df
+		7, 8, 8, 8, 8, 8, 8, 8, // e0 - e7
+		8, 8, 8, 8, 8, 9, 8, 8, // e8 - ef
+		10, 11, 11, 11, 11, 11, 11, 11, // f0 - f7
+		12, 13, 13, 13, 14, 15, 0, 0, // f8 - ff
+	}
+
+	Utf8St := []byte{
+		ErrorMachineState, StartMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, 12, 10, // 00-07
+		9, 11, 8, 7, 6, 5, 4, 3, // 08-0f
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 10-17
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 18-1f
+		ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, // 20-27
+		ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, // 28-2f
+		ErrorMachineState, ErrorMachineState, 5, 5, 5, 5, ErrorMachineState, ErrorMachineState, // 30-37
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 38-3f
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, 5, 5, 5, ErrorMachineState, ErrorMachineState, // 40-47
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 48-4f
+		ErrorMachineState, ErrorMachineState, 7, 7, 7, 7, ErrorMachineState, ErrorMachineState, // 50-57
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 58-5f
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, 7, 7, ErrorMachineState, ErrorMachineState, // 60-67
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 68-6f
+		ErrorMachineState, ErrorMachineState, 9, 9, 9, 9, ErrorMachineState, ErrorMachineState, // 70-77
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 78-7f
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, 9, ErrorMachineState, ErrorMachineState, // 80-87
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 88-8f
+		ErrorMachineState, ErrorMachineState, 12, 12, 12, 12, ErrorMachineState, ErrorMachineState, // 90-97
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 98-9f
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, 12, ErrorMachineState, ErrorMachineState, // a0-a7
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // a8-af
+		ErrorMachineState, ErrorMachineState, 12, 12, 12, ErrorMachineState, ErrorMachineState, ErrorMachineState, // b0-b7
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // b8-bf
+		ErrorMachineState, ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, ErrorMachineState, ErrorMachineState, // c0-c7
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // c8-cf
+	}
+
+	Utf8CharLenTable := []byte{0, 1, 0, 0, 0, 0, 2, 3, 3, 3, 4, 4, 5, 5, 6, 6}
+	return &StateMachineModel{
+		Name:         UTF8ModelName,
+		Language:     "",
+		ClassTable:   Utf8Cls,
+		ClassFactor:  16,
+		StateTable:   Utf8St,
+		CharLenTable: Utf8CharLenTable,
+	}
+}
+
+func Ucs2LeSmModel() *StateMachineModel {
+	Ucs2leCls := []byte{
+		0, 0, 0, 0, 0, 0, 0, 0, // 00 - 07
+		0, 0, 1, 0, 0, 2, 0, 0, // 08 - 0f
+		0, 0, 0, 0, 0, 0, 0, 0, // 10 - 17
+		0, 0, 0, 3, 0, 0, 0, 0, // 18 - 1f
+		0, 0, 0, 0, 0, 0, 0, 0, // 20 - 27
+		0, 3, 3, 3, 3, 3, 0, 0, // 28 - 2f
+		0, 0, 0, 0, 0, 0, 0, 0, // 30 - 37
+		0, 0, 0, 0, 0, 0, 0, 0, // 38 - 3f
+		0, 0, 0, 0, 0, 0, 0, 0, // 40 - 47
+		0, 0, 0, 0, 0, 0, 0, 0, // 48 - 4f
+		0, 0, 0, 0, 0, 0, 0, 0, // 50 - 57
+		0, 0, 0, 0, 0, 0, 0, 0, // 58 - 5f
+		0, 0, 0, 0, 0, 0, 0, 0, // 60 - 67
+		0, 0, 0, 0, 0, 0, 0, 0, // 68 - 6f
+		0, 0, 0, 0, 0, 0, 0, 0, // 70 - 77
+		0, 0, 0, 0, 0, 0, 0, 0, // 78 - 7f
+		0, 0, 0, 0, 0, 0, 0, 0, // 80 - 87
+		0, 0, 0, 0, 0, 0, 0, 0, // 88 - 8f
+		0, 0, 0, 0, 0, 0, 0, 0, // 90 - 97
+		0, 0, 0, 0, 0, 0, 0, 0, // 98 - 9f
+		0, 0, 0, 0, 0, 0, 0, 0, // a0 - a7
+		0, 0, 0, 0, 0, 0, 0, 0, // a8 - af
+		0, 0, 0, 0, 0, 0, 0, 0, // b0 - b7
+		0, 0, 0, 0, 0, 0, 0, 0, // b8 - bf
+		0, 0, 0, 0, 0, 0, 0, 0, // c0 - c7
+		0, 0, 0, 0, 0, 0, 0, 0, // c8 - cf
+		0, 0, 0, 0, 0, 0, 0, 0, // d0 - d7
+		0, 0, 0, 0, 0, 0, 0, 0, // d8 - df
+		0, 0, 0, 0, 0, 0, 0, 0, // e0 - e7
+		0, 0, 0, 0, 0, 0, 0, 0, // e8 - ef
+		0, 0, 0, 0, 0, 0, 0, 0, // f0 - f7
+		0, 0, 0, 0, 0, 0, 4, 5, // f8 - ff
+	}
+
+	Ucs2leSt := []byte{
+		6, 6, 7, 6, 4, 3, ErrorMachineState, ErrorMachineState, // 00-07
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, // 08-0f
+		ItsMeMachineState, ItsMeMachineState, 5, 5, 5, ErrorMachineState, ItsMeMachineState, ErrorMachineState, // 10-17
+		5, 5, 5, ErrorMachineState, 5, ErrorMachineState, 6, 6, // 18-1f
+		7, 6, 8, 8, 5, 5, 5, ErrorMachineState, // 20-27
+		5, 5, 5, ErrorMachineState, ErrorMachineState, ErrorMachineState, 5, 5, // 28-2f
+		5, 5, 5, ErrorMachineState, 5, ErrorMachineState, StartMachineState, StartMachineState, // 30-37
+	}
+
+	Ucs2leCharLenTable := []byte{2, 2, 2, 2, 2, 2}
+	return &StateMachineModel{
+		Name:         UTF16LeModelName,
+		Language:     "",
+		ClassTable:   Ucs2leCls,
+		ClassFactor:  6,
+		StateTable:   Ucs2leSt,
+		CharLenTable: Ucs2leCharLenTable,
+	}
+}
+
+func Ucs2BeSmModel() *StateMachineModel {
+	Ucs2beCls := []byte{
+		0, 0, 0, 0, 0, 0, 0, 0, // 00 - 07
+		0, 0, 1, 0, 0, 2, 0, 0, // 08 - 0f
+		0, 0, 0, 0, 0, 0, 0, 0, // 10 - 17
+		0, 0, 0, 3, 0, 0, 0, 0, // 18 - 1f
+		0, 0, 0, 0, 0, 0, 0, 0, // 20 - 27
+		0, 3, 3, 3, 3, 3, 0, 0, // 28 - 2f
+		0, 0, 0, 0, 0, 0, 0, 0, // 30 - 37
+		0, 0, 0, 0, 0, 0, 0, 0, // 38 - 3f
+		0, 0, 0, 0, 0, 0, 0, 0, // 40 - 47
+		0, 0, 0, 0, 0, 0, 0, 0, // 48 - 4f
+		0, 0, 0, 0, 0, 0, 0, 0, // 50 - 57
+		0, 0, 0, 0, 0, 0, 0, 0, // 58 - 5f
+		0, 0, 0, 0, 0, 0, 0, 0, // 60 - 67
+		0, 0, 0, 0, 0, 0, 0, 0, // 68 - 6f
+		0, 0, 0, 0, 0, 0, 0, 0, // 70 - 77
+		0, 0, 0, 0, 0, 0, 0, 0, // 78 - 7f
+		0, 0, 0, 0, 0, 0, 0, 0, // 80 - 87
+		0, 0, 0, 0, 0, 0, 0, 0, // 88 - 8f
+		0, 0, 0, 0, 0, 0, 0, 0, // 90 - 97
+		0, 0, 0, 0, 0, 0, 0, 0, // 98 - 9f
+		0, 0, 0, 0, 0, 0, 0, 0, // a0 - a7
+		0, 0, 0, 0, 0, 0, 0, 0, // a8 - af
+		0, 0, 0, 0, 0, 0, 0, 0, // b0 - b7
+		0, 0, 0, 0, 0, 0, 0, 0, // b8 - bf
+		0, 0, 0, 0, 0, 0, 0, 0, // c0 - c7
+		0, 0, 0, 0, 0, 0, 0, 0, // c8 - cf
+		0, 0, 0, 0, 0, 0, 0, 0, // d0 - d7
+		0, 0, 0, 0, 0, 0, 0, 0, // d8 - df
+		0, 0, 0, 0, 0, 0, 0, 0, // e0 - e7
+		0, 0, 0, 0, 0, 0, 0, 0, // e8 - ef
+		0, 0, 0, 0, 0, 0, 0, 0, // f0 - f7
+		0, 0, 0, 0, 0, 0, 4, 5, // f8 - ff
+	}
+
+	Ucs2beSt := []byte{
+		5, 7, 7, ErrorMachineState, 4, 3, ErrorMachineState, ErrorMachineState, // 00-07
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, // 08-0f
+		ItsMeMachineState, ItsMeMachineState, 6, 6, 6, 6, ErrorMachineState, ErrorMachineState, // 10-17
+		6, 6, 6, 6, 6, ItsMeMachineState, 6, 6, // 18-1f
+		6, 6, 6, 6, 5, 7, 7, ErrorMachineState, // 20-27
+		5, 8, 6, 6, ErrorMachineState, 6, 6, 6, // 28-2f
+		6, 6, 6, 6, ErrorMachineState, ErrorMachineState, StartMachineState, StartMachineState, // 30-37
+	}
+
+	Ucs2beCharLenTable := []byte{2, 2, 2, 0, 2, 2}
+	return &StateMachineModel{
+		Name:         UTF16BeModelName,
+		Language:     "",
+		ClassTable:   Ucs2beCls,
+		ClassFactor:  6,
+		StateTable:   Ucs2beSt,
+		CharLenTable: Ucs2beCharLenTable,
+	}
+}
+
+func SjisSmModel() *StateMachineModel {
+	SjisCls := []byte{
+		1, 1, 1, 1, 1, 1, 1, 1, // 00 - 07
+		1, 1, 1, 1, 1, 1, 0, 0, // 08 - 0f
+		1, 1, 1, 1, 1, 1, 1, 1, // 10 - 17
+		1, 1, 1, 0, 1, 1, 1, 1, // 18 - 1f
+		1, 1, 1, 1, 1, 1, 1, 1, // 20 - 27
+		1, 1, 1, 1, 1, 1, 1, 1, // 28 - 2f
+		1, 1, 1, 1, 1, 1, 1, 1, // 30 - 37
+		1, 1, 1, 1, 1, 1, 1, 1, // 38 - 3f
+		2, 2, 2, 2, 2, 2, 2, 2, // 40 - 47
+		2, 2, 2, 2, 2, 2, 2, 2, // 48 - 4f
+		2, 2, 2, 2, 2, 2, 2, 2, // 50 - 57
+		2, 2, 2, 2, 2, 2, 2, 2, // 58 - 5f
+		2, 2, 2, 2, 2, 2, 2, 2, // 60 - 67
+		2, 2, 2, 2, 2, 2, 2, 2, // 68 - 6f
+		2, 2, 2, 2, 2, 2, 2, 2, // 70 - 77
+		2, 2, 2, 2, 2, 2, 2, 1, // 78 - 7f
+		3, 3, 3, 3, 3, 2, 2, 3, // 80 - 87
+		3, 3, 3, 3, 3, 3, 3, 3, // 88 - 8f
+		3, 3, 3, 3, 3, 3, 3, 3, // 90 - 97
+		3, 3, 3, 3, 3, 3, 3, 3, // 98 - 9f
+		// 0xa0 is illegal in sjis encoding, but some pages does
+		// contain such byte. We need to be more error forgiven.
+		2, 2, 2, 2, 2, 2, 2, 2, // a0 - a7
+		2, 2, 2, 2, 2, 2, 2, 2, // a8 - af
+		2, 2, 2, 2, 2, 2, 2, 2, // b0 - b7
+		2, 2, 2, 2, 2, 2, 2, 2, // b8 - bf
+		2, 2, 2, 2, 2, 2, 2, 2, // c0 - c7
+		2, 2, 2, 2, 2, 2, 2, 2, // c8 - cf
+		2, 2, 2, 2, 2, 2, 2, 2, // d0 - d7
+		2, 2, 2, 2, 2, 2, 2, 2, // d8 - df
+		3, 3, 3, 3, 3, 3, 3, 3, // e0 - e7
+		3, 3, 3, 3, 3, 4, 4, 4, // e8 - ef
+		3, 3, 3, 3, 3, 3, 3, 3, // f0 - f7
+		3, 3, 3, 3, 3, 0, 0, 0, // f8 - ff
+	}
+
+	SjisSt := []byte{
+		ErrorMachineState, StartMachineState, StartMachineState, 3, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 00-07
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, // 08-0f
+		ItsMeMachineState, ItsMeMachineState, ErrorMachineState, ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, // 10-17
+	}
+
+	SjisCharLenTable := []byte{0, 1, 1, 2, 0, 0}
+	return &StateMachineModel{
+		Name:         ShiftJisModelName,
+		Language:     "",
+		ClassTable:   SjisCls,
+		ClassFactor:  6,
+		StateTable:   SjisSt,
+		CharLenTable: SjisCharLenTable,
+	}
+}
+
+func GB2312SmModel() *StateMachineModel {
+	Gb2312Cls := []byte{
+		1, 1, 1, 1, 1, 1, 1, 1, // 00 - 07
+		1, 1, 1, 1, 1, 1, 0, 0, // 08 - 0f
+		1, 1, 1, 1, 1, 1, 1, 1, // 10 - 17
+		1, 1, 1, 0, 1, 1, 1, 1, // 18 - 1f
+		1, 1, 1, 1, 1, 1, 1, 1, // 20 - 27
+		1, 1, 1, 1, 1, 1, 1, 1, // 28 - 2f
+		3, 3, 3, 3, 3, 3, 3, 3, // 30 - 37
+		3, 3, 1, 1, 1, 1, 1, 1, // 38 - 3f
+		2, 2, 2, 2, 2, 2, 2, 2, // 40 - 47
+		2, 2, 2, 2, 2, 2, 2, 2, // 48 - 4f
+		2, 2, 2, 2, 2, 2, 2, 2, // 50 - 57
+		2, 2, 2, 2, 2, 2, 2, 2, // 58 - 5f
+		2, 2, 2, 2, 2, 2, 2, 2, // 60 - 67
+		2, 2, 2, 2, 2, 2, 2, 2, // 68 - 6f
+		2, 2, 2, 2, 2, 2, 2, 2, // 70 - 77
+		2, 2, 2, 2, 2, 2, 2, 4, // 78 - 7f
+		5, 6, 6, 6, 6, 6, 6, 6, // 80 - 87
+		6, 6, 6, 6, 6, 6, 6, 6, // 88 - 8f
+		6, 6, 6, 6, 6, 6, 6, 6, // 90 - 97
+		6, 6, 6, 6, 6, 6, 6, 6, // 98 - 9f
+		6, 6, 6, 6, 6, 6, 6, 6, // a0 - a7
+		6, 6, 6, 6, 6, 6, 6, 6, // a8 - af
+		6, 6, 6, 6, 6, 6, 6, 6, // b0 - b7
+		6, 6, 6, 6, 6, 6, 6, 6, // b8 - bf
+		6, 6, 6, 6, 6, 6, 6, 6, // c0 - c7
+		6, 6, 6, 6, 6, 6, 6, 6, // c8 - cf
+		6, 6, 6, 6, 6, 6, 6, 6, // d0 - d7
+		6, 6, 6, 6, 6, 6, 6, 6, // d8 - df
+		6, 6, 6, 6, 6, 6, 6, 6, // e0 - e7
+		6, 6, 6, 6, 6, 6, 6, 6, // e8 - ef
+		6, 6, 6, 6, 6, 6, 6, 6, // f0 - f7
+		6, 6, 6, 6, 6, 6, 6, 0, // f8 - ff
+	}
+
+	Gb2312St := []byte{ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, 3, ErrorMachineState, // 00-07
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ItsMeMachineState, // 08-0f
+		ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ErrorMachineState, ErrorMachineState, StartMachineState, // 10-17
+		4, ErrorMachineState, StartMachineState, StartMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 18-1f
+		ErrorMachineState, ErrorMachineState, 5, ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ErrorMachineState, // 20-27
+		ErrorMachineState, ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, // 28-2f
+	}
+
+	// To be accurate, the length of class 6 can be either 2 or 4.
+	// But it is not necessary to discriminate between the two since
+	// it is used for frequency analysis only, and we are validating
+	// each code range there as well. So it is safe to set it to be
+	// 2 here.
+	Gb2312CharLenTable := []byte{0, 1, 1, 1, 1, 1, 2}
+	return &StateMachineModel{
+		Name:         GB2312ModelName,
+		Language:     "",
+		ClassTable:   Gb2312Cls,
+		ClassFactor:  7,
+		StateTable:   Gb2312St,
+		CharLenTable: Gb2312CharLenTable,
+	}
+}
+
+func EucTwSmModel() *StateMachineModel {
+	EucTwCls := []byte{
+		2, 2, 2, 2, 2, 2, 2, 2, // 00 - 07
+		2, 2, 2, 2, 2, 2, 0, 0, // 08 - 0f
+		2, 2, 2, 2, 2, 2, 2, 2, // 10 - 17
+		2, 2, 2, 0, 2, 2, 2, 2, // 18 - 1f
+		2, 2, 2, 2, 2, 2, 2, 2, // 20 - 27
+		2, 2, 2, 2, 2, 2, 2, 2, // 28 - 2f
+		2, 2, 2, 2, 2, 2, 2, 2, // 30 - 37
+		2, 2, 2, 2, 2, 2, 2, 2, // 38 - 3f
+		2, 2, 2, 2, 2, 2, 2, 2, // 40 - 47
+		2, 2, 2, 2, 2, 2, 2, 2, // 48 - 4f
+		2, 2, 2, 2, 2, 2, 2, 2, // 50 - 57
+		2, 2, 2, 2, 2, 2, 2, 2, // 58 - 5f
+		2, 2, 2, 2, 2, 2, 2, 2, // 60 - 67
+		2, 2, 2, 2, 2, 2, 2, 2, // 68 - 6f
+		2, 2, 2, 2, 2, 2, 2, 2, // 70 - 77
+		2, 2, 2, 2, 2, 2, 2, 2, // 78 - 7f
+		0, 0, 0, 0, 0, 0, 0, 0, // 80 - 87
+		0, 0, 0, 0, 0, 0, 6, 0, // 88 - 8f
+		0, 0, 0, 0, 0, 0, 0, 0, // 90 - 97
+		0, 0, 0, 0, 0, 0, 0, 0, // 98 - 9f
+		0, 3, 4, 4, 4, 4, 4, 4, // a0 - a7
+		5, 5, 1, 1, 1, 1, 1, 1, // a8 - af
+		1, 1, 1, 1, 1, 1, 1, 1, // b0 - b7
+		1, 1, 1, 1, 1, 1, 1, 1, // b8 - bf
+		1, 1, 3, 1, 3, 3, 3, 3, // c0 - c7
+		3, 3, 3, 3, 3, 3, 3, 3, // c8 - cf
+		3, 3, 3, 3, 3, 3, 3, 3, // d0 - d7
+		3, 3, 3, 3, 3, 3, 3, 3, // d8 - df
+		3, 3, 3, 3, 3, 3, 3, 3, // e0 - e7
+		3, 3, 3, 3, 3, 3, 3, 3, // e8 - ef
+		3, 3, 3, 3, 3, 3, 3, 3, // f0 - f7
+		3, 3, 3, 3, 3, 3, 3, 0, // f8 - ff
+	}
+
+	EucTwSt := []byte{ErrorMachineState, ErrorMachineState, StartMachineState, 3, 3, 3, 4, ErrorMachineState, // 00-07
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ItsMeMachineState, // 08-0f
+		ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ErrorMachineState, StartMachineState, ErrorMachineState, // 10-17
+		StartMachineState, StartMachineState, StartMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 18-1f
+		5, ErrorMachineState, ErrorMachineState, ErrorMachineState, StartMachineState, ErrorMachineState, StartMachineState, StartMachineState, // 20-27
+		StartMachineState, ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, // 28-2f
+	}
+
+	EucTwCharLenTable := []byte{0, 0, 1, 2, 2, 2, 3}
+	return &StateMachineModel{
+		Name:         EucTwModelName,
+		Language:     "",
+		ClassTable:   EucTwCls,
+		ClassFactor:  7,
+		StateTable:   EucTwSt,
+		CharLenTable: EucTwCharLenTable,
+	}
+}
+
+func EucKrSmModel() *StateMachineModel {
+	EuckrCls := []byte{
+		1, 1, 1, 1, 1, 1, 1, 1, // 00 - 07
+		1, 1, 1, 1, 1, 1, 0, 0, // 08 - 0f
+		1, 1, 1, 1, 1, 1, 1, 1, // 10 - 17
+		1, 1, 1, 0, 1, 1, 1, 1, // 18 - 1f
+		1, 1, 1, 1, 1, 1, 1, 1, // 20 - 27
+		1, 1, 1, 1, 1, 1, 1, 1, // 28 - 2f
+		1, 1, 1, 1, 1, 1, 1, 1, // 30 - 37
+		1, 1, 1, 1, 1, 1, 1, 1, // 38 - 3f
+		1, 1, 1, 1, 1, 1, 1, 1, // 40 - 47
+		1, 1, 1, 1, 1, 1, 1, 1, // 48 - 4f
+		1, 1, 1, 1, 1, 1, 1, 1, // 50 - 57
+		1, 1, 1, 1, 1, 1, 1, 1, // 58 - 5f
+		1, 1, 1, 1, 1, 1, 1, 1, // 60 - 67
+		1, 1, 1, 1, 1, 1, 1, 1, // 68 - 6f
+		1, 1, 1, 1, 1, 1, 1, 1, // 70 - 77
+		1, 1, 1, 1, 1, 1, 1, 1, // 78 - 7f
+		0, 0, 0, 0, 0, 0, 0, 0, // 80 - 87
+		0, 0, 0, 0, 0, 0, 0, 0, // 88 - 8f
+		0, 0, 0, 0, 0, 0, 0, 0, // 90 - 97
+		0, 0, 0, 0, 0, 0, 0, 0, // 98 - 9f
+		0, 2, 2, 2, 2, 2, 2, 2, // a0 - a7
+		2, 2, 2, 2, 2, 3, 3, 3, // a8 - af
+		2, 2, 2, 2, 2, 2, 2, 2, // b0 - b7
+		2, 2, 2, 2, 2, 2, 2, 2, // b8 - bf
+		2, 2, 2, 2, 2, 2, 2, 2, // c0 - c7
+		2, 3, 2, 2, 2, 2, 2, 2, // c8 - cf
+		2, 2, 2, 2, 2, 2, 2, 2, // d0 - d7
+		2, 2, 2, 2, 2, 2, 2, 2, // d8 - df
+		2, 2, 2, 2, 2, 2, 2, 2, // e0 - e7
+		2, 2, 2, 2, 2, 2, 2, 2, // e8 - ef
+		2, 2, 2, 2, 2, 2, 2, 2, // f0 - f7
+		2, 2, 2, 2, 2, 2, 2, 0, // f8 - ff
+	}
+
+	EuckrSt := []byte{
+		ErrorMachineState, StartMachineState, 3, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 00-07
+		ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ErrorMachineState, ErrorMachineState, StartMachineState, StartMachineState, // 08-0f
+	}
+
+	EuckrCharLenTable := []byte{0, 1, 2, 0}
+	return &StateMachineModel{
+		Name:         EucKrModelName,
+		Language:     "",
+		ClassTable:   EuckrCls,
+		ClassFactor:  4,
+		StateTable:   EuckrSt,
+		CharLenTable: EuckrCharLenTable,
+	}
+}
+
+func EucJpSmModel() *StateMachineModel {
+	EucJpCls := []byte{
+		4, 4, 4, 4, 4, 4, 4, 4, // 00 - 07
+		4, 4, 4, 4, 4, 4, 5, 5, // 08 - 0f
+		4, 4, 4, 4, 4, 4, 4, 4, // 10 - 17
+		4, 4, 4, 5, 4, 4, 4, 4, // 18 - 1f
+		4, 4, 4, 4, 4, 4, 4, 4, // 20 - 27
+		4, 4, 4, 4, 4, 4, 4, 4, // 28 - 2f
+		4, 4, 4, 4, 4, 4, 4, 4, // 30 - 37
+		4, 4, 4, 4, 4, 4, 4, 4, // 38 - 3f
+		4, 4, 4, 4, 4, 4, 4, 4, // 40 - 47
+		4, 4, 4, 4, 4, 4, 4, 4, // 48 - 4f
+		4, 4, 4, 4, 4, 4, 4, 4, // 50 - 57
+		4, 4, 4, 4, 4, 4, 4, 4, // 58 - 5f
+		4, 4, 4, 4, 4, 4, 4, 4, // 60 - 67
+		4, 4, 4, 4, 4, 4, 4, 4, // 68 - 6f
+		4, 4, 4, 4, 4, 4, 4, 4, // 70 - 77
+		4, 4, 4, 4, 4, 4, 4, 4, // 78 - 7f
+		5, 5, 5, 5, 5, 5, 5, 5, // 80 - 87
+		5, 5, 5, 5, 5, 5, 1, 3, // 88 - 8f
+		5, 5, 5, 5, 5, 5, 5, 5, // 90 - 97
+		5, 5, 5, 5, 5, 5, 5, 5, // 98 - 9f
+		5, 2, 2, 2, 2, 2, 2, 2, // a0 - a7
+		2, 2, 2, 2, 2, 2, 2, 2, // a8 - af
+		2, 2, 2, 2, 2, 2, 2, 2, // b0 - b7
+		2, 2, 2, 2, 2, 2, 2, 2, // b8 - bf
+		2, 2, 2, 2, 2, 2, 2, 2, // c0 - c7
+		2, 2, 2, 2, 2, 2, 2, 2, // c8 - cf
+		2, 2, 2, 2, 2, 2, 2, 2, // d0 - d7
+		2, 2, 2, 2, 2, 2, 2, 2, // d8 - df
+		0, 0, 0, 0, 0, 0, 0, 0, // e0 - e7
+		0, 0, 0, 0, 0, 0, 0, 0, // e8 - ef
+		0, 0, 0, 0, 0, 0, 0, 0, // f0 - f7
+		0, 0, 0, 0, 0, 0, 0, 5, // f8 - ff
+	}
+
+	EucJpSt := []byte{3, 4, 3, 5, StartMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 00-07
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, // 08-0f
+		ItsMeMachineState, ItsMeMachineState, StartMachineState, ErrorMachineState, StartMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 10-17
+		ErrorMachineState, ErrorMachineState, StartMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, 3, ErrorMachineState, // 18-1f
+		3, ErrorMachineState, ErrorMachineState, ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, // 20-27
+	}
+
+	EucJpCharLenTable := []byte{2, 2, 2, 3, 1, 0}
+	return &StateMachineModel{
+		Name:         EucJpModelName,
+		Language:     "",
+		ClassTable:   EucJpCls,
+		ClassFactor:  6,
+		StateTable:   EucJpSt,
+		CharLenTable: EucJpCharLenTable,
+	}
+}
+
+func CP949SmModel() *StateMachineModel {
+	Cp949Cls := []byte{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, // 00 - 0f
+		1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, // 10 - 1f
+		1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, // 20 - 2f
+		1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, // 30 - 3f
+		1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, // 40 - 4f
+		4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 1, 1, 1, 1, 1, // 50 - 5f
+		1, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, // 60 - 6f
+		5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 1, 1, 1, 1, 1, // 70 - 7f
+		0, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, // 80 - 8f
+		6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, // 90 - 9f
+		6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, // a0 - af
+		7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, // b0 - bf
+		7, 7, 7, 7, 7, 7, 9, 2, 2, 3, 2, 2, 2, 2, 2, 2, // c0 - cf
+		2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, // d0 - df
+		2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, // e0 - ef
+		2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, // f0 - ff
+	}
+
+	Cp949St := []byte{
+		ErrorMachineState, StartMachineState, 3, ErrorMachineState, StartMachineState, StartMachineState, 4, 5, ErrorMachineState, 6, // StartMachineState
+		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // ErrorMachineState
+		ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, // ItsMeMachineState
+		ErrorMachineState, ErrorMachineState, StartMachineState, StartMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, // 3
+		ErrorMachineState, ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, // 4
+		ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, // 5
+		ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, ErrorMachineState, ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, // 6
+	}
+
+	Cp949CharLenTable := []byte{0, 1, 2, 0, 1, 1, 2, 2, 0, 2}
+	return &StateMachineModel{
+		Name:         CP949ModelName,
+		Language:     "",
+		ClassTable:   Cp949Cls,
+		ClassFactor:  0,
+		StateTable:   Cp949St,
+		CharLenTable: Cp949CharLenTable,
+	}
+}
+
+func Big5SmModel() *StateMachineModel {
+	Big5Cls := []byte{
+		1, 1, 1, 1, 1, 1, 1, 1, // 00 - 07    //allow 0x00 as legal value
+		1, 1, 1, 1, 1, 1, 0, 0, // 08 - 0f
+		1, 1, 1, 1, 1, 1, 1, 1, // 10 - 17
+		1, 1, 1, 0, 1, 1, 1, 1, // 18 - 1f
+		1, 1, 1, 1, 1, 1, 1, 1, // 20 - 27
+		1, 1, 1, 1, 1, 1, 1, 1, // 28 - 2f
+		1, 1, 1, 1, 1, 1, 1, 1, // 30 - 37
+		1, 1, 1, 1, 1, 1, 1, 1, // 38 - 3f
+		2, 2, 2, 2, 2, 2, 2, 2, // 40 - 47
+		2, 2, 2, 2, 2, 2, 2, 2, // 48 - 4f
+		2, 2, 2, 2, 2, 2, 2, 2, // 50 - 57
+		2, 2, 2, 2, 2, 2, 2, 2, // 58 - 5f
+		2, 2, 2, 2, 2, 2, 2, 2, // 60 - 67
+		2, 2, 2, 2, 2, 2, 2, 2, // 68 - 6f
+		2, 2, 2, 2, 2, 2, 2, 2, // 70 - 77
+		2, 2, 2, 2, 2, 2, 2, 1, // 78 - 7f
+		4, 4, 4, 4, 4, 4, 4, 4, // 80 - 87
+		4, 4, 4, 4, 4, 4, 4, 4, // 88 - 8f
+		4, 4, 4, 4, 4, 4, 4, 4, // 90 - 97
+		4, 4, 4, 4, 4, 4, 4, 4, // 98 - 9f
+		4, 3, 3, 3, 3, 3, 3, 3, // a0 - a7
+		3, 3, 3, 3, 3, 3, 3, 3, // a8 - af
+		3, 3, 3, 3, 3, 3, 3, 3, // b0 - b7
+		3, 3, 3, 3, 3, 3, 3, 3, // b8 - bf
+		3, 3, 3, 3, 3, 3, 3, 3, // c0 - c7
+		3, 3, 3, 3, 3, 3, 3, 3, // c8 - cf
+		3, 3, 3, 3, 3, 3, 3, 3, // d0 - d7
+		3, 3, 3, 3, 3, 3, 3, 3, // d8 - df
+		3, 3, 3, 3, 3, 3, 3, 3, // e0 - e7
+		3, 3, 3, 3, 3, 3, 3, 3, // e8 - ef
+		3, 3, 3, 3, 3, 3, 3, 3, // f0 - f7
+		3, 3, 3, 3, 3, 3, 3, 0, // f8 - ff
+	}
+
+	Big5St := []byte{ErrorMachineState, StartMachineState, StartMachineState, 3, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 00-07
+		ErrorMachineState, ErrorMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ErrorMachineState, // 08-0f
+		ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, // 10-17
+	}
+
+	Big5CharLenTable := []byte{0, 1, 1, 2, 0}
+	return &StateMachineModel{
+		Name:         Big5ModelName,
+		Language:     "",
+		ClassTable:   Big5Cls,
+		ClassFactor:  5,
+		StateTable:   Big5St,
+		CharLenTable: Big5CharLenTable,
+	}
+}

@@ -9,6 +9,20 @@ const (
 	HzModelName        = "HZ-GB-2312"
 	Iso2022cnModelName = "ISO-2022-CN"
 	Iso2022jpModelName = "ISO-2022-JP"
+	UTF8ModelName      = "UTF-8"
+	UTF16LeModelName   = "UTF-16LE"
+	UTF16BeModelName   = "UTF-16BE"
+	ShiftJisModelName  = "Shift_JIS"
+	GB2312ModelName    = "GB2312"
+	EucTwModelName     = "x-euc-tw"
+	EucKrModelName     = "EUC-KR"
+	EucJpModelName     = "EUC-JP"
+	CP949ModelName     = "CP949"
+	Big5ModelName      = "Big5"
+)
+
+const (
+	UTF8ProbeCharsetName = "utf-8"
 )
 
 type LangFilter byte
