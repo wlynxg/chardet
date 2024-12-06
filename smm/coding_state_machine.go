@@ -1,8 +1,12 @@
-package chardet
+package smm
+
+import (
+	"github.com/wlynxg/chardet/consts"
+)
 
 type CodingStateMachine struct {
 	model       *StateMachineModel
-	currState   MachineState
+	currState   consts.MachineState
 	currBytePos int
 	currCharLen int
 
@@ -11,13 +15,13 @@ type CodingStateMachine struct {
 
 func NewCodingStateMachine(sm StateMachineModel) *CodingStateMachine {
 	return &CodingStateMachine{
-		currState: StartMachineState,
+		currState: consts.StartMachineState,
 		model:     &sm,
 	}
 }
 
 func (o *CodingStateMachine) Reset() {
-	o.currState = StartMachineState
+	o.currState = consts.StartMachineState
 }
 
 func (o *CodingStateMachine) CurrentCharLength() int {
@@ -38,21 +42,21 @@ func (o *CodingStateMachine) Language() string {
 	return o.model.Language
 }
 
-func (o *CodingStateMachine) NextState(b byte) MachineState {
+func (o *CodingStateMachine) NextState(b byte) consts.MachineState {
 	if o.model == nil || int(b) >= len(o.model.ClassTable) {
-		return ErrorMachineState
+		return consts.ErrorMachineState
 	}
 	// for each byte we get its class
 	// if it is first byte, we also get byte length
 	byteClass := o.model.ClassTable[b]
-	if o.currState == StartMachineState {
+	if o.currState == consts.StartMachineState {
 		o.currBytePos = 0
 		o.currCharLen = int(o.model.CharLenTable[byteClass])
 	}
 
 	// from byte's class and state_table, we get its next state
 	currState := byte(o.currState)*o.model.ClassFactor + byteClass
-	o.currState = MachineState(o.model.StateTable[currState])
+	o.currState = consts.MachineState(o.model.StateTable[currState])
 	o.currBytePos++
 	return o.currState
 }

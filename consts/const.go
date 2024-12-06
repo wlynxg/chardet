@@ -1,4 +1,10 @@
-package chardet
+package consts
+
+const (
+	UTF8ProbeCharsetName     = "utf-8"
+	ShiftJISProbeCharsetName = "SHIFT_JIS"
+	CP932CharsetName         = "CP932"
+)
 
 const (
 	ChineseLanguage  = "Chinese"
@@ -21,14 +27,11 @@ const (
 	Big5ModelName      = "Big5"
 )
 
-const (
-	UTF8ProbeCharsetName = "utf-8"
-)
-
 type LangFilter byte
 
 const (
-	ChineseSimplifiedLangFilter = 1 << iota
+	UnknownLangFilter           LangFilter = 0
+	ChineseSimplifiedLangFilter LangFilter = 1 << iota
 	ChineseTraditionalLangFilter
 	JapaneseLangFilter
 	KoreanLangFilter
@@ -42,7 +45,7 @@ const (
 type InputState byte
 
 const (
-	PureAsciiInputState = iota + 1
+	PureAsciiInputState InputState = iota + 1
 	EcsAsciiInputState
 	HighByteInputState
 )
@@ -50,7 +53,7 @@ const (
 type ProbingState byte
 
 const (
-	DetectingProbingState = iota + 1
+	DetectingProbingState ProbingState = iota + 1
 	FoundItProbingState
 	NotMeProbingState
 )
@@ -58,7 +61,7 @@ const (
 type MachineState byte
 
 const (
-	StartMachineState = iota
+	StartMachineState MachineState = iota
 	ErrorMachineState
 	ItsMeMachineState
 )

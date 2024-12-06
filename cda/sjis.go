@@ -1,10 +1,25 @@
 package cda
 
 type SJISDistributionAnalysis struct {
-	cda *CharDistributionAnalysis
+	CharDistributionAnalysis
 }
 
-func NewSJISDistributionAnalysis() SJISDistributionAnalysis {
+func NewSJISDistributionAnalysis() *SJISDistributionAnalysis {
+	// Sampling from about 20M text materials include literature and computer technology
+	//
+	// Japanese frequency table, applied to both S-JIS and EUC-JP
+	// They are sorted in order.
+
+	// 128  --> 0.77094
+	// 256  --> 0.85710
+	// 512  --> 0.92635
+	// 1024 --> 0.97130
+	// 2048 --> 0.99431
+	//
+	// Ideal Distribution Ratio = 0.92635 / (1-0.92635) = 12.58
+	// Random Distribution Ration = 512 / (2965+62+83+86-512) = 0.191
+	//
+	// Typical Distribution Ratio, 25% of IDR
 	jisCharToFreqOrder := []int{
 		40, 1, 6, 182, 152, 180, 295, 2127, 285, 381, 3295, 4304, 3068, 4606, 3165, 3510, //   16
 		3511, 1822, 2785, 4607, 1193, 2226, 5070, 4608, 171, 2996, 1247, 18, 179, 5071, 856, 1661, //   32
@@ -284,16 +299,13 @@ func NewSJISDistributionAnalysis() SJISDistributionAnalysis {
 	jisTableSize := 4368
 	jisTypicalDistributionRatio := 3.0
 
-	return SJISDistributionAnalysis{
-		cda: &CharDistributionAnalysis{
-			charToFreqOrder:          jisCharToFreqOrder,
-			tableSize:                jisTableSize,
-			typicalDistributionRatio: jisTypicalDistributionRatio,
-		},
-	}
+	jisd := &SJISDistributionAnalysis{}
+	jisd.CharDistributionAnalysis = NewCharDistributionAnalysis(
+		jisCharToFreqOrder, jisTableSize, jisTypicalDistributionRatio, jisd.GetOrder)
+	return jisd
 }
 
-func (s *SJISDistributionAnalysis) Order(buff []byte) int {
+func (s *SJISDistributionAnalysis) GetOrder(buff []byte) int {
 	// for sjis encoding, we are interested
 	//   first  byte range: 0x81 -- 0x9f , 0xe0 -- 0xfe
 	//   second byte range: 0x40 -- 0x7e,  0x81 -- oxfe

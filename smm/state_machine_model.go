@@ -1,4 +1,8 @@
-package chardet
+package smm
+
+import (
+	"github.com/wlynxg/chardet/consts"
+)
 
 type StateMachineModel struct {
 	Name         string
@@ -9,7 +13,7 @@ type StateMachineModel struct {
 	CharLenTable []byte
 }
 
-func HzSmModel() *StateMachineModel {
+func HzSmModel() StateMachineModel {
 	hzCls := []byte{
 		1, 0, 0, 0, 0, 0, 0, 0, // 00 - 07
 		0, 0, 0, 0, 0, 0, 0, 0, // 08 - 0f
@@ -46,19 +50,19 @@ func HzSmModel() *StateMachineModel {
 	}
 
 	hzSt := []byte{
-		StartMachineState, ErrorMachineState, 3, StartMachineState, StartMachineState, StartMachineState, ErrorMachineState, ErrorMachineState, // 00-07
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, // 08-0f
-		ItsMeMachineState, ItsMeMachineState, ErrorMachineState, ErrorMachineState, StartMachineState, StartMachineState, 4, ErrorMachineState, // 10-17
-		5, ErrorMachineState, 6, ErrorMachineState, 5, 5, 4, ErrorMachineState, // 18-1f
-		4, ErrorMachineState, 4, 4, 4, ErrorMachineState, 4, ErrorMachineState, // 20-27
-		4, ItsMeMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, // 28-2f
+		consts.StartMachineState, consts.ErrorMachineState, 3, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // 00-07
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, // 08-0f
+		consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, 4, consts.ErrorMachineState, // 10-17
+		5, consts.ErrorMachineState, 6, consts.ErrorMachineState, 5, 5, 4, consts.ErrorMachineState, // 18-1f
+		4, consts.ErrorMachineState, 4, 4, 4, consts.ErrorMachineState, 4, consts.ErrorMachineState, // 20-27
+		4, consts.ItsMeMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, // 28-2f
 	}
 
 	hzCharLenTable := []byte{0, 0, 0, 0, 0, 0}
 
-	return &StateMachineModel{
-		Name:         HzModelName,
-		Language:     ChineseLanguage,
+	return StateMachineModel{
+		Name:         consts.HzModelName,
+		Language:     consts.ChineseLanguage,
 		ClassTable:   hzCls,
 		ClassFactor:  6,
 		StateTable:   hzSt,
@@ -66,7 +70,7 @@ func HzSmModel() *StateMachineModel {
 	}
 }
 
-func Iso2022cnSmModel() *StateMachineModel {
+func Iso2022cnSmModel() StateMachineModel {
 	Iso2022cnCls := []byte{
 		2, 0, 0, 0, 0, 0, 0, 0, // 00 - 07
 		0, 0, 0, 0, 0, 0, 0, 0, // 08 - 0f
@@ -103,21 +107,21 @@ func Iso2022cnSmModel() *StateMachineModel {
 	}
 
 	Iso2022cnSt := []byte{
-		StartMachineState, 3, ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, // 00-07
-		StartMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 08-0f
-		ErrorMachineState, ErrorMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, // 10-17
-		ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, 4, ErrorMachineState, // 18-1f
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 20-27
-		5, 6, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 28-2f
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 30-37
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ErrorMachineState, StartMachineState, // 38-3f
+		consts.StartMachineState, 3, consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, // 00-07
+		consts.StartMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // 08-0f
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, // 10-17
+		consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, 4, consts.ErrorMachineState, // 18-1f
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ItsMeMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // 20-27
+		5, 6, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // 28-2f
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ItsMeMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // 30-37
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ItsMeMachineState, consts.ErrorMachineState, consts.StartMachineState, // 38-3f
 	}
 
 	Iso2022cnCharLenTable := []byte{0, 0, 0, 0, 0, 0, 0, 0, 0}
 
-	return &StateMachineModel{
-		Name:         Iso2022cnModelName,
-		Language:     ChineseLanguage,
+	return StateMachineModel{
+		Name:         consts.Iso2022cnModelName,
+		Language:     consts.ChineseLanguage,
 		ClassTable:   Iso2022cnCls,
 		ClassFactor:  9,
 		StateTable:   Iso2022cnSt,
@@ -125,7 +129,7 @@ func Iso2022cnSmModel() *StateMachineModel {
 	}
 }
 
-func Iso2022jpSmModel() *StateMachineModel {
+func Iso2022jpSmModel() StateMachineModel {
 	Iso2022jpCls := []byte{
 		2, 0, 0, 0, 0, 0, 0, 0, // 00 - 07
 		0, 0, 0, 0, 0, 0, 2, 2, // 08 - 0f
@@ -162,22 +166,22 @@ func Iso2022jpSmModel() *StateMachineModel {
 	}
 
 	Iso2022jpSt := []byte{
-		StartMachineState, 3, ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, // 00-07
-		StartMachineState, StartMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 08-0f
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, // 10-17
-		ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ErrorMachineState, ErrorMachineState, // 18-1f
-		ErrorMachineState, 5, ErrorMachineState, ErrorMachineState, ErrorMachineState, 4, ErrorMachineState, ErrorMachineState, // 20-27
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, 6, ItsMeMachineState, ErrorMachineState, ItsMeMachineState, ErrorMachineState, // 28-2f
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ItsMeMachineState, // 30-37
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 38-3f
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ErrorMachineState, StartMachineState, StartMachineState, // 40-47
+		consts.StartMachineState, 3, consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, // 00-07
+		consts.StartMachineState, consts.StartMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // 08-0f
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, // 10-17
+		consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // 18-1f
+		consts.ErrorMachineState, 5, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, 4, consts.ErrorMachineState, consts.ErrorMachineState, // 20-27
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, 6, consts.ItsMeMachineState, consts.ErrorMachineState, consts.ItsMeMachineState, consts.ErrorMachineState, // 28-2f
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, // 30-37
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ItsMeMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // 38-3f
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ItsMeMachineState, consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, // 40-47
 	}
 
 	Iso2022jpCharLenTable := []byte{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 
-	return &StateMachineModel{
-		Name:         Iso2022jpModelName,
-		Language:     JapaneseLanguage,
+	return StateMachineModel{
+		Name:         consts.Iso2022jpModelName,
+		Language:     consts.JapaneseLanguage,
 		ClassTable:   Iso2022jpCls,
 		ClassFactor:  10,
 		StateTable:   Iso2022jpSt,
@@ -185,7 +189,7 @@ func Iso2022jpSmModel() *StateMachineModel {
 	}
 }
 
-func Iso2022krSmModel() *StateMachineModel {
+func Iso2022krSmModel() StateMachineModel {
 	Iso2022krCls := []byte{
 		2, 0, 0, 0, 0, 0, 0, 0, // 00 - 07
 		0, 0, 0, 0, 0, 0, 0, 0, // 08 - 0f
@@ -222,16 +226,16 @@ func Iso2022krSmModel() *StateMachineModel {
 	}
 
 	Iso2022krSt := []byte{
-		StartMachineState, 3, ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, ErrorMachineState, ErrorMachineState, // 00-07
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, // 08-0f
-		ItsMeMachineState, ItsMeMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, 4, ErrorMachineState, ErrorMachineState, // 10-17
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, 5, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 18-1f
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, // 20-27
+		consts.StartMachineState, 3, consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // 00-07
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, // 08-0f
+		consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, 4, consts.ErrorMachineState, consts.ErrorMachineState, // 10-17
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, 5, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // 18-1f
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ItsMeMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, // 20-27
 	}
 
 	Iso2022krCharLenTable := []byte{0, 0, 0, 0, 0, 0}
 
-	return &StateMachineModel{
+	return StateMachineModel{
 		Name:         "",
 		Language:     "",
 		ClassTable:   Iso2022krCls,
@@ -241,7 +245,7 @@ func Iso2022krSmModel() *StateMachineModel {
 	}
 }
 
-func UTF8SmModel() *StateMachineModel {
+func UTF8SmModel() StateMachineModel {
 	Utf8Cls := []byte{
 		1, 1, 1, 1, 1, 1, 1, 1, // 00 - 07  //allow 0x00 as a legal value
 		1, 1, 1, 1, 1, 1, 0, 0, // 08 - 0f
@@ -278,37 +282,37 @@ func UTF8SmModel() *StateMachineModel {
 	}
 
 	Utf8St := []byte{
-		ErrorMachineState, StartMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, 12, 10, // 00-07
+		consts.ErrorMachineState, consts.StartMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, 12, 10, // 00-07
 		9, 11, 8, 7, 6, 5, 4, 3, // 08-0f
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 10-17
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 18-1f
-		ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, // 20-27
-		ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, // 28-2f
-		ErrorMachineState, ErrorMachineState, 5, 5, 5, 5, ErrorMachineState, ErrorMachineState, // 30-37
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 38-3f
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, 5, 5, 5, ErrorMachineState, ErrorMachineState, // 40-47
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 48-4f
-		ErrorMachineState, ErrorMachineState, 7, 7, 7, 7, ErrorMachineState, ErrorMachineState, // 50-57
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 58-5f
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, 7, 7, ErrorMachineState, ErrorMachineState, // 60-67
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 68-6f
-		ErrorMachineState, ErrorMachineState, 9, 9, 9, 9, ErrorMachineState, ErrorMachineState, // 70-77
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 78-7f
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, 9, ErrorMachineState, ErrorMachineState, // 80-87
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 88-8f
-		ErrorMachineState, ErrorMachineState, 12, 12, 12, 12, ErrorMachineState, ErrorMachineState, // 90-97
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 98-9f
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, 12, ErrorMachineState, ErrorMachineState, // a0-a7
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // a8-af
-		ErrorMachineState, ErrorMachineState, 12, 12, 12, ErrorMachineState, ErrorMachineState, ErrorMachineState, // b0-b7
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // b8-bf
-		ErrorMachineState, ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, ErrorMachineState, ErrorMachineState, // c0-c7
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // c8-cf
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // 10-17
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // 18-1f
+		consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, // 20-27
+		consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, // 28-2f
+		consts.ErrorMachineState, consts.ErrorMachineState, 5, 5, 5, 5, consts.ErrorMachineState, consts.ErrorMachineState, // 30-37
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // 38-3f
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, 5, 5, 5, consts.ErrorMachineState, consts.ErrorMachineState, // 40-47
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // 48-4f
+		consts.ErrorMachineState, consts.ErrorMachineState, 7, 7, 7, 7, consts.ErrorMachineState, consts.ErrorMachineState, // 50-57
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // 58-5f
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, 7, 7, consts.ErrorMachineState, consts.ErrorMachineState, // 60-67
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // 68-6f
+		consts.ErrorMachineState, consts.ErrorMachineState, 9, 9, 9, 9, consts.ErrorMachineState, consts.ErrorMachineState, // 70-77
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // 78-7f
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, 9, consts.ErrorMachineState, consts.ErrorMachineState, // 80-87
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // 88-8f
+		consts.ErrorMachineState, consts.ErrorMachineState, 12, 12, 12, 12, consts.ErrorMachineState, consts.ErrorMachineState, // 90-97
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // 98-9f
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, 12, consts.ErrorMachineState, consts.ErrorMachineState, // a0-a7
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // a8-af
+		consts.ErrorMachineState, consts.ErrorMachineState, 12, 12, 12, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // b0-b7
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // b8-bf
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // c0-c7
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // c8-cf
 	}
 
 	Utf8CharLenTable := []byte{0, 1, 0, 0, 0, 0, 2, 3, 3, 3, 4, 4, 5, 5, 6, 6}
-	return &StateMachineModel{
-		Name:         UTF8ModelName,
+	return StateMachineModel{
+		Name:         consts.UTF8ModelName,
 		Language:     "",
 		ClassTable:   Utf8Cls,
 		ClassFactor:  16,
@@ -354,18 +358,18 @@ func Ucs2LeSmModel() *StateMachineModel {
 	}
 
 	Ucs2leSt := []byte{
-		6, 6, 7, 6, 4, 3, ErrorMachineState, ErrorMachineState, // 00-07
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, // 08-0f
-		ItsMeMachineState, ItsMeMachineState, 5, 5, 5, ErrorMachineState, ItsMeMachineState, ErrorMachineState, // 10-17
-		5, 5, 5, ErrorMachineState, 5, ErrorMachineState, 6, 6, // 18-1f
-		7, 6, 8, 8, 5, 5, 5, ErrorMachineState, // 20-27
-		5, 5, 5, ErrorMachineState, ErrorMachineState, ErrorMachineState, 5, 5, // 28-2f
-		5, 5, 5, ErrorMachineState, 5, ErrorMachineState, StartMachineState, StartMachineState, // 30-37
+		6, 6, 7, 6, 4, 3, consts.ErrorMachineState, consts.ErrorMachineState, // 00-07
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, // 08-0f
+		consts.ItsMeMachineState, consts.ItsMeMachineState, 5, 5, 5, consts.ErrorMachineState, consts.ItsMeMachineState, consts.ErrorMachineState, // 10-17
+		5, 5, 5, consts.ErrorMachineState, 5, consts.ErrorMachineState, 6, 6, // 18-1f
+		7, 6, 8, 8, 5, 5, 5, consts.ErrorMachineState, // 20-27
+		5, 5, 5, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, 5, 5, // 28-2f
+		5, 5, 5, consts.ErrorMachineState, 5, consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, // 30-37
 	}
 
 	Ucs2leCharLenTable := []byte{2, 2, 2, 2, 2, 2}
 	return &StateMachineModel{
-		Name:         UTF16LeModelName,
+		Name:         consts.UTF16LeModelName,
 		Language:     "",
 		ClassTable:   Ucs2leCls,
 		ClassFactor:  6,
@@ -411,18 +415,18 @@ func Ucs2BeSmModel() *StateMachineModel {
 	}
 
 	Ucs2beSt := []byte{
-		5, 7, 7, ErrorMachineState, 4, 3, ErrorMachineState, ErrorMachineState, // 00-07
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, // 08-0f
-		ItsMeMachineState, ItsMeMachineState, 6, 6, 6, 6, ErrorMachineState, ErrorMachineState, // 10-17
-		6, 6, 6, 6, 6, ItsMeMachineState, 6, 6, // 18-1f
-		6, 6, 6, 6, 5, 7, 7, ErrorMachineState, // 20-27
-		5, 8, 6, 6, ErrorMachineState, 6, 6, 6, // 28-2f
-		6, 6, 6, 6, ErrorMachineState, ErrorMachineState, StartMachineState, StartMachineState, // 30-37
+		5, 7, 7, consts.ErrorMachineState, 4, 3, consts.ErrorMachineState, consts.ErrorMachineState, // 00-07
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, // 08-0f
+		consts.ItsMeMachineState, consts.ItsMeMachineState, 6, 6, 6, 6, consts.ErrorMachineState, consts.ErrorMachineState, // 10-17
+		6, 6, 6, 6, 6, consts.ItsMeMachineState, 6, 6, // 18-1f
+		6, 6, 6, 6, 5, 7, 7, consts.ErrorMachineState, // 20-27
+		5, 8, 6, 6, consts.ErrorMachineState, 6, 6, 6, // 28-2f
+		6, 6, 6, 6, consts.ErrorMachineState, consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, // 30-37
 	}
 
 	Ucs2beCharLenTable := []byte{2, 2, 2, 0, 2, 2}
 	return &StateMachineModel{
-		Name:         UTF16BeModelName,
+		Name:         consts.UTF16BeModelName,
 		Language:     "",
 		ClassTable:   Ucs2beCls,
 		ClassFactor:  6,
@@ -431,7 +435,7 @@ func Ucs2BeSmModel() *StateMachineModel {
 	}
 }
 
-func SjisSmModel() *StateMachineModel {
+func SjisSmModel() StateMachineModel {
 	SjisCls := []byte{
 		1, 1, 1, 1, 1, 1, 1, 1, // 00 - 07
 		1, 1, 1, 1, 1, 1, 0, 0, // 08 - 0f
@@ -470,14 +474,14 @@ func SjisSmModel() *StateMachineModel {
 	}
 
 	SjisSt := []byte{
-		ErrorMachineState, StartMachineState, StartMachineState, 3, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 00-07
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, // 08-0f
-		ItsMeMachineState, ItsMeMachineState, ErrorMachineState, ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, // 10-17
+		consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, 3, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // 00-07
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, // 08-0f
+		consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, // 10-17
 	}
 
 	SjisCharLenTable := []byte{0, 1, 1, 2, 0, 0}
-	return &StateMachineModel{
-		Name:         ShiftJisModelName,
+	return StateMachineModel{
+		Name:         consts.ShiftJisModelName,
 		Language:     "",
 		ClassTable:   SjisCls,
 		ClassFactor:  6,
@@ -522,12 +526,12 @@ func GB2312SmModel() *StateMachineModel {
 		6, 6, 6, 6, 6, 6, 6, 0, // f8 - ff
 	}
 
-	Gb2312St := []byte{ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, 3, ErrorMachineState, // 00-07
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ItsMeMachineState, // 08-0f
-		ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ErrorMachineState, ErrorMachineState, StartMachineState, // 10-17
-		4, ErrorMachineState, StartMachineState, StartMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 18-1f
-		ErrorMachineState, ErrorMachineState, 5, ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ErrorMachineState, // 20-27
-		ErrorMachineState, ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, // 28-2f
+	Gb2312St := []byte{consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, 3, consts.ErrorMachineState, // 00-07
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, // 08-0f
+		consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.StartMachineState, // 10-17
+		4, consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // 18-1f
+		consts.ErrorMachineState, consts.ErrorMachineState, 5, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ItsMeMachineState, consts.ErrorMachineState, // 20-27
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, // 28-2f
 	}
 
 	// To be accurate, the length of class 6 can be either 2 or 4.
@@ -537,7 +541,7 @@ func GB2312SmModel() *StateMachineModel {
 	// 2 here.
 	Gb2312CharLenTable := []byte{0, 1, 1, 1, 1, 1, 2}
 	return &StateMachineModel{
-		Name:         GB2312ModelName,
+		Name:         consts.GB2312ModelName,
 		Language:     "",
 		ClassTable:   Gb2312Cls,
 		ClassFactor:  7,
@@ -582,17 +586,17 @@ func EucTwSmModel() *StateMachineModel {
 		3, 3, 3, 3, 3, 3, 3, 0, // f8 - ff
 	}
 
-	EucTwSt := []byte{ErrorMachineState, ErrorMachineState, StartMachineState, 3, 3, 3, 4, ErrorMachineState, // 00-07
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ItsMeMachineState, // 08-0f
-		ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ErrorMachineState, StartMachineState, ErrorMachineState, // 10-17
-		StartMachineState, StartMachineState, StartMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 18-1f
-		5, ErrorMachineState, ErrorMachineState, ErrorMachineState, StartMachineState, ErrorMachineState, StartMachineState, StartMachineState, // 20-27
-		StartMachineState, ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, // 28-2f
+	EucTwSt := []byte{consts.ErrorMachineState, consts.ErrorMachineState, consts.StartMachineState, 3, 3, 3, 4, consts.ErrorMachineState, // 00-07
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, // 08-0f
+		consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ErrorMachineState, consts.StartMachineState, consts.ErrorMachineState, // 10-17
+		consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // 18-1f
+		5, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.StartMachineState, consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, // 20-27
+		consts.StartMachineState, consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, // 28-2f
 	}
 
 	EucTwCharLenTable := []byte{0, 0, 1, 2, 2, 2, 3}
 	return &StateMachineModel{
-		Name:         EucTwModelName,
+		Name:         consts.EucTwModelName,
 		Language:     "",
 		ClassTable:   EucTwCls,
 		ClassFactor:  7,
@@ -638,13 +642,13 @@ func EucKrSmModel() *StateMachineModel {
 	}
 
 	EuckrSt := []byte{
-		ErrorMachineState, StartMachineState, 3, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 00-07
-		ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ErrorMachineState, ErrorMachineState, StartMachineState, StartMachineState, // 08-0f
+		consts.ErrorMachineState, consts.StartMachineState, 3, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // 00-07
+		consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, // 08-0f
 	}
 
 	EuckrCharLenTable := []byte{0, 1, 2, 0}
 	return &StateMachineModel{
-		Name:         EucKrModelName,
+		Name:         consts.EucKrModelName,
 		Language:     "",
 		ClassTable:   EuckrCls,
 		ClassFactor:  4,
@@ -689,16 +693,16 @@ func EucJpSmModel() *StateMachineModel {
 		0, 0, 0, 0, 0, 0, 0, 5, // f8 - ff
 	}
 
-	EucJpSt := []byte{3, 4, 3, 5, StartMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 00-07
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, // 08-0f
-		ItsMeMachineState, ItsMeMachineState, StartMachineState, ErrorMachineState, StartMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 10-17
-		ErrorMachineState, ErrorMachineState, StartMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, 3, ErrorMachineState, // 18-1f
-		3, ErrorMachineState, ErrorMachineState, ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, // 20-27
+	EucJpSt := []byte{3, 4, 3, 5, consts.StartMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // 00-07
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, // 08-0f
+		consts.ItsMeMachineState, consts.ItsMeMachineState, consts.StartMachineState, consts.ErrorMachineState, consts.StartMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // 10-17
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.StartMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, 3, consts.ErrorMachineState, // 18-1f
+		3, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, // 20-27
 	}
 
 	EucJpCharLenTable := []byte{2, 2, 2, 3, 1, 0}
 	return &StateMachineModel{
-		Name:         EucJpModelName,
+		Name:         consts.EucJpModelName,
 		Language:     "",
 		ClassTable:   EucJpCls,
 		ClassFactor:  6,
@@ -727,18 +731,18 @@ func CP949SmModel() *StateMachineModel {
 	}
 
 	Cp949St := []byte{
-		ErrorMachineState, StartMachineState, 3, ErrorMachineState, StartMachineState, StartMachineState, 4, 5, ErrorMachineState, 6, // StartMachineState
-		ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // ErrorMachineState
-		ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, // ItsMeMachineState
-		ErrorMachineState, ErrorMachineState, StartMachineState, StartMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, // 3
-		ErrorMachineState, ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, // 4
-		ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, // 5
-		ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, ErrorMachineState, ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, // 6
+		consts.ErrorMachineState, consts.StartMachineState, 3, consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, 4, 5, consts.ErrorMachineState, 6, // StartMachineState
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // ErrorMachineState
+		consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, // ItsMeMachineState
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, // 3
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, // 4
+		consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, // 5
+		consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, // 6
 	}
 
 	Cp949CharLenTable := []byte{0, 1, 2, 0, 1, 1, 2, 2, 0, 2}
 	return &StateMachineModel{
-		Name:         CP949ModelName,
+		Name:         consts.CP949ModelName,
 		Language:     "",
 		ClassTable:   Cp949Cls,
 		ClassFactor:  0,
@@ -783,14 +787,14 @@ func Big5SmModel() *StateMachineModel {
 		3, 3, 3, 3, 3, 3, 3, 0, // f8 - ff
 	}
 
-	Big5St := []byte{ErrorMachineState, StartMachineState, StartMachineState, 3, ErrorMachineState, ErrorMachineState, ErrorMachineState, ErrorMachineState, // 00-07
-		ErrorMachineState, ErrorMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ItsMeMachineState, ErrorMachineState, // 08-0f
-		ErrorMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, StartMachineState, // 10-17
+	Big5St := []byte{consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, 3, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // 00-07
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ErrorMachineState, // 08-0f
+		consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, // 10-17
 	}
 
 	Big5CharLenTable := []byte{0, 1, 1, 2, 0}
 	return &StateMachineModel{
-		Name:         Big5ModelName,
+		Name:         consts.Big5ModelName,
 		Language:     "",
 		ClassTable:   Big5Cls,
 		ClassFactor:  5,
