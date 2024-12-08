@@ -162,6 +162,10 @@ func (u *UniversalDetector) Feed(data []byte) {
 		// bigram distributions.
 		if len(u.charsetProbes) == 0 {
 			u.charsetProbes = []probe.Probe{probe.MBCGroupProbe(u.filter)}
+			// If we're checking non-CJK encodings, use single-byte probe
+			if u.filter&consts.NonCjkLangFilter != 0 {
+				u.charsetProbes = append(u.charsetProbes, probe.SB)
+			}
 		}
 	default:
 	}

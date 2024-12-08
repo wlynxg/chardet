@@ -14,26 +14,27 @@ type MultiByteCharSetProbe struct {
 	log                   *zap.SugaredLogger
 	charsetName, language string
 	distributionAnalyzer  cda.Analyzer
-	codingSm              *smm.CodingStateMachine
+	codingSM              *smm.CodingStateMachine
 	lastChar              [2]byte
 }
 
-func NewMultiByteCharSetProbe(charsetName, language string, filter consts.LangFilter) MultiByteCharSetProbe {
+func NewMultiByteCharSetProbe(charsetName, language string, filter consts.LangFilter,
+	distributionAnalyzer cda.Analyzer, codingSM *smm.CodingStateMachine) MultiByteCharSetProbe {
 	return MultiByteCharSetProbe{
 		CharSetProbe:         NewCharSetProbe(filter),
 		log:                  log.New("MultiByteCharSetProbe"),
 		charsetName:          charsetName,
 		language:             language,
-		distributionAnalyzer: nil,
-		codingSm:             nil,
+		distributionAnalyzer: distributionAnalyzer,
+		codingSM:             codingSM,
 		lastChar:             [2]byte{0, 0},
 	}
 }
 
 func (m *MultiByteCharSetProbe) Reset() {
 	m.CharSetProbe.Reset()
-	if m.codingSm != nil {
-		m.codingSm.Reset()
+	if m.codingSM != nil {
+		m.codingSM.Reset()
 	}
 	if m.distributionAnalyzer != nil {
 		m.distributionAnalyzer.Reset()
@@ -48,7 +49,7 @@ func (m *MultiByteCharSetProbe) Feed(buf []byte) consts.ProbingState {
 
 loop:
 	for i := 0; i < len(buf); i++ {
-		codingState := m.codingSm.NextState(buf[i])
+		codingState := m.codingSM.NextState(buf[i])
 		switch codingState {
 		case consts.ErrorMachineState:
 			// TODO: 继承
@@ -59,7 +60,7 @@ loop:
 			m.state = consts.FoundItProbingState
 			break loop
 		case consts.StartMachineState:
-			charLen := m.codingSm.CurrentCharLength()
+			charLen := m.codingSM.CurrentCharLength()
 			if i == 0 {
 				m.lastChar[1] = buf[0]
 				m.distributionAnalyzer.Feed(m.lastChar[:], charLen)
@@ -82,4 +83,12 @@ loop:
 
 func (m *MultiByteCharSetProbe) GetConfidence() float64 {
 	return m.distributionAnalyzer.GetConfidence()
+}
+
+func (m *MultiByteCharSetProbe) CharSetName() string {
+	return m.charsetName
+}
+
+func (m *MultiByteCharSetProbe) Language() string {
+	return m.language
 }

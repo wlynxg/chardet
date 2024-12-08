@@ -11,25 +11,23 @@ import (
 type SJISProbe struct {
 	MultiByteCharSetProbe
 
-	log                  *zap.SugaredLogger
-	state                consts.ProbingState
-	codingSM             *CodingStateMachine
-	distributionAnalyzer cda.Analyzer
-	contextAnalyzer      cda.Analyzer
-	numMbChars           int
+	log             *zap.SugaredLogger
+	state           consts.ProbingState
+	contextAnalyzer cda.Analyzer
+	numMbChars      int
 }
 
 func NewSJISProbe() *SJISProbe {
 	sp := &SJISProbe{
-		log:                  log.New("SJISProbe"),
-		codingSM:             NewCodingStateMachine(smm.SjisSmModel()),
-		distributionAnalyzer: cda.NewSJISDistributionAnalysis(),
-		contextAnalyzer:      cda.NewSJISContextAnalysis(),
+		log:             log.New("SJISProbe"),
+		contextAnalyzer: cda.NewSJISContextAnalysis(),
 	}
 	sp.MultiByteCharSetProbe = NewMultiByteCharSetProbe(
 		sp.contextAnalyzer.CharSetName(),
 		consts.JapaneseLanguage,
-		consts.UnknownLangFilter)
+		consts.UnknownLangFilter,
+		cda.NewSJISContextAnalysis(),
+		smm.NewCodingStateMachine(smm.SjisSmModel()))
 	return sp
 }
 
@@ -40,18 +38,10 @@ func (s *SJISProbe) Reset() {
 	}
 }
 
-func (s *SJISProbe) CharSetName() string {
-	return s.contextAnalyzer.CharSetName()
-}
-
-func (s *SJISProbe) Language() string {
-	return consts.JapaneseLanguage
-}
-
 func (s *SJISProbe) Feed(buf []byte) consts.ProbingState {
 loop:
 	for i := 0; i < len(buf); i++ {
-		codingState := s.codingSm.NextState(buf[i])
+		codingState := s.codingSM.NextState(buf[i])
 		switch codingState {
 		case consts.ErrorMachineState:
 			s.log.Debugf("%s %s prober hit error at byte %d", s.charsetName, s.language, i)
@@ -74,6 +64,15 @@ loop:
 		}
 	}
 
-	s.
+	s.lastChar[0] = buf[1]
+	if s.state == consts.DetectingProbingState &&
+		s.contextAnalyzer.GotEnoughData() &&
+		(s.GetConfidence() > s.ShortcutThreshold) {
+		s.state = consts.FoundItProbingState
+	}
 	return s.state
+}
+
+func (s *SJISProbe) GetConfidence() float64 {
+	return max(s.contextAnalyzer.GetConfidence(), s.distributionAnalyzer.GetConfidence())
 }

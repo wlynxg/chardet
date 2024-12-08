@@ -490,7 +490,7 @@ func SjisSmModel() StateMachineModel {
 	}
 }
 
-func GB2312SmModel() *StateMachineModel {
+func GB2312SmModel() StateMachineModel {
 	Gb2312Cls := []byte{
 		1, 1, 1, 1, 1, 1, 1, 1, // 00 - 07
 		1, 1, 1, 1, 1, 1, 0, 0, // 08 - 0f
@@ -540,7 +540,7 @@ func GB2312SmModel() *StateMachineModel {
 	// each code range there as well. So it is safe to set it to be
 	// 2 here.
 	Gb2312CharLenTable := []byte{0, 1, 1, 1, 1, 1, 2}
-	return &StateMachineModel{
+	return StateMachineModel{
 		Name:         consts.GB2312ModelName,
 		Language:     "",
 		ClassTable:   Gb2312Cls,
@@ -550,7 +550,7 @@ func GB2312SmModel() *StateMachineModel {
 	}
 }
 
-func EucTwSmModel() *StateMachineModel {
+func EucTwSmModel() StateMachineModel {
 	EucTwCls := []byte{
 		2, 2, 2, 2, 2, 2, 2, 2, // 00 - 07
 		2, 2, 2, 2, 2, 2, 0, 0, // 08 - 0f
@@ -595,7 +595,7 @@ func EucTwSmModel() *StateMachineModel {
 	}
 
 	EucTwCharLenTable := []byte{0, 0, 1, 2, 2, 2, 3}
-	return &StateMachineModel{
+	return StateMachineModel{
 		Name:         consts.EucTwModelName,
 		Language:     "",
 		ClassTable:   EucTwCls,
@@ -605,7 +605,7 @@ func EucTwSmModel() *StateMachineModel {
 	}
 }
 
-func EucKrSmModel() *StateMachineModel {
+func EucKrSmModel() StateMachineModel {
 	EuckrCls := []byte{
 		1, 1, 1, 1, 1, 1, 1, 1, // 00 - 07
 		1, 1, 1, 1, 1, 1, 0, 0, // 08 - 0f
@@ -647,7 +647,7 @@ func EucKrSmModel() *StateMachineModel {
 	}
 
 	EuckrCharLenTable := []byte{0, 1, 2, 0}
-	return &StateMachineModel{
+	return StateMachineModel{
 		Name:         consts.EucKrModelName,
 		Language:     "",
 		ClassTable:   EuckrCls,
@@ -657,7 +657,7 @@ func EucKrSmModel() *StateMachineModel {
 	}
 }
 
-func EucJpSmModel() *StateMachineModel {
+func EucJpSmModel() StateMachineModel {
 	EucJpCls := []byte{
 		4, 4, 4, 4, 4, 4, 4, 4, // 00 - 07
 		4, 4, 4, 4, 4, 4, 5, 5, // 08 - 0f
@@ -701,7 +701,7 @@ func EucJpSmModel() *StateMachineModel {
 	}
 
 	EucJpCharLenTable := []byte{2, 2, 2, 3, 1, 0}
-	return &StateMachineModel{
+	return StateMachineModel{
 		Name:         consts.EucJpModelName,
 		Language:     "",
 		ClassTable:   EucJpCls,
@@ -711,7 +711,7 @@ func EucJpSmModel() *StateMachineModel {
 	}
 }
 
-func CP949SmModel() *StateMachineModel {
+func CP949SmModel() StateMachineModel {
 	Cp949Cls := []byte{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, // 00 - 0f
 		1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, // 10 - 1f
 		1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, // 20 - 2f
@@ -741,7 +741,7 @@ func CP949SmModel() *StateMachineModel {
 	}
 
 	Cp949CharLenTable := []byte{0, 1, 2, 0, 1, 1, 2, 2, 0, 2}
-	return &StateMachineModel{
+	return StateMachineModel{
 		Name:         consts.CP949ModelName,
 		Language:     "",
 		ClassTable:   Cp949Cls,
@@ -751,7 +751,7 @@ func CP949SmModel() *StateMachineModel {
 	}
 }
 
-func Big5SmModel() *StateMachineModel {
+func Big5SmModel() StateMachineModel {
 	Big5Cls := []byte{
 		1, 1, 1, 1, 1, 1, 1, 1, // 00 - 07    //allow 0x00 as legal value
 		1, 1, 1, 1, 1, 1, 0, 0, // 08 - 0f
@@ -793,12 +793,69 @@ func Big5SmModel() *StateMachineModel {
 	}
 
 	Big5CharLenTable := []byte{0, 1, 1, 2, 0}
-	return &StateMachineModel{
+	return StateMachineModel{
 		Name:         consts.Big5ModelName,
 		Language:     "",
 		ClassTable:   Big5Cls,
 		ClassFactor:  5,
 		StateTable:   Big5St,
 		CharLenTable: Big5CharLenTable,
+	}
+}
+
+func JohabSmModel() StateMachineModel {
+	JohabCls := []byte{
+		4, 4, 4, 4, 4, 4, 4, 4, // 00 - 07
+		4, 4, 4, 4, 4, 4, 0, 0, // 08 - 0f
+		4, 4, 4, 4, 4, 4, 4, 4, // 10 - 17
+		4, 4, 4, 0, 4, 4, 4, 4, // 18 - 1f
+		4, 4, 4, 4, 4, 4, 4, 4, // 20 - 27
+		4, 4, 4, 4, 4, 4, 4, 4, // 28 - 2f
+		4, 3, 3, 3, 3, 3, 3, 3, // 30 - 37
+		3, 3, 3, 3, 3, 3, 3, 3, // 38 - 3f
+		3, 1, 1, 1, 1, 1, 1, 1, // 40 - 47
+		1, 1, 1, 1, 1, 1, 1, 1, // 48 - 4f
+		1, 1, 1, 1, 1, 1, 1, 1, // 50 - 57
+		1, 1, 1, 1, 1, 1, 1, 1, // 58 - 5f
+		1, 1, 1, 1, 1, 1, 1, 1, // 60 - 67
+		1, 1, 1, 1, 1, 1, 1, 1, // 68 - 6f
+		1, 1, 1, 1, 1, 1, 1, 1, // 70 - 77
+		1, 1, 1, 1, 1, 1, 1, 2, // 78 - 7f
+		6, 6, 6, 6, 8, 8, 8, 8, // 80 - 87
+		8, 8, 8, 8, 8, 8, 8, 8, // 88 - 8f
+		8, 7, 7, 7, 7, 7, 7, 7, // 90 - 97
+		7, 7, 7, 7, 7, 7, 7, 7, // 98 - 9f
+		7, 7, 7, 7, 7, 7, 7, 7, // a0 - a7
+		7, 7, 7, 7, 7, 7, 7, 7, // a8 - af
+		7, 7, 7, 7, 7, 7, 7, 7, // b0 - b7
+		7, 7, 7, 7, 7, 7, 7, 7, // b8 - bf
+		7, 7, 7, 7, 7, 7, 7, 7, // c0 - c7
+		7, 7, 7, 7, 7, 7, 7, 7, // c8 - cf
+		7, 7, 7, 7, 5, 5, 5, 5, // d0 - d7
+		5, 9, 9, 9, 9, 9, 9, 5, // d8 - df
+		9, 9, 9, 9, 9, 9, 9, 9, // e0 - e7
+		9, 9, 9, 9, 9, 9, 9, 9, // e8 - ef
+		9, 9, 9, 9, 9, 9, 9, 9, // f0 - f7
+		9, 9, 5, 5, 5, 5, 5, 0, // f8 - ff
+	}
+
+	JohabSt := []byte{
+		// cls = 0                   1                   2                   3                   4                   5                   6                   7                   8                   9
+		consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.ErrorMachineState, consts.ErrorMachineState, 3, 3, 4, // consts.StartMachineState
+		consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, consts.ItsMeMachineState, // consts.ItsMeMachineState
+		consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.ErrorMachineState, // consts.ErrorMachineState
+		consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, consts.ErrorMachineState, consts.ErrorMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, consts.StartMachineState, // 3
+		consts.ErrorMachineState, consts.StartMachineState, consts.ErrorMachineState, consts.StartMachineState, consts.ErrorMachineState, consts.StartMachineState, consts.ErrorMachineState, consts.StartMachineState, consts.ErrorMachineState, consts.StartMachineState, // 4
+	}
+
+	JohabCharLenTable := []byte{0, 1, 1, 1, 1, 0, 0, 2, 2, 2}
+
+	return StateMachineModel{
+		Name:         consts.JohabName,
+		Language:     "",
+		ClassTable:   JohabCls,
+		ClassFactor:  5,
+		StateTable:   JohabSt,
+		CharLenTable: JohabCharLenTable,
 	}
 }

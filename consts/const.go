@@ -9,6 +9,8 @@ const (
 const (
 	ChineseLanguage  = "Chinese"
 	JapaneseLanguage = "Japanese"
+	KoreanLanguage   = "Korean"
+	HebrewLanguage   = "Hebrew"
 )
 
 const (
@@ -20,11 +22,12 @@ const (
 	UTF16BeModelName   = "UTF-16BE"
 	ShiftJisModelName  = "Shift_JIS"
 	GB2312ModelName    = "GB2312"
-	EucTwModelName     = "x-euc-tw"
+	EucTwModelName     = "EUC-TW"
 	EucKrModelName     = "EUC-KR"
 	EucJpModelName     = "EUC-JP"
 	CP949ModelName     = "CP949"
 	Big5ModelName      = "Big5"
+	JohabName          = "Johab"
 )
 
 type LangFilter byte
