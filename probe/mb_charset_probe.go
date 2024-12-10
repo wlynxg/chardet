@@ -4,7 +4,6 @@ import (
 	"github.com/wlynxg/chardet/cda"
 	"github.com/wlynxg/chardet/consts"
 	"github.com/wlynxg/chardet/log"
-	"github.com/wlynxg/chardet/smm"
 	"go.uber.org/zap"
 )
 
@@ -14,12 +13,12 @@ type MultiByteCharSetProbe struct {
 	log                   *zap.SugaredLogger
 	charsetName, language string
 	distributionAnalyzer  cda.Analyzer
-	codingSM              *smm.CodingStateMachine
+	codingSM              *CodingStateMachine
 	lastChar              [2]byte
 }
 
 func NewMultiByteCharSetProbe(charsetName, language string, filter consts.LangFilter,
-	distributionAnalyzer cda.Analyzer, codingSM *smm.CodingStateMachine) MultiByteCharSetProbe {
+	distributionAnalyzer cda.Analyzer, codingSM *CodingStateMachine) MultiByteCharSetProbe {
 	return MultiByteCharSetProbe{
 		CharSetProbe:         NewCharSetProbe(filter),
 		log:                  log.New("MultiByteCharSetProbe"),
@@ -52,7 +51,6 @@ loop:
 		codingState := m.codingSM.NextState(buf[i])
 		switch codingState {
 		case consts.ErrorMachineState:
-			// TODO: 继承
 			m.log.Debugf("%s %s prober hit error at byte %d", m.charsetName, m.language, i)
 			m.state = consts.NotMeProbingState
 			break loop

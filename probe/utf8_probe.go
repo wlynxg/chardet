@@ -4,7 +4,6 @@ import (
 	"math"
 
 	"github.com/wlynxg/chardet/consts"
-	"github.com/wlynxg/chardet/smm"
 )
 
 type UTF8Probe struct {
@@ -12,7 +11,7 @@ type UTF8Probe struct {
 	OneCharProb       float64
 	ShortcutThreshold float64
 
-	codingSM   *smm.CodingStateMachine
+	codingSM   *CodingStateMachine
 	numMbChars int
 }
 
@@ -20,7 +19,7 @@ func NewUTF8Probe() *UTF8Probe {
 	return &UTF8Probe{
 		OneCharProb:       0.5,
 		ShortcutThreshold: 0.95,
-		codingSM:          smm.NewCodingStateMachine(smm.UTF8SmModel()),
+		codingSM:          NewCodingStateMachine(UTF8SmModel()),
 		numMbChars:        0,
 	}
 }
@@ -42,10 +41,6 @@ func (u *UTF8Probe) Reset() {
 }
 
 func (u *UTF8Probe) Feed(data []byte) consts.ProbingState {
-	if u.codingSM == nil {
-		return consts.NotMeProbingState
-	}
-
 loop:
 	for _, datum := range data {
 		codingState := u.codingSM.NextState(datum)

@@ -3,7 +3,6 @@ package probe
 import (
 	"github.com/wlynxg/chardet/cda"
 	"github.com/wlynxg/chardet/consts"
-	"github.com/wlynxg/chardet/smm"
 )
 
 type JOHABProbe struct {
@@ -17,7 +16,7 @@ func NewJOHABProbe() *JOHABProbe {
 			consts.KoreanLanguage,
 			consts.UnknownLangFilter,
 			cda.NewJOHABDistributionAnalysis(),
-			smm.NewCodingStateMachine(smm.JohabSmModel()),
+			NewCodingStateMachine(JohabSmModel()),
 		),
 	}
 }

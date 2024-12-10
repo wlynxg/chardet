@@ -3,7 +3,6 @@ package probe
 import (
 	"github.com/wlynxg/chardet/cda"
 	"github.com/wlynxg/chardet/consts"
-	"github.com/wlynxg/chardet/smm"
 )
 
 type CP949Probe struct {
@@ -17,7 +16,7 @@ func NewCP949Probe() *CP949Probe {
 			consts.KoreanLanguage,
 			consts.UnknownLangFilter,
 			cda.NewEUCKRDistributionAnalysis(),
-			smm.NewCodingStateMachine(smm.CP949SmModel()),
+			NewCodingStateMachine(CP949SmModel()),
 		),
 	}
 }

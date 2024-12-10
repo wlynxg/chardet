@@ -10,7 +10,7 @@ type SBCSGroupProbe struct {
 
 func NewSBCSGroupProbe() *SBCSGroupProbe {
 	p := &SBCSGroupProbe{}
-	p.CharSetProbe = NewCharSetProbe(consts.UnknownLangFilter)
+	p.CharSetGroupProbe = NewCharSetGroupProbe(consts.UnknownLangFilter, nil)
 	hp := NewHebrewProbe()
 	logical := NewSingleByteCharSetProbe(NewWindows1255HebrewModel(), false, hp)
 	visual := NewSingleByteCharSetProbe(NewWindows1255HebrewModel(), true, hp)
@@ -35,6 +35,6 @@ func NewSBCSGroupProbe() *SBCSGroupProbe {
 		logical,
 		visual,
 	}
-
+	p.Reset()
 	return p
 }

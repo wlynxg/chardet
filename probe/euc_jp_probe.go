@@ -4,7 +4,6 @@ import (
 	"github.com/wlynxg/chardet/cda"
 	"github.com/wlynxg/chardet/consts"
 	"github.com/wlynxg/chardet/log"
-	"github.com/wlynxg/chardet/smm"
 	"go.uber.org/zap"
 )
 
@@ -24,7 +23,7 @@ func NewEUCJPProbe() *EUCJPProbe {
 		consts.JapaneseLanguage,
 		consts.UnknownLangFilter,
 		cda.NewEUCJPDistributionAnalysis(),
-		smm.NewCodingStateMachine(smm.EucJpSmModel()),
+		NewCodingStateMachine(EucJpSmModel()),
 	)
 	return ep
 }

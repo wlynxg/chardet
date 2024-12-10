@@ -4,7 +4,6 @@ import (
 	"github.com/wlynxg/chardet/cda"
 	"github.com/wlynxg/chardet/consts"
 	"github.com/wlynxg/chardet/log"
-	"github.com/wlynxg/chardet/smm"
 	"go.uber.org/zap"
 )
 
@@ -18,17 +17,17 @@ type SJISProbe struct {
 }
 
 func NewSJISProbe() *SJISProbe {
-	sp := &SJISProbe{
+	return &SJISProbe{
+		MultiByteCharSetProbe: NewMultiByteCharSetProbe(
+			"",
+			consts.JapaneseLanguage,
+			consts.UnknownLangFilter,
+			cda.NewSJISDistributionAnalysis(),
+			NewCodingStateMachine(SjisSmModel()),
+		),
 		log:             log.New("SJISProbe"),
 		contextAnalyzer: cda.NewSJISContextAnalysis(),
 	}
-	sp.MultiByteCharSetProbe = NewMultiByteCharSetProbe(
-		sp.contextAnalyzer.CharSetName(),
-		consts.JapaneseLanguage,
-		consts.UnknownLangFilter,
-		cda.NewSJISContextAnalysis(),
-		smm.NewCodingStateMachine(smm.SjisSmModel()))
-	return sp
 }
 
 func (s *SJISProbe) Reset() {
@@ -36,6 +35,10 @@ func (s *SJISProbe) Reset() {
 	if s.contextAnalyzer != nil {
 		s.contextAnalyzer.Reset()
 	}
+}
+
+func (s *SJISProbe) CharSetName() string {
+	return s.contextAnalyzer.CharSetName()
 }
 
 func (s *SJISProbe) Feed(buf []byte) consts.ProbingState {

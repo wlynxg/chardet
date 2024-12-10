@@ -8,7 +8,6 @@ import (
 	"github.com/wlynxg/chardet/consts"
 	"github.com/wlynxg/chardet/log"
 	"github.com/wlynxg/chardet/probe"
-	"github.com/wlynxg/chardet/smm"
 	"go.uber.org/zap"
 )
 
@@ -31,11 +30,11 @@ type UniversalDetector struct {
 	hasWinBytes     bool
 	inputState      consts.InputState
 	lastChars       []byte
-	escCharsetProbe *smm.EscCharSetProbe
+	escCharsetProbe *probe.EscCharSetProbe
 	langFilter      consts.LangFilter
 	charsetProbes   []probe.ICharSetProbe
 	filter          consts.LangFilter
-	result          *Result
+	result          Result
 }
 
 func NewUniversalDetector(filter consts.LangFilter) *UniversalDetector {
@@ -45,7 +44,7 @@ func NewUniversalDetector(filter consts.LangFilter) *UniversalDetector {
 
 	return &UniversalDetector{
 		MinimumThreshold: 0.20,
-		HighByteDetector: regexp.MustCompile(`[\x80-\xFF]`),
+		HighByteDetector: regexp.MustCompile(`[^\x00-\x7F]`),
 		EscDetector:      regexp.MustCompile(`(\x1B|~{)`),
 		WinByteDetector:  regexp.MustCompile(`[\x80-\x9F]`),
 		IsoWinMap: map[string]string{
@@ -67,7 +66,7 @@ func NewUniversalDetector(filter consts.LangFilter) *UniversalDetector {
 }
 
 func (u *UniversalDetector) Reset() {
-	u.result = &Result{}
+	u.result = Result{}
 	u.done = false
 	u.gotData = false
 	u.hasWinBytes = false
@@ -85,38 +84,38 @@ func (u *UniversalDetector) Reset() {
 	}
 }
 
-func (u *UniversalDetector) Feed(data []byte) {
-	if u.done || len(data) == 0 {
+func (u *UniversalDetector) Feed(buf []byte) {
+	if u.done || len(buf) == 0 {
 		return
 	}
 
 	// First check for known BOMs, since these are guaranteed to be correct
 	if !u.gotData {
-		// If the data starts with BOM, we know it is UTF
+		// If the buf starts with BOM, we know it is UTF
 		var encoding string
 		switch {
-		case bytes.HasPrefix(data, consts.UTF8BOM):
+		case bytes.HasPrefix(buf, consts.UTF8BOM):
 			// EF BB BF  UTF-8 with BOM
 			encoding = consts.UTF8SIG
-		case bytes.HasPrefix(data, consts.UTF32LEBOM) || bytes.HasPrefix(data, consts.UTF32BEBOM):
+		case bytes.HasPrefix(buf, consts.UTF32LEBOM) || bytes.HasPrefix(buf, consts.UTF32BEBOM):
 			// FF FE 00 00  UTF-32, little-endian BOM
 			// 00 00 FE FF  UTF-32, big-endian BOM
 			encoding = consts.UTF32
-		case bytes.HasPrefix(data, consts.UTF16LEBOM) || bytes.HasPrefix(data, consts.UTF16BEBOM):
+		case bytes.HasPrefix(buf, consts.UTF16LEBOM) || bytes.HasPrefix(buf, consts.UTF16BEBOM):
 			// FF FE  UTF-16, little endian BOM
 			// FE FF  UTF-16, big endian BOM
 			encoding = consts.UTF16
-		case bytes.HasPrefix(data, consts.UCS43412BOM):
+		case bytes.HasPrefix(buf, consts.UCS43412BOM):
 			// FE FF 00 00  UCS-4, unusual octet order BOM (3412)
 			encoding = consts.UCS43412
-		case bytes.HasPrefix(data, consts.UCS42143BOM):
+		case bytes.HasPrefix(buf, consts.UCS42143BOM):
 			// 00 00 FF FE  UCS-4, unusual octet order BOM (2143)
 			encoding = consts.UCS42143
 		}
 
 		u.gotData = true
 		if encoding != "" {
-			u.result = &Result{
+			u.result = Result{
 				Encoding:   encoding,
 				Confidence: 1.0,
 				Language:   "",
@@ -129,15 +128,15 @@ func (u *UniversalDetector) Feed(data []byte) {
 	// If none of those matched, and we've only seen ASCII so far, check
 	// for high bytes and escape sequences.
 	if u.inputState == consts.PureAsciiInputState {
-		if u.HighByteDetector.Match(data) {
+		if u.HighByteDetector.Match(buf) {
 			u.inputState = consts.HighByteInputState
 		} else if u.inputState == consts.PureAsciiInputState &&
-			u.EscDetector.Match(bytes.Join([][]byte{u.lastChars, data}, nil)) {
+			u.EscDetector.Match(bytes.Join([][]byte{u.lastChars, buf}, nil)) {
 			u.inputState = consts.EcsAsciiInputState
 		}
 	}
 
-	u.lastChars = append(u.lastChars, data[len(data)-1])
+	u.lastChars = append(u.lastChars, buf[len(buf)-1])
 
 	switch u.inputState {
 	case consts.EcsAsciiInputState:
@@ -146,13 +145,13 @@ func (u *UniversalDetector) Feed(data []byte) {
 		// HZ and ISO-2022 encodings, since those are the only encodings that
 		// use such sequences.
 		if u.escCharsetProbe == nil {
-			u.escCharsetProbe = smm.NewEscCharSetProbe(u.langFilter)
+			u.escCharsetProbe = probe.NewEscCharSetProbe(u.langFilter)
 		}
 
-		if u.escCharsetProbe.Feed(data) == consts.FoundItProbingState {
-			u.result = &Result{
-				Encoding:   u.escCharsetProbe.CharsetName(),
-				Confidence: u.escCharsetProbe.Confidence(),
+		if u.escCharsetProbe.Feed(buf) == consts.FoundItProbingState {
+			u.result = Result{
+				Encoding:   u.escCharsetProbe.CharSetName(),
+				Confidence: u.escCharsetProbe.GetConfidence(),
 				Language:   u.escCharsetProbe.Language(),
 			}
 			u.done = true
@@ -178,17 +177,18 @@ func (u *UniversalDetector) Feed(data []byte) {
 				continue
 			}
 
-			if charsetProbe.Feed(data) == consts.FoundItProbingState {
-				u.result = &Result{
+			if charsetProbe.Feed(buf) == consts.FoundItProbingState {
+				u.result = Result{
 					Encoding:   charsetProbe.CharSetName(),
 					Confidence: charsetProbe.GetConfidence(),
 					Language:   charsetProbe.Language(),
 				}
 				u.done = true
+				break
 			}
 		}
 
-		if u.WinByteDetector.Match(data) {
+		if u.WinByteDetector.Match(buf) {
 			u.hasWinBytes = true
 		}
 	default:
@@ -197,7 +197,7 @@ func (u *UniversalDetector) Feed(data []byte) {
 
 func (u *UniversalDetector) GetResult() Result {
 	if u.done {
-		return *u.result
+		return u.result
 	}
 	u.done = true
 
@@ -205,7 +205,7 @@ func (u *UniversalDetector) GetResult() Result {
 	case !u.gotData:
 		u.log.Debug("no data received!")
 	case u.inputState == consts.PureAsciiInputState:
-		u.result = &Result{
+		u.result = Result{
 			Encoding:   consts.Ascii,
 			Confidence: 1.0,
 			Language:   "",
@@ -240,12 +240,12 @@ func (u *UniversalDetector) GetResult() Result {
 					charsetName = n
 				}
 			}
-			u.result = &Result{
+			u.result = Result{
 				Encoding:   charsetName,
 				Confidence: confidence,
 				Language:   maxConfidenceProbe.Language(),
 			}
 		}
 	}
-	return *u.result
+	return u.result
 }

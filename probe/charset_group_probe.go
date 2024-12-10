@@ -16,16 +16,17 @@ type CharSetGroupProbe struct {
 	probes         []ICharSetProbe
 }
 
-func NewCharSetGroupProbe(filter consts.LangFilter) CharSetGroupProbe {
-	csgp := CharSetGroupProbe{
+func NewCharSetGroupProbe(filter consts.LangFilter, probes []ICharSetProbe) CharSetGroupProbe {
+	p := CharSetGroupProbe{
 		CharSetProbe:   NewCharSetProbe(filter),
 		log:            log.New("CharSetGroupProbe"),
 		filter:         filter,
 		activeNum:      0,
 		bestGuessProbe: nil,
-		probes:         []ICharSetProbe{},
+		probes:         probes,
 	}
-	return csgp
+	p.Reset()
+	return p
 }
 
 func (c *CharSetGroupProbe) Reset() {
@@ -67,7 +68,7 @@ func (c *CharSetGroupProbe) Feed(buf []byte) consts.ProbingState {
 			continue
 		}
 
-		if probe.IsActive() {
+		if !probe.IsActive() {
 			c.log.Debugf("%s not active", probe.CharSetName())
 			continue
 		}
@@ -108,7 +109,7 @@ func (c *CharSetGroupProbe) GetConfidence() float64 {
 			continue
 		}
 
-		if probe.IsActive() {
+		if !probe.IsActive() {
 			c.log.Debugf("%s not active", probe.CharSetName())
 			continue
 		}

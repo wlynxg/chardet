@@ -46,12 +46,13 @@ func NewSingleByteCharSetProbe(model SingleByteCharSetModel, reversed bool, name
 		reversed: reversed,
 		// Optional auxiliary probe for a name decision
 		nameProbe:   nameProbe,
-		lastOrder:   0,
-		seqCounters: nil,
+		lastOrder:   255,
+		seqCounters: make([]byte, consts.LikelihoodCategories),
 		totalSeqs:   0,
 		totalChar:   0,
 		freqChar:    0,
 	}
+	sp.Reset()
 	return sp
 }
 
@@ -127,7 +128,7 @@ func (s *SingleByteCharSetProbe) Feed(buf []byte) consts.ProbingState {
 			if confidence > s.PositiveShortcutThreshold {
 				s.log.Debugf("%s confidence = %f, we have a winner", charsetName, confidence)
 				s.state = consts.FoundItProbingState
-			} else if confidence > s.NegativeShortcutThreshold {
+			} else if confidence < s.NegativeShortcutThreshold {
 				s.log.Debugf("%s confidence = %f, below negative shortcut threshhold %f",
 					charsetName, confidence, s.NegativeShortcutThreshold)
 				s.state = consts.NotMeProbingState

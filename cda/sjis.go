@@ -311,10 +311,6 @@ func (s *SJISDistributionAnalysis) GetOrder(buff []byte) int {
 	//   second byte range: 0x40 -- 0x7e,  0x81 -- oxfe
 	// no validation needed here. State machine has done that
 
-	if len(buff) < 2 {
-		return -1
-	}
-
 	var (
 		firstChar, secondChar = buff[0], buff[1]
 		order                 int
