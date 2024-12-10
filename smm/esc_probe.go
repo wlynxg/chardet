@@ -92,7 +92,7 @@ func (e *EscCharSetProbe) Language() string {
 	return e.detectedLanguage
 }
 
-func (e *EscCharSetProbe) Confidence() float32 {
+func (e *EscCharSetProbe) Confidence() float64 {
 	if e.detectedCharset != "" {
 		return 0.99
 	} else {

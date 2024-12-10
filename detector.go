@@ -11,7 +11,7 @@ import (
 
 type Result struct {
 	Encoding   string  `json:"encoding,omitempty"`
-	Confidence float32 `json:"confidence,omitempty"`
+	Confidence float64 `json:"confidence,omitempty"`
 	Language   string  `json:"language,omitempty"`
 }
 
@@ -29,7 +29,7 @@ type UniversalDetector struct {
 	lastChars       []byte
 	escCharsetProbe *smm.EscCharSetProbe
 	langFilter      consts.LangFilter
-	charsetProbes   []probe.Probe
+	charsetProbes   []probe.ICharSetProbe
 	filter          consts.LangFilter
 	result          *Result
 }
@@ -161,11 +161,31 @@ func (u *UniversalDetector) Feed(data []byte) {
 		// the multi-byte probes use a combination of character unigram and
 		// bigram distributions.
 		if len(u.charsetProbes) == 0 {
-			u.charsetProbes = []probe.Probe{probe.MBCGroupProbe(u.filter)}
+			u.charsetProbes = []probe.ICharSetProbe{probe.MBCGroupProbe(u.filter)}
 			// If we're checking non-CJK encodings, use single-byte probe
 			if u.filter&consts.NonCjkLangFilter != 0 {
-				u.charsetProbes = append(u.charsetProbes, probe.SB)
+				u.charsetProbes = append(u.charsetProbes, probe.NewSBCSGroupProbe())
 			}
+			u.charsetProbes = append(u.charsetProbes, probe.NewLatin1Probe())
+		}
+
+		for _, charsetProbe := range u.charsetProbes {
+			if charsetProbe == nil {
+				continue
+			}
+
+			if charsetProbe.Feed(data) == consts.FoundItProbingState {
+				u.result = &Result{
+					Encoding:   charsetProbe.CharSetName(),
+					Confidence: charsetProbe.GetConfidence(),
+					Language:   charsetProbe.Language(),
+				}
+				u.done = true
+			}
+		}
+
+		if u.WinByteDetector.Match(data) {
+			u.hasWinBytes = true
 		}
 	default:
 	}

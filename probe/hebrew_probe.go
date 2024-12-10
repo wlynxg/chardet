@@ -1,7 +1,6 @@
 package probe
 
 import (
-	"github.com/wlynxg/chardet/cda"
 	"github.com/wlynxg/chardet/consts"
 )
 
@@ -18,8 +17,8 @@ type HebrewProbe struct {
 	finalCharVisualScore  int
 	prev                  byte
 	beforePrev            byte
-	logicalProbe          cda.Analyzer
-	visualProbe           cda.Analyzer
+	logicalProbe          ICharSetProbe
+	visualProbe           ICharSetProbe
 }
 
 func NewHebrewProbe() *HebrewProbe {
@@ -68,7 +67,7 @@ func (h *HebrewProbe) Reset() {
 	// These probers are owned by the group prober.
 }
 
-func (h *HebrewProbe) SetModelProbe(logical, visual cda.Analyzer) {
+func (h *HebrewProbe) SetModelProbe(logical, visual ICharSetProbe) {
 	h.logicalProbe = logical
 	h.visualProbe = visual
 }
@@ -195,4 +194,8 @@ func (h *HebrewProbe) Language() string {
 func (h *HebrewProbe) State() consts.ProbingState {
 	// TODO: _logical_prober
 	return consts.DetectingProbingState
+}
+
+func (h *HebrewProbe) GetConfidence() float64 {
+	return 0
 }
