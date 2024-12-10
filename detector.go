@@ -3,10 +3,13 @@ package chardet
 import (
 	"bytes"
 	"regexp"
+	"strings"
 
 	"github.com/wlynxg/chardet/consts"
+	"github.com/wlynxg/chardet/log"
 	"github.com/wlynxg/chardet/probe"
 	"github.com/wlynxg/chardet/smm"
+	"go.uber.org/zap"
 )
 
 type Result struct {
@@ -22,6 +25,7 @@ type UniversalDetector struct {
 	WinByteDetector  *regexp.Regexp
 	IsoWinMap        map[string]string
 
+	log             *zap.SugaredLogger
 	done            bool
 	gotData         bool
 	hasWinBytes     bool
@@ -55,6 +59,7 @@ func NewUniversalDetector(filter consts.LangFilter) *UniversalDetector {
 			"iso-8859-13": "Windows-1257",
 		},
 
+		log:        log.New("UniversalDetector"),
 		inputState: consts.PureAsciiInputState,
 		lastChars:  []byte{},
 		filter:     filter,
@@ -75,8 +80,7 @@ func (u *UniversalDetector) Reset() {
 
 	for _, p := range u.charsetProbes {
 		if p != nil {
-			// TODO: charsetProbes Reset
-			// p.Reset()
+			p.Reset()
 		}
 	}
 }
@@ -189,4 +193,59 @@ func (u *UniversalDetector) Feed(data []byte) {
 		}
 	default:
 	}
+}
+
+func (u *UniversalDetector) GetResult() Result {
+	if u.done {
+		return *u.result
+	}
+	u.done = true
+
+	switch {
+	case !u.gotData:
+		u.log.Debug("no data received!")
+	case u.inputState == consts.PureAsciiInputState:
+		u.result = &Result{
+			Encoding:   consts.Ascii,
+			Confidence: 1.0,
+			Language:   "",
+		}
+	case u.inputState == consts.HighByteInputState:
+		var (
+			probeConfidence    = 0.0
+			maxProbeConfidence = 0.0
+			maxConfidenceProbe probe.ICharSetProbe
+		)
+
+		for _, charsetProbe := range u.charsetProbes {
+			if charsetProbe == nil {
+				continue
+			}
+
+			probeConfidence = charsetProbe.GetConfidence()
+			if probeConfidence > maxProbeConfidence {
+				maxProbeConfidence = probeConfidence
+				maxConfidenceProbe = charsetProbe
+			}
+		}
+
+		if maxConfidenceProbe != nil && maxProbeConfidence > u.MinimumThreshold {
+			charsetName := maxConfidenceProbe.CharSetName()
+			confidence := maxConfidenceProbe.GetConfidence()
+
+			if u.hasWinBytes {
+				// Use Windows encoding name instead of ISO-8859 if we saw any
+				// extra Windows-specific bytes
+				if n, ok := u.IsoWinMap[strings.ToLower(maxConfidenceProbe.CharSetName())]; ok {
+					charsetName = n
+				}
+			}
+			u.result = &Result{
+				Encoding:   charsetName,
+				Confidence: confidence,
+				Language:   maxConfidenceProbe.Language(),
+			}
+		}
+	}
+	return *u.result
 }

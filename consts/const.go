@@ -4,6 +4,7 @@ const (
 	UTF8ProbeCharsetName     = "utf-8"
 	ShiftJISProbeCharsetName = "SHIFT_JIS"
 	CP932CharsetName         = "CP932"
+	Ascii                    = "Ascii"
 )
 
 const (
