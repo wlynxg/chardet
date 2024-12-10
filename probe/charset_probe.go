@@ -11,6 +11,8 @@ import (
 type CharSetProbe struct {
 	ShortcutThreshold float64
 
+	InternationalWordsPattern *regexp.Regexp
+
 	active bool
 	state  consts.ProbingState
 	filter consts.LangFilter
@@ -19,6 +21,8 @@ type CharSetProbe struct {
 func NewCharSetProbe(filter consts.LangFilter) CharSetProbe {
 	csp := CharSetProbe{
 		ShortcutThreshold: 0.95,
+
+		InternationalWordsPattern: regexp.MustCompile(`[a-zA-Z][\x80-\xFF]+[a-zA-Z][^a-zA-Z\x80-\xFF]?`),
 
 		active: false,
 		state:  consts.DetectingProbingState,
@@ -65,8 +69,7 @@ are replaced by a single space ascii character.
 This filter applies to all scripts which do not use English characters.
 */
 func (p *CharSetProbe) FilterInternationalWords(buf []byte) []byte {
-	pattern := regexp.MustCompile(`[a-zA-Z]*[\x80-\xFF]+[a-zA-Z]*[^a-zA-Z\x80-\xFF]?`)
-	words := pattern.FindAll(buf, -1)
+	words := p.InternationalWordsPattern.FindAll(buf, -1)
 
 	var filtered bytes.Buffer
 	for _, word := range words {
