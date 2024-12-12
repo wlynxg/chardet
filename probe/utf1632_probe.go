@@ -128,11 +128,11 @@ func (u *UTF1632Probe) isLikelyUtf16le() bool {
 //
 //	https://en.wikipedia.org/wiki/UTF-32
 func (u *UTF1632Probe) validateUtf32Characters(quard []byte) {
-	if quard[0] != 0 || quard[1] > 0x10 || (quard[0] == 0 && quard[1] == 0 && quard[2] >= 0xDB && quard[2] <= 0xDF) {
+	if quard[0] != 0 || quard[1] > 0x10 || (quard[0] == 0 && quard[1] == 0 && quard[2] >= 0xD8 && quard[2] <= 0xDF) {
 		u.invalidUtf32be = true
 	}
 
-	if quard[3] != 0 || quard[2] > 0x10 || (quard[3] == 0 && quard[2] == 0 && quard[1] >= 0xDB && quard[1] <= 0xDF) {
+	if quard[3] != 0 || quard[2] > 0x10 || (quard[3] == 0 && quard[2] == 0 && quard[1] >= 0xD8 && quard[1] <= 0xDF) {
 		u.invalidUtf32le = true
 	}
 }
@@ -153,7 +153,7 @@ func (u *UTF1632Probe) validateUtf16Characters(quard []byte) {
 		}
 	} else {
 		if quard[0] >= 0xDC && quard[0] <= 0xDF {
-			u.firstHalfSurrogatePairDetected16be = true
+			u.firstHalfSurrogatePairDetected16be = false
 		} else {
 			u.invalidUtf16le = true
 		}
@@ -166,8 +166,8 @@ func (u *UTF1632Probe) validateUtf16Characters(quard []byte) {
 			u.invalidUtf16le = true
 		}
 	} else {
-		if quard[2] >= 0xDC && quard[2] <= 0xDF {
-			u.firstHalfSurrogatePairDetected16le = true
+		if quard[1] >= 0xDC && quard[1] <= 0xDF {
+			u.firstHalfSurrogatePairDetected16le = false
 		} else {
 			u.invalidUtf16le = true
 		}
@@ -189,8 +189,9 @@ func (u *UTF1632Probe) Feed(buf []byte) consts.ProbingState {
 		} else {
 			u.nonzeroAtMod[mod4]++
 		}
+		u.position++
 	}
-	return u.state
+	return u.State()
 }
 
 func (u *UTF1632Probe) State() consts.ProbingState {

@@ -74,9 +74,9 @@ func TestDetectSubset(t *testing.T) {
 		// {"SHIFT_JIS", 1},
 		// {"utf-8", 1},
 		// {"utf-16", 1},
-		{"utf-16BE", 1},
-
 		// {"MacRoman", 1},
+
+		{"utf-16BE", 1},
 	}
 
 	for _, tc := range testCases {
