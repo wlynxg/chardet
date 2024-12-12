@@ -27,7 +27,7 @@ type SingleByteCharSetProbe struct {
 	reversed    bool
 	nameProbe   ICharSetProbe
 	lastOrder   int
-	seqCounters []byte
+	seqCounters []int
 	totalSeqs   int
 	totalChar   int
 	freqChar    int
@@ -47,7 +47,7 @@ func NewSingleByteCharSetProbe(model SingleByteCharSetModel, reversed bool, name
 		// Optional auxiliary probe for a name decision
 		nameProbe:   nameProbe,
 		lastOrder:   255,
-		seqCounters: make([]byte, consts.LikelihoodCategories),
+		seqCounters: make([]int, consts.LikelihoodCategories),
 		totalSeqs:   0,
 		totalChar:   0,
 		freqChar:    0,
@@ -60,7 +60,7 @@ func (s *SingleByteCharSetProbe) Reset() {
 	s.CharSetProbe.Reset()
 	// char order of last character
 	s.lastOrder = 255
-	s.seqCounters = make([]byte, consts.LikelihoodCategories)
+	s.seqCounters = make([]int, consts.LikelihoodCategories)
 	s.totalSeqs = 0
 	s.totalChar = 0
 	// characters that fall in our sampling range
@@ -111,9 +111,9 @@ func (s *SingleByteCharSetProbe) Feed(buf []byte) consts.ProbingState {
 			if s.lastOrder < s.SampleSize {
 				s.totalSeqs++
 
-				lmCat := s.model.LanguageModel[order][s.lastOrder]
-				if !s.reversed {
-					lmCat = s.model.LanguageModel[s.lastOrder][order]
+				lmCat := s.model.LanguageModel[s.lastOrder][order]
+				if s.reversed {
+					lmCat = s.model.LanguageModel[order][s.lastOrder]
 				}
 				s.seqCounters[lmCat]++
 			}
@@ -142,11 +142,8 @@ func (s *SingleByteCharSetProbe) Feed(buf []byte) consts.ProbingState {
 func (s *SingleByteCharSetProbe) GetConfidence() float64 {
 	r := 0.01
 	if s.totalSeqs > 0 {
-		r := float64(s.seqCounters[int(consts.PositiveSequenceLikelihood)]) /
-			float64(s.totalSeqs) /
-			s.model.TypicalPositiveRatio *
-			float64(s.freqChar) /
-			float64(s.totalSeqs)
+		r1 := float64(s.seqCounters[int(consts.PositiveSequenceLikelihood)]) / float64(s.totalSeqs) / s.model.TypicalPositiveRatio
+		r = r1 * float64(s.freqChar) / float64(s.totalChar)
 		if r >= 1 {
 			r = 0.99
 		}

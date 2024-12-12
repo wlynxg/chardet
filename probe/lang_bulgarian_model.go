@@ -4365,7 +4365,7 @@ func NewISO88595BulgarianModel() SingleByteCharSetModel {
 	}
 	return SingleByteCharSetModel{
 		CharsetName:          consts.ISO88595,
-		Language:             consts.BulgarianLanguage,
+		Language:             consts.Bulgarian,
 		CharToOrderMap:       Iso88595BulgarianCharToOrder,
 		LanguageModel:        bulgarianLangModel(),
 		TypicalPositiveRatio: 0.969392,
@@ -4635,7 +4635,7 @@ func NewWindows1251BulgarianModel() SingleByteCharSetModel {
 	}
 	return SingleByteCharSetModel{
 		CharsetName:          consts.Windows1251,
-		Language:             consts.BulgarianLanguage,
+		Language:             consts.Bulgarian,
 		CharToOrderMap:       Windows1251BulgarianCharToOrder,
 		LanguageModel:        bulgarianLangModel(),
 		TypicalPositiveRatio: 0.969392,

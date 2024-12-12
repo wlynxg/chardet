@@ -20,7 +20,7 @@ func NewSJISProbe() *SJISProbe {
 	return &SJISProbe{
 		MultiByteCharSetProbe: NewMultiByteCharSetProbe(
 			"",
-			consts.JapaneseLanguage,
+			consts.Japanese,
 			consts.UnknownLangFilter,
 			cda.NewSJISDistributionAnalysis(),
 			NewCodingStateMachine(SjisSmModel()),

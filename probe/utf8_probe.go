@@ -25,7 +25,7 @@ func NewUTF8Probe() *UTF8Probe {
 }
 
 func (u *UTF8Probe) CharSetName() string {
-	return consts.UTF8ProbeCharsetName
+	return consts.UTF8
 }
 
 func (u *UTF8Probe) Language() string {

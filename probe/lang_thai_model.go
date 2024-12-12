@@ -4365,7 +4365,7 @@ func NewTis620ThaiModel() SingleByteCharSetModel {
 	}
 	return SingleByteCharSetModel{
 		CharsetName:          consts.TIS620,
-		Language:             consts.ThaiLanguage,
+		Language:             consts.Thai,
 		CharToOrderMap:       Tis620ThaiCharToOrder,
 		LanguageModel:        thaiLangModel(),
 		TypicalPositiveRatio: 0.926386,

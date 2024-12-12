@@ -188,7 +188,7 @@ func (h *HebrewProbe) CharSetName() string {
 }
 
 func (h *HebrewProbe) Language() string {
-	return consts.HebrewLanguage
+	return consts.Hebrew
 }
 
 func (h *HebrewProbe) State() consts.ProbingState {

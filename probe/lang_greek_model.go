@@ -4113,7 +4113,7 @@ func NewISO88597GreekModel() SingleByteCharSetModel {
 	}
 	return SingleByteCharSetModel{
 		CharsetName:          consts.ISO88597,
-		Language:             consts.GreekLanguage,
+		Language:             consts.Greek,
 		CharToOrderMap:       Iso88597GreekCharToOrder,
 		LanguageModel:        greekLangModel(),
 		TypicalPositiveRatio: 0.982851,
@@ -4383,7 +4383,7 @@ func NewWindows1253GreekModel() SingleByteCharSetModel {
 	}
 	return SingleByteCharSetModel{
 		CharsetName:          consts.Windows1253,
-		Language:             consts.GreekLanguage,
+		Language:             consts.Greek,
 		CharToOrderMap:       Windows1253GreekCharToOrder,
 		LanguageModel:        greekLangModel(),
 		TypicalPositiveRatio: 0.982851,

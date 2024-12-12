@@ -12,8 +12,8 @@ type Big5Probe struct {
 func NewBig5Probe() *Big5Probe {
 	return &Big5Probe{
 		MultiByteCharSetProbe: NewMultiByteCharSetProbe(
-			consts.Big5ModelName,
-			consts.ChineseLanguage,
+			consts.Big5,
+			consts.Chinese,
 			consts.UnknownLangFilter,
 			cda.NewBig5DistributionAnalysis(),
 			NewCodingStateMachine(Big5SmModel()),

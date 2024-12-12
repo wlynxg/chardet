@@ -61,8 +61,8 @@ func HzSmModel() StateMachineModel {
 	hzCharLenTable := []byte{0, 0, 0, 0, 0, 0}
 
 	return StateMachineModel{
-		Name:         consts.HzModelName,
-		Language:     consts.ChineseLanguage,
+		Name:         consts.HzGB2312,
+		Language:     consts.Chinese,
 		ClassTable:   hzCls,
 		ClassFactor:  6,
 		StateTable:   hzSt,
@@ -120,8 +120,8 @@ func Iso2022cnSmModel() StateMachineModel {
 	Iso2022cnCharLenTable := []byte{0, 0, 0, 0, 0, 0, 0, 0, 0}
 
 	return StateMachineModel{
-		Name:         consts.Iso2022cnModelName,
-		Language:     consts.ChineseLanguage,
+		Name:         consts.ISO2022CN,
+		Language:     consts.Chinese,
 		ClassTable:   Iso2022cnCls,
 		ClassFactor:  9,
 		StateTable:   Iso2022cnSt,
@@ -180,8 +180,8 @@ func Iso2022jpSmModel() StateMachineModel {
 	Iso2022jpCharLenTable := []byte{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 
 	return StateMachineModel{
-		Name:         consts.Iso2022jpModelName,
-		Language:     consts.JapaneseLanguage,
+		Name:         consts.ISO2022JP,
+		Language:     consts.Japanese,
 		ClassTable:   Iso2022jpCls,
 		ClassFactor:  10,
 		StateTable:   Iso2022jpSt,
@@ -312,7 +312,7 @@ func UTF8SmModel() StateMachineModel {
 
 	Utf8CharLenTable := []byte{0, 1, 0, 0, 0, 0, 2, 3, 3, 3, 4, 4, 5, 5, 6, 6}
 	return StateMachineModel{
-		Name:         consts.UTF8ModelName,
+		Name:         consts.UTF8,
 		Language:     "",
 		ClassTable:   Utf8Cls,
 		ClassFactor:  16,
@@ -369,7 +369,7 @@ func Ucs2LeSmModel() *StateMachineModel {
 
 	Ucs2leCharLenTable := []byte{2, 2, 2, 2, 2, 2}
 	return &StateMachineModel{
-		Name:         consts.UTF16LeModelName,
+		Name:         consts.UTF16Le,
 		Language:     "",
 		ClassTable:   Ucs2leCls,
 		ClassFactor:  6,
@@ -426,7 +426,7 @@ func Ucs2BeSmModel() *StateMachineModel {
 
 	Ucs2beCharLenTable := []byte{2, 2, 2, 0, 2, 2}
 	return &StateMachineModel{
-		Name:         consts.UTF16BeModelName,
+		Name:         consts.UTF16Be,
 		Language:     "",
 		ClassTable:   Ucs2beCls,
 		ClassFactor:  6,
@@ -481,7 +481,7 @@ func SjisSmModel() StateMachineModel {
 
 	SjisCharLenTable := []byte{0, 1, 1, 2, 0, 0}
 	return StateMachineModel{
-		Name:         consts.ShiftJisModelName,
+		Name:         consts.ShiftJis,
 		Language:     "",
 		ClassTable:   SjisCls,
 		ClassFactor:  6,
@@ -541,7 +541,7 @@ func GB2312SmModel() StateMachineModel {
 	// 2 here.
 	Gb2312CharLenTable := []byte{0, 1, 1, 1, 1, 1, 2}
 	return StateMachineModel{
-		Name:         consts.GB2312ModelName,
+		Name:         consts.GB2312,
 		Language:     "",
 		ClassTable:   Gb2312Cls,
 		ClassFactor:  7,
@@ -596,7 +596,7 @@ func EucTwSmModel() StateMachineModel {
 
 	EucTwCharLenTable := []byte{0, 0, 1, 2, 2, 2, 3}
 	return StateMachineModel{
-		Name:         consts.EucTwModelName,
+		Name:         consts.EucTw,
 		Language:     "",
 		ClassTable:   EucTwCls,
 		ClassFactor:  7,
@@ -648,7 +648,7 @@ func EucKrSmModel() StateMachineModel {
 
 	EuckrCharLenTable := []byte{0, 1, 2, 0}
 	return StateMachineModel{
-		Name:         consts.EucKrModelName,
+		Name:         consts.EucKr,
 		Language:     "",
 		ClassTable:   EuckrCls,
 		ClassFactor:  4,
@@ -702,7 +702,7 @@ func EucJpSmModel() StateMachineModel {
 
 	EucJpCharLenTable := []byte{2, 2, 2, 3, 1, 0}
 	return StateMachineModel{
-		Name:         consts.EucJpModelName,
+		Name:         consts.EucJp,
 		Language:     "",
 		ClassTable:   EucJpCls,
 		ClassFactor:  6,
@@ -743,7 +743,7 @@ func CP949SmModel() StateMachineModel {
 
 	Cp949CharLenTable := []byte{0, 1, 2, 0, 1, 1, 2, 2, 0, 2}
 	return StateMachineModel{
-		Name:         consts.CP949ModelName,
+		Name:         consts.CP949,
 		Language:     "",
 		ClassTable:   Cp949Cls,
 		ClassFactor:  10,
@@ -795,7 +795,7 @@ func Big5SmModel() StateMachineModel {
 
 	Big5CharLenTable := []byte{0, 1, 1, 2, 0}
 	return StateMachineModel{
-		Name:         consts.Big5ModelName,
+		Name:         consts.Big5,
 		Language:     "",
 		ClassTable:   Big5Cls,
 		ClassFactor:  5,
@@ -852,10 +852,10 @@ func JohabSmModel() StateMachineModel {
 	JohabCharLenTable := []byte{0, 1, 1, 1, 1, 0, 0, 2, 2, 2}
 
 	return StateMachineModel{
-		Name:         consts.JohabName,
+		Name:         consts.Johab,
 		Language:     "",
 		ClassTable:   JohabCls,
-		ClassFactor:  5,
+		ClassFactor:  10,
 		StateTable:   JohabSt,
 		CharLenTable: JohabCharLenTable,
 	}

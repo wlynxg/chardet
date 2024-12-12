@@ -12,8 +12,8 @@ type CP949Probe struct {
 func NewCP949Probe() *CP949Probe {
 	return &CP949Probe{
 		MultiByteCharSetProbe: NewMultiByteCharSetProbe(
-			consts.CP949ModelName,
-			consts.KoreanLanguage,
+			consts.CP949,
+			consts.Korean,
 			consts.UnknownLangFilter,
 			cda.NewEUCKRDistributionAnalysis(),
 			NewCodingStateMachine(CP949SmModel()),

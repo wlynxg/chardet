@@ -4376,7 +4376,7 @@ func NewIso88599TurkishModel() SingleByteCharSetModel {
 
 	return SingleByteCharSetModel{
 		CharsetName:          consts.ISO88595,
-		Language:             consts.TurkishLanguage,
+		Language:             consts.Turkish,
 		CharToOrderMap:       Iso88599TurkishCharToOrder,
 		LanguageModel:        TurkishLangModel,
 		TypicalPositiveRatio: 0.97029,

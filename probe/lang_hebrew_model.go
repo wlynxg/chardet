@@ -4375,7 +4375,7 @@ func NewWindows1255HebrewModel() SingleByteCharSetModel {
 
 	return SingleByteCharSetModel{
 		CharsetName:          consts.Windows1255,
-		Language:             consts.HebrewLanguage,
+		Language:             consts.Hebrew,
 		CharToOrderMap:       Windows1255HebrewCharToOrder,
 		LanguageModel:        HebrewLangModel,
 		TypicalPositiveRatio: 0.984004,

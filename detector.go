@@ -2,7 +2,6 @@ package chardet
 
 import (
 	"bytes"
-	"regexp"
 	"strings"
 
 	"github.com/wlynxg/chardet/consts"
@@ -19,22 +18,23 @@ type Result struct {
 
 type UniversalDetector struct {
 	MinimumThreshold float64
-	HighByteDetector *regexp.Regexp
-	EscDetector      *regexp.Regexp
-	WinByteDetector  *regexp.Regexp
 	IsoWinMap        map[string]string
 
-	log             *zap.SugaredLogger
-	done            bool
-	gotData         bool
-	hasWinBytes     bool
-	inputState      consts.InputState
-	lastChars       []byte
-	escCharsetProbe *probe.EscCharSetProbe
-	langFilter      consts.LangFilter
+	log *zap.SugaredLogger
+
+	done        bool
+	gotData     bool
+	hasWinBytes bool
+
+	lastChars  []byte
+	inputState consts.InputState
+	filter     consts.LangFilter
+
+	escCharsetProbe probe.ICharSetProbe
+	utf1632Probe    *probe.UTF1632Probe
 	charsetProbes   []probe.ICharSetProbe
-	filter          consts.LangFilter
-	result          Result
+
+	result Result
 }
 
 func NewUniversalDetector(filter consts.LangFilter) *UniversalDetector {
@@ -44,9 +44,6 @@ func NewUniversalDetector(filter consts.LangFilter) *UniversalDetector {
 
 	return &UniversalDetector{
 		MinimumThreshold: 0.20,
-		HighByteDetector: regexp.MustCompile(`[^\x00-\x7F]`),
-		EscDetector:      regexp.MustCompile(`(\x1B|~{)`),
-		WinByteDetector:  regexp.MustCompile(`[\x80-\x9F]`),
 		IsoWinMap: map[string]string{
 			"iso-8859-1":  "Windows-1252",
 			"iso-8859-2":  "Windows-1250",
@@ -77,6 +74,10 @@ func (u *UniversalDetector) Reset() {
 		u.escCharsetProbe.Reset()
 	}
 
+	if u.utf1632Probe != nil {
+		u.utf1632Probe.Reset()
+	}
+
 	for _, p := range u.charsetProbes {
 		if p != nil {
 			p.Reset()
@@ -93,24 +94,24 @@ func (u *UniversalDetector) Feed(buf []byte) {
 	if !u.gotData {
 		// If the buf starts with BOM, we know it is UTF
 		var encoding string
-		switch {
-		case bytes.HasPrefix(buf, consts.UTF8BOM):
+
+		if bytes.HasPrefix(buf, []byte(consts.UTF8BOM)) {
 			// EF BB BF  UTF-8 with BOM
 			encoding = consts.UTF8SIG
-		case bytes.HasPrefix(buf, consts.UTF32LEBOM) || bytes.HasPrefix(buf, consts.UTF32BEBOM):
+		} else if bytes.HasPrefix(buf, []byte(consts.UTF32LEBOM)) || bytes.HasPrefix(buf, []byte(consts.UTF32BEBOM)) {
 			// FF FE 00 00  UTF-32, little-endian BOM
 			// 00 00 FE FF  UTF-32, big-endian BOM
 			encoding = consts.UTF32
-		case bytes.HasPrefix(buf, consts.UTF16LEBOM) || bytes.HasPrefix(buf, consts.UTF16BEBOM):
+		} else if bytes.HasPrefix(buf, []byte(consts.UCS43412BOM)) {
+			// FE FF 00 00  UCS-4, unusual octet order BOM (3412)
+			encoding = consts.UCS43412
+		} else if bytes.HasPrefix(buf, []byte(consts.UCS42143BOM)) {
+			// 00 00 FF FE  UCS-4, unusual octet order BOM (2143)
+			encoding = consts.UCS42143
+		} else if bytes.HasPrefix(buf, []byte(consts.UTF16LEBOM)) || bytes.HasPrefix(buf, []byte(consts.UTF16BEBOM)) {
 			// FF FE  UTF-16, little endian BOM
 			// FE FF  UTF-16, big endian BOM
 			encoding = consts.UTF16
-		case bytes.HasPrefix(buf, consts.UCS43412BOM):
-			// FE FF 00 00  UCS-4, unusual octet order BOM (3412)
-			encoding = consts.UCS43412
-		case bytes.HasPrefix(buf, consts.UCS42143BOM):
-			// 00 00 FF FE  UCS-4, unusual octet order BOM (2143)
-			encoding = consts.UCS42143
 		}
 
 		u.gotData = true
@@ -128,15 +129,32 @@ func (u *UniversalDetector) Feed(buf []byte) {
 	// If none of those matched, and we've only seen ASCII so far, check
 	// for high bytes and escape sequences.
 	if u.inputState == consts.PureAsciiInputState {
-		if u.HighByteDetector.Match(buf) {
+		if HighByteDetector(buf) {
 			u.inputState = consts.HighByteInputState
 		} else if u.inputState == consts.PureAsciiInputState &&
-			u.EscDetector.Match(bytes.Join([][]byte{u.lastChars, buf}, nil)) {
+			EscDetector(bytes.Join([][]byte{u.lastChars, buf}, nil)) {
 			u.inputState = consts.EcsAsciiInputState
 		}
 	}
 
 	u.lastChars = append(u.lastChars, buf[len(buf)-1])
+
+	// next we will look to see if it is appears to be either a UTF-16 or UTF-32 encoding
+	if u.utf1632Probe == nil {
+		u.utf1632Probe = probe.NewUTF1632Probe()
+	}
+
+	if u.utf1632Probe.State() == consts.DetectingProbingState {
+		if u.utf1632Probe.Feed(buf) == consts.FoundItProbingState {
+			u.result = Result{
+				Encoding:   u.utf1632Probe.CharSetName(),
+				Confidence: u.utf1632Probe.GetConfidence(),
+				Language:   "",
+			}
+			u.done = true
+			return
+		}
+	}
 
 	switch u.inputState {
 	case consts.EcsAsciiInputState:
@@ -145,7 +163,7 @@ func (u *UniversalDetector) Feed(buf []byte) {
 		// HZ and ISO-2022 encodings, since those are the only encodings that
 		// use such sequences.
 		if u.escCharsetProbe == nil {
-			u.escCharsetProbe = probe.NewEscCharSetProbe(u.langFilter)
+			u.escCharsetProbe = probe.NewEscCharSetProbe(u.filter)
 		}
 
 		if u.escCharsetProbe.Feed(buf) == consts.FoundItProbingState {
@@ -169,7 +187,7 @@ func (u *UniversalDetector) Feed(buf []byte) {
 			if u.filter&consts.NonCjkLangFilter != 0 {
 				u.charsetProbes = append(u.charsetProbes, probe.NewSBCSGroupProbe())
 			}
-			u.charsetProbes = append(u.charsetProbes, probe.NewLatin1Probe())
+			u.charsetProbes = append(u.charsetProbes, probe.NewLatin1Probe(), probe.NewMacRomanProbe())
 		}
 
 		for _, charsetProbe := range u.charsetProbes {
@@ -188,7 +206,7 @@ func (u *UniversalDetector) Feed(buf []byte) {
 			}
 		}
 
-		if u.WinByteDetector.Match(buf) {
+		if WinByteDetector(buf) {
 			u.hasWinBytes = true
 		}
 	default:
@@ -248,4 +266,36 @@ func (u *UniversalDetector) GetResult() Result {
 		}
 	}
 	return u.result
+}
+
+func HighByteDetector(buf []byte) bool {
+	for _, b := range buf {
+		if b >= 0x80 { // Check if the byte is in the international range
+			return true
+		}
+	}
+	return false
+}
+
+func EscDetector(buf []byte) bool {
+	for i := 0; i < len(buf); i++ {
+		// Check for ESC character (0x1B)
+		if buf[i] == 0x1B {
+			return true
+		}
+		// Check for ~ character (0x7E) followed by {
+		if buf[i] == 0x7E && i+1 < len(buf) && buf[i+1] == '{' {
+			return true
+		}
+	}
+	return false
+}
+
+func WinByteDetector(buf []byte) bool {
+	for _, b := range buf {
+		if b >= 0x80 && b <= 0x9F { // Check if the byte is in the specified range
+			return true
+		}
+	}
+	return false
 }

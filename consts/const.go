@@ -1,50 +1,70 @@
 package consts
 
 const (
-	UTF8ProbeCharsetName     = "utf-8"
-	ShiftJISProbeCharsetName = "SHIFT_JIS"
-	CP932CharsetName         = "CP932"
-	Ascii                    = "Ascii"
+	Chinese   = "Chinese"
+	Japanese  = "Japanese"
+	Korean    = "Korean"
+	Hebrew    = "Hebrew"
+	Russian   = "Russian"
+	Greek     = "Greek"
+	Bulgarian = "Bulgarian"
+	Thai      = "Thai"
+	Turkish   = "Turkish"
 )
 
 const (
-	ChineseLanguage   = "Chinese"
-	JapaneseLanguage  = "Japanese"
-	KoreanLanguage    = "Korean"
-	HebrewLanguage    = "Hebrew"
-	RussianLanguage   = "Russian"
-	GreekLanguage     = "Greek"
-	BulgarianLanguage = "Bulgarian"
-	ThaiLanguage      = "Thai"
-	TurkishLanguage   = "Turkish"
+	Ascii   = "Ascii"
+	UTF8    = "UTF-8"
+	UTF8SIG = "UTF-8-SIG"
+	UTF16   = "UTF-16"
+	UTF16Le = "UTF-16LE"
+	UTF16Be = "UTF-16BE"
+	UTF32   = "UTF-32"
+	UTF32Be = "UTF-32BE"
+	UTF32Le = "UTF-32LE"
+
+	GB2312   = "GB2312"
+	HzGB2312 = "HZ-GB-2312"
+	ShiftJis = "SHIFT_JIS"
+	Big5     = "Big5"
+	Johab    = "Johab"
+	Koi8R    = "KOI8-R"
+	TIS620   = "TIS-620"
+
+	MacCyrillic = "MacCyrillic"
+	MacRoman    = "MacRoman"
+
+	EucTw = "EUC-TW"
+	EucKr = "EUC-KR"
+	EucJp = "EUC-JP"
+
+	CP932 = "CP932"
+	CP949 = "CP949"
+
+	Windows1251 = "windows-1251"
+	Windows1255 = "windows-1255"
+	Windows1253 = "windows-1253"
+
+	ISO88591  = "ISO-8859-1"
+	ISO88595  = "ISO-8859-5"
+	ISO88597  = "ISO-8859-7"
+	ISO2022CN = "ISO-2022-CN"
+	ISO2022JP = "ISO-2022-JP"
+	UCS43412  = "X-ISO-10646-UCS-4-3412"
+	UCS42143  = "X-ISO-10646-UCS-4-2143"
+
+	IBM855 = "IBM855"
+	IBM866 = "IBM866"
 )
 
 const (
-	HzModelName        = "HZ-GB-2312"
-	Iso2022cnModelName = "ISO-2022-CN"
-	Iso2022jpModelName = "ISO-2022-JP"
-	UTF8ModelName      = "UTF-8"
-	UTF16LeModelName   = "UTF-16LE"
-	UTF16BeModelName   = "UTF-16BE"
-	ShiftJisModelName  = "Shift_JIS"
-	GB2312ModelName    = "GB2312"
-	EucTwModelName     = "EUC-TW"
-	EucKrModelName     = "EUC-KR"
-	EucJpModelName     = "EUC-JP"
-	CP949ModelName     = "CP949"
-	Big5ModelName      = "Big5"
-	JohabName          = "Johab"
-	Windows1251        = "windows-1251"
-	Windows1255        = "windows-1255"
-	Windows1253        = "windows-1253"
-	Koi8R              = "KOI8-R"
-	ISO88595           = "ISO-8859-5"
-	ISO88591           = "ISO-8859-1"
-	IBM855             = "IBM855"
-	IBM866             = "IBM866"
-	MacCyrillic        = "MacCyrillic"
-	ISO88597           = "ISO-8859-7"
-	TIS620             = "TIS-620"
+	UTF8BOM     = "\xEF\xBB\xBF"
+	UTF32LEBOM  = "\xFF\xFE\x00\x00"
+	UTF32BEBOM  = "\x00\x00\xFE\xFF"
+	UTF16LEBOM  = "\xFE\xFF"
+	UTF16BEBOM  = "\xFF\xFE"
+	UCS43412BOM = "\xFE\xFF\x00\x00"
+	UCS42143BOM = "\x00\x00\xFF\xFE"
 )
 
 // LangFilter represents the different language filters we can apply to a "UniversalDetector".
@@ -106,7 +126,7 @@ const (
 //	``SingleByteCharsetProbe`` put characters into.
 //
 //	Anything less than CONTROL is considered a letter.
-type CharacterCategory byte
+type CharacterCategory int
 
 const (
 	UndefinedCharacterCategory CharacterCategory = 255 - iota

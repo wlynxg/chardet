@@ -7,15 +7,17 @@ import (
 const (
 	FreqCatNum = 4
 
-	UDF      = 0 // undefined
-	OTH      = 1 // other
-	ASC      = 2 // ascii capital letter
-	ASS      = 3 // ascii small letter
-	ACV      = 4 // accent capital vowel
-	ACO      = 5 // accent capital other
-	ASV      = 6 // accent small vowel
-	ASO      = 7 // accent small other
-	ClassNum = 8 // total classes
+	UDF              = 0 // undefined
+	OTH              = 1 // other
+	ASC              = 2 // ascii capital letter
+	ASS              = 3 // ascii small letter
+	ACV              = 4 // accent capital vowel
+	ACO              = 5 // accent capital other
+	ASV              = 6 // accent small vowel
+	ASO              = 7 // accent small other
+	ODD              = 8 // character that is unlikely to appear
+	Latin1ClassNum   = 8 // latin1 total classes
+	MacRomanClassNum = 9 // macroman total classes
 )
 
 type Latin1Probe struct {
@@ -105,7 +107,7 @@ func (l *Latin1Probe) Feed(buf []byte) consts.ProbingState {
 	buf = l.FilterWithEnglishLetters(buf)
 	for _, b := range buf {
 		charCls := l.Char2Class[int(b)]
-		freq := l.ClassModel[(l.lastCharClass*ClassNum)+charCls]
+		freq := l.ClassModel[(l.lastCharClass*Latin1ClassNum)+charCls]
 		if freq == 0 {
 			l.state = consts.NotMeProbingState
 			break

@@ -12,8 +12,8 @@ type JOHABProbe struct {
 func NewJOHABProbe() *JOHABProbe {
 	return &JOHABProbe{
 		MultiByteCharSetProbe: NewMultiByteCharSetProbe(
-			consts.JohabName,
-			consts.KoreanLanguage,
+			consts.Johab,
+			consts.Korean,
 			consts.UnknownLangFilter,
 			cda.NewJOHABDistributionAnalysis(),
 			NewCodingStateMachine(JohabSmModel()),

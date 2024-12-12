@@ -4366,7 +4366,7 @@ func NewWindows1251RussianModel() SingleByteCharSetModel {
 
 	return SingleByteCharSetModel{
 		CharsetName:          consts.Windows1251,
-		Language:             consts.RussianLanguage,
+		Language:             consts.Russian,
 		CharToOrderMap:       Windows1251RussianCharToOrder,
 		LanguageModel:        russianLangModel(),
 		TypicalPositiveRatio: 0.976601,
@@ -4636,7 +4636,7 @@ func NewKoi8RRussianModel() SingleByteCharSetModel {
 	}
 	return SingleByteCharSetModel{
 		CharsetName:          consts.Koi8R,
-		Language:             consts.RussianLanguage,
+		Language:             consts.Russian,
 		CharToOrderMap:       Koi8RRussianCharToOrder,
 		LanguageModel:        russianLangModel(),
 		TypicalPositiveRatio: 0.976601,
@@ -4906,7 +4906,7 @@ func NewISO88595RussianModel() SingleByteCharSetModel {
 	}
 	return SingleByteCharSetModel{
 		CharsetName:          consts.ISO88595,
-		Language:             consts.RussianLanguage,
+		Language:             consts.Russian,
 		CharToOrderMap:       Iso88595RussianCharToOrder,
 		LanguageModel:        russianLangModel(),
 		TypicalPositiveRatio: 0.976601,
@@ -5176,7 +5176,7 @@ func NewMacCyrillicRussianModel() SingleByteCharSetModel {
 	}
 	return SingleByteCharSetModel{
 		CharsetName:          consts.MacCyrillic,
-		Language:             consts.RussianLanguage,
+		Language:             consts.Russian,
 		CharToOrderMap:       MaccyrillicRussianCharToOrder,
 		LanguageModel:        russianLangModel(),
 		TypicalPositiveRatio: 0.976601,
@@ -5446,7 +5446,7 @@ func NewIBM866RussianModel() SingleByteCharSetModel {
 	}
 	return SingleByteCharSetModel{
 		CharsetName:          consts.IBM866,
-		Language:             consts.RussianLanguage,
+		Language:             consts.Russian,
 		CharToOrderMap:       Ibm866RussianCharToOrder,
 		LanguageModel:        russianLangModel(),
 		TypicalPositiveRatio: 0.976601,
@@ -5716,7 +5716,7 @@ func NewIBM855RussianModel() SingleByteCharSetModel {
 	}
 	return SingleByteCharSetModel{
 		CharsetName:          consts.IBM855,
-		Language:             consts.RussianLanguage,
+		Language:             consts.Russian,
 		CharToOrderMap:       Ibm855RussianCharToOrder,
 		LanguageModel:        russianLangModel(),
 		TypicalPositiveRatio: 0.976601,

@@ -21,6 +21,7 @@ func MBCGroupProbe(filter consts.LangFilter) *MBCSGroupProbe {
 				NewCP949Probe(),
 				NewBig5Probe(),
 				NewEUCTWProbe(),
+				NewJOHABProbe(),
 			},
 		),
 	}

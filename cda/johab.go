@@ -2541,7 +2541,9 @@ func (j *JOHABDistributionAnalysis) GetOrder(buf []byte) int {
 	first := buf[0]
 	if first >= 0x88 && first <= 0xD4 {
 		code := int(first)*256 + int(buf[1])
-		return code
+		if c, ok := j.JohabToEuckrOrderTable[code]; ok {
+			return c
+		}
 	}
 	return -1
 }

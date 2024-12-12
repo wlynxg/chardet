@@ -12,8 +12,8 @@ type EUCKRProbe struct {
 func NewEUCKRProbe() *EUCKRProbe {
 	return &EUCKRProbe{
 		MultiByteCharSetProbe: NewMultiByteCharSetProbe(
-			consts.EucKrModelName,
-			consts.KoreanLanguage,
+			consts.EucKr,
+			consts.Korean,
 			consts.UnknownLangFilter,
 			cda.NewEUCKRDistributionAnalysis(),
 			NewCodingStateMachine(EucKrSmModel()),

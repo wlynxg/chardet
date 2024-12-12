@@ -188,7 +188,7 @@ type SJISContextAnalysis struct {
 
 func NewSJISContextAnalysis() *SJISContextAnalysis {
 	sa := &SJISContextAnalysis{
-		charsetName: consts.ShiftJISProbeCharsetName,
+		charsetName: consts.ShiftJis,
 	}
 	sa.JapaneseContextAnalysis = NewJapaneseContextAnalysis(sa.GetOrder)
 	return sa
@@ -211,7 +211,7 @@ func (s *SJISContextAnalysis) GetOrder(buf []byte) (int, int) {
 	if (firstChar >= 0x81 && firstChar <= 0x9F) || (firstChar >= 0xE0 && firstChar <= 0xFC) {
 		charLen = 2
 		if firstChar == 0x87 || (firstChar >= 0xFA && firstChar <= 0xFC) {
-			s.charsetName = consts.CP932CharsetName
+			s.charsetName = consts.CP932
 		}
 	} else {
 		charLen = 1

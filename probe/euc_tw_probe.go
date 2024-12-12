@@ -12,8 +12,8 @@ type EUCTWProbe struct {
 func NewEUCTWProbe() *EUCTWProbe {
 	return &EUCTWProbe{
 		MultiByteCharSetProbe: NewMultiByteCharSetProbe(
-			consts.EucTwModelName,
-			consts.ChineseLanguage,
+			consts.EucTw,
+			consts.Chinese,
 			consts.UnknownLangFilter,
 			cda.NewEUCTWDistributionAnalysis(),
 			NewCodingStateMachine(EucTwSmModel()),

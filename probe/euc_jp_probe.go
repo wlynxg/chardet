@@ -19,8 +19,8 @@ func NewEUCJPProbe() *EUCJPProbe {
 		contextAnalyzer: cda.NewEUCJPContextAnalysis(),
 	}
 	ep.MultiByteCharSetProbe = NewMultiByteCharSetProbe(
-		consts.EucJpModelName,
-		consts.JapaneseLanguage,
+		consts.EucJp,
+		consts.Japanese,
 		consts.UnknownLangFilter,
 		cda.NewEUCJPDistributionAnalysis(),
 		NewCodingStateMachine(EucJpSmModel()),
