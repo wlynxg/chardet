@@ -1,0 +1,2138 @@
+{
+    "metadata": {
+        "python_version": "3.12.0",
+        "chardet_version": "5.2.0"
+    },
+    "results": {
+        "testdata/README.txt": {
+            "encoding": "ascii",
+            "confidence": 1.0,
+            "language": ""
+        },
+        "testdata/Ascii/howto.diveintomark.org.xml": {
+            "encoding": "ascii",
+            "confidence": 1.0,
+            "language": ""
+        },
+        "testdata/Ascii/_chromium_iso-8859-1_with_no_encoding_specified.html": {
+            "encoding": "ascii",
+            "confidence": 1.0,
+            "language": ""
+        },
+        "testdata/Ascii/_mozilla_bug638318_text.html": {
+            "encoding": "ascii",
+            "confidence": 1.0,
+            "language": ""
+        },
+        "testdata/Big5/0804.blogspot.com.xml": {
+            "encoding": "Big5",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/Big5/blog.worren.net.xml": {
+            "encoding": "Big5",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/Big5/carbonxiv.blogspot.com.xml": {
+            "encoding": "Big5",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/Big5/catshadow.blogspot.com.xml": {
+            "encoding": "Big5",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/Big5/coolloud.org.tw.xml": {
+            "encoding": "Big5",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/Big5/digitalwall.com.xml": {
+            "encoding": "Big5",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/Big5/ebao.us.xml": {
+            "encoding": "Big5",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/Big5/fudesign.blogspot.com.xml": {
+            "encoding": "Big5",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/Big5/kafkatseng.blogspot.com.xml": {
+            "encoding": "Big5",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/Big5/ke207.blogspot.com.xml": {
+            "encoding": "Big5",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/Big5/leavesth.blogspot.com.xml": {
+            "encoding": "Big5",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/Big5/letterlego.blogspot.com.xml": {
+            "encoding": "Big5",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/Big5/linyijen.blogspot.com.xml": {
+            "encoding": "Big5",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/Big5/marilynwu.blogspot.com.xml": {
+            "encoding": "Big5",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/Big5/myblog.pchome.com.tw.xml": {
+            "encoding": "Big5",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/Big5/oui-design.com.xml": {
+            "encoding": "Big5",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/Big5/sanwenji.blogspot.com.xml": {
+            "encoding": "Big5",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/Big5/sinica.edu.tw.xml": {
+            "encoding": "Big5",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/Big5/sylvia1976.blogspot.com.xml": {
+            "encoding": "Big5",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/Big5/tlkkuo.blogspot.com.xml": {
+            "encoding": "Big5",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/Big5/unoriginalblog.com.xml": {
+            "encoding": "Big5",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/Big5/upsaid.com.xml": {
+            "encoding": "Big5",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/Big5/willythecop.blogspot.com.xml": {
+            "encoding": "Big5",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/Big5/ytc.blogspot.com.xml": {
+            "encoding": "Big5",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/Big5/_chromium_Big5_with_no_encoding_specified.html": {
+            "encoding": "Big5",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/Big5/_ude_1.txt": {
+            "encoding": "Big5",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/CP932/hardsoft.at.webry.info.xml": {
+            "encoding": "CP932",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/CP932/www2.chuo-u.ac.jp-suishin.xml": {
+            "encoding": "CP932",
+            "confidence": 0.2599388379204893,
+            "language": "Japanese"
+        },
+        "testdata/CP932/y-moto.com.xml": {
+            "encoding": "CP932",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/CP949/ricanet.com.xml": {
+            "encoding": "CP949",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-JP/aivy.co.jp.xml": {
+            "encoding": "EUC-JP",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/akaname.main.jp.xml": {
+            "encoding": "EUC-JP",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/arclamp.jp.xml": {
+            "encoding": "EUC-JP",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/aristrist.s57.xrea.com.xml": {
+            "encoding": "EUC-JP",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/artifact-jp.com.xml": {
+            "encoding": "EUC-JP",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/atom.ycf.nanet.co.jp.xml": {
+            "encoding": "EUC-JP",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/azito.under.jp.xml": {
+            "encoding": "EUC-JP",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/azoz.org.xml": {
+            "encoding": "EUC-JP",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/blog.kabu-navi.com.atom.xml": {
+            "encoding": "EUC-JP",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/blog.kabu-navi.com.xml": {
+            "encoding": "EUC-JP",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/bphrs.net.xml": {
+            "encoding": "EUC-JP",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/ch.kitaguni.tv.xml": {
+            "encoding": "EUC-JP",
+            "confidence": 1.0,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/club.h14m.org.xml": {
+            "encoding": "EUC-JP",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/contents-factory.com.xml": {
+            "encoding": "EUC-JP",
+            "confidence": 1.0,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/furusatonoeki.cutegirl.jp.xml": {
+            "encoding": "EUC-JP",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/manana.moo.jp.xml": {
+            "encoding": "EUC-JP",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/mimizun.com.xml": {
+            "encoding": "EUC-JP",
+            "confidence": 1.0,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/misuzilla.org.xml": {
+            "encoding": "EUC-JP",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/overcube.com.atom.xml": {
+            "encoding": "EUC-JP",
+            "confidence": 1.0,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/overcube.com.xml": {
+            "encoding": "EUC-JP",
+            "confidence": 1.0,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/pinkupa.com.xml": {
+            "encoding": "EUC-JP",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/rdf.ycf.nanet.co.jp.xml": {
+            "encoding": "EUC-JP",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/siesta.co.jp.aozora.xml": {
+            "encoding": "EUC-JP",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/tls.org.xml": {
+            "encoding": "EUC-JP",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/yukiboh.moo.jp.xml": {
+            "encoding": "EUC-JP",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/_mozilla_bug426271_text-euc-jp.html": {
+            "encoding": "EUC-JP",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/_mozilla_bug431054_text.html": {
+            "encoding": "EUC-JP",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/_mozilla_bug620106_text.html": {
+            "encoding": "EUC-JP",
+            "confidence": 1.0,
+            "language": "Japanese"
+        },
+        "testdata/EUC-JP/_ude_1.txt": {
+            "encoding": "EUC-JP",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/EUC-KR/acnnewswire.net.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/alogblog.com.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/arts.egloos.com.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/birder.egloos.com.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/blog.bd-lab.com.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/blog.empas.com.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/blog.rss.naver.com.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/calmguy.egloos.com.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/chisato.info.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/console.linuxstudy.pe.kr.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/critique.or.kr.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/epitaph.egloos.com.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/ittrend.egloos.com.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/jely.egloos.com.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/jely.pe.kr.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/jowchung.oolim.net.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/kina.egloos.com.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/lennon81.egloos.com.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/oroll.egloos.com.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/poliplus.egloos.com.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/scarletkh2.egloos.com.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/siwoo.org.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/sparcs.kaist.ac.kr.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/tori02.egloos.com.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/willis.egloos.com.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/xenix.egloos.com.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/yunho.egloos.com.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/zangsalang.egloos.com.xml": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/_chromium_windows-949_with_no_encoding_specified.html": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/_mozilla_bug9357_text.html": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/_ude_euc1.txt": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-KR/_ude_euc2.txt": {
+            "encoding": "EUC-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/EUC-TW/_ude_euc-tw1.txt": {
+            "encoding": "EUC-TW",
+            "confidence": 0.99,
+            "language": "Taiwan"
+        },
+        "testdata/GB2312/14.blog.westca.com.xml": {
+            "encoding": "GB2312",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/GB2312/2.blog.westca.com.xml": {
+            "encoding": "GB2312",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/GB2312/acnnewswire.net.xml": {
+            "encoding": "GB2312",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/GB2312/bbs.blogsome.com.xml": {
+            "encoding": "GB2312",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/GB2312/cappuccinos.3322.org.xml": {
+            "encoding": "GB2312",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/GB2312/chen56.blogcn.com.xml": {
+            "encoding": "GB2312",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/GB2312/cindychen.com.xml": {
+            "encoding": "GB2312",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/GB2312/cnblog.org.xml": {
+            "encoding": "GB2312",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/GB2312/coverer.com.xml": {
+            "encoding": "GB2312",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/GB2312/eighthday.blogspot.com.xml": {
+            "encoding": "GB2312",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/GB2312/godthink.blogsome.com.xml": {
+            "encoding": "GB2312",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/GB2312/jjgod.3322.org.xml": {
+            "encoding": "GB2312",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/GB2312/lily.blogsome.com.xml": {
+            "encoding": "GB2312",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/GB2312/luciferwang.blogcn.com.xml": {
+            "encoding": "GB2312",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/GB2312/pda.blogsome.com.xml": {
+            "encoding": "GB2312",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/GB2312/softsea.net.xml": {
+            "encoding": "GB2312",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/GB2312/w3cn.org.xml": {
+            "encoding": "GB2312",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/GB2312/xy15400.blogcn.com.xml": {
+            "encoding": "GB2312",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/GB2312/_chromium_gb18030_with_no_encoding_specified.html.xml": {
+            "encoding": "GB2312",
+            "confidence": 0.99,
+            "language": "Chinese"
+        },
+        "testdata/GB2312/_mozilla_bug171813_text.html": {
+            "encoding": "GB2312",
+            "confidence": 0.9876543209876544,
+            "language": "Chinese"
+        },
+        "testdata/IBM855/aif.ru.health.xml": {
+            "encoding": "IBM855",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/IBM855/aug32.hole.ru.xml": {
+            "encoding": "IBM855",
+            "confidence": 0.8239675159046529,
+            "language": "Russian"
+        },
+        "testdata/IBM855/aviaport.ru.xml": {
+            "encoding": "IBM855",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/IBM855/blog.mlmaster.com.xml": {
+            "encoding": "IBM855",
+            "confidence": 0.9751996489671343,
+            "language": "Russian"
+        },
+        "testdata/IBM855/forum.template-toolkit.ru.1.xml": {
+            "encoding": "IBM855",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/IBM855/forum.template-toolkit.ru.4.xml": {
+            "encoding": "IBM855",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/IBM855/forum.template-toolkit.ru.6.xml": {
+            "encoding": "IBM855",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/IBM855/forum.template-toolkit.ru.8.xml": {
+            "encoding": "IBM855",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/IBM855/forum.template-toolkit.ru.9.xml": {
+            "encoding": "IBM855",
+            "confidence": 0.9985247367248818,
+            "language": "Russian"
+        },
+        "testdata/IBM855/greek.ru.xml": {
+            "encoding": "IBM855",
+            "confidence": 0.8948763260921985,
+            "language": "Russian"
+        },
+        "testdata/IBM855/intertat.ru.xml": {
+            "encoding": "IBM855",
+            "confidence": 0.9571304076837278,
+            "language": "Russian"
+        },
+        "testdata/IBM855/janulalife.blogspot.com.xml": {
+            "encoding": "IBM855",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/IBM855/kapranoff.ru.xml": {
+            "encoding": "IBM855",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/IBM855/money.rin.ru.xml": {
+            "encoding": "IBM855",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/IBM855/music.peeps.ru.xml": {
+            "encoding": "IBM855",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/IBM855/newsru.com.xml": {
+            "encoding": "IBM855",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/IBM855/susu.ac.ru.xml": {
+            "encoding": "IBM855",
+            "confidence": 0.9759395632958838,
+            "language": "Russian"
+        },
+        "testdata/IBM855/_ude_1.txt": {
+            "encoding": "IBM855",
+            "confidence": 0.9675376749057197,
+            "language": "Russian"
+        },
+        "testdata/IBM866/aif.ru.health.xml": {
+            "encoding": "IBM866",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/IBM866/aug32.hole.ru.xml": {
+            "encoding": "IBM866",
+            "confidence": 0.8239675159046529,
+            "language": "Russian"
+        },
+        "testdata/IBM866/aviaport.ru.xml": {
+            "encoding": "IBM866",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/IBM866/blog.mlmaster.com.xml": {
+            "encoding": "IBM866",
+            "confidence": 0.9751996489671343,
+            "language": "Russian"
+        },
+        "testdata/IBM866/forum.template-toolkit.ru.1.xml": {
+            "encoding": "IBM866",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/IBM866/forum.template-toolkit.ru.4.xml": {
+            "encoding": "IBM866",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/IBM866/forum.template-toolkit.ru.6.xml": {
+            "encoding": "IBM866",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/IBM866/forum.template-toolkit.ru.8.xml": {
+            "encoding": "IBM866",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/IBM866/forum.template-toolkit.ru.9.xml": {
+            "encoding": "IBM866",
+            "confidence": 0.9985247367248818,
+            "language": "Russian"
+        },
+        "testdata/IBM866/greek.ru.xml": {
+            "encoding": "IBM866",
+            "confidence": 0.9105907196658134,
+            "language": "Russian"
+        },
+        "testdata/IBM866/intertat.ru.xml": {
+            "encoding": "IBM866",
+            "confidence": 0.9571304076837278,
+            "language": "Russian"
+        },
+        "testdata/IBM866/janulalife.blogspot.com.xml": {
+            "encoding": "IBM866",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/IBM866/kapranoff.ru.xml": {
+            "encoding": "IBM866",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/IBM866/money.rin.ru.xml": {
+            "encoding": "IBM866",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/IBM866/music.peeps.ru.xml": {
+            "encoding": "IBM866",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/IBM866/newsru.com.xml": {
+            "encoding": "IBM866",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/IBM866/susu.ac.ru.xml": {
+            "encoding": "IBM866",
+            "confidence": 0.9759395632958838,
+            "language": "Russian"
+        },
+        "testdata/IBM866/_ude_1.txt": {
+            "encoding": "IBM866",
+            "confidence": 0.9675376749057197,
+            "language": "Russian"
+        },
+        "testdata/iso-2022-jp/_ude_1.txt": {
+            "encoding": "ISO-2022-JP",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/iso-2022-kr/_ude_iso1.txt": {
+            "encoding": "ISO-2022-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/iso-2022-kr/_ude_iso2.txt": {
+            "encoding": "ISO-2022-KR",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/iso-8859-1/_ude_1.txt": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/iso-8859-1/_ude_2.txt": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/iso-8859-1/_ude_3.txt": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/iso-8859-1/_ude_4.txt": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/iso-8859-1/_ude_5.txt": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/iso-8859-1/_ude_6.txt": {
+            "encoding": "ISO-8859-9",
+            "confidence": 0.6663871358750136,
+            "language": "Turkish"
+        },
+        "testdata/iso-8859-2-croatian/_ude_1.txt": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/iso-8859-2-czech/_ude_1.txt": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.6803194444444445,
+            "language": ""
+        },
+        "testdata/iso-8859-2-czech/_ude_2.txt": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.6565188735769922,
+            "language": ""
+        },
+        "testdata/iso-8859-2-hungarian/auto-apro.hu.xml": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.7273719999999999,
+            "language": ""
+        },
+        "testdata/iso-8859-2-hungarian/cigartower.hu.xml": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.726530104119511,
+            "language": ""
+        },
+        "testdata/iso-8859-2-hungarian/escience.hu.xml": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.7287413793103449,
+            "language": ""
+        },
+        "testdata/iso-8859-2-hungarian/hirtv.hu.xml": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/iso-8859-2-hungarian/honositomuhely.hu.xml": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/iso-8859-2-hungarian/saraspatak.hu.xml": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/iso-8859-2-hungarian/shamalt.uw.hu.mk.xml": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/iso-8859-2-hungarian/shamalt.uw.hu.mr.xml": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/iso-8859-2-hungarian/shamalt.uw.hu.mv.xml": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/iso-8859-2-hungarian/shamalt.uw.hu.xml": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.7285075934579439,
+            "language": ""
+        },
+        "testdata/iso-8859-2-hungarian/ugyanmar.blogspot.com.xml": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/iso-8859-2-hungarian/_ude_1.txt": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/iso-8859-2-hungarian/_ude_2.txt": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/iso-8859-2-hungarian/_ude_3.txt": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/iso-8859-2-polish/_ude_1.txt": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/iso-8859-2-slovak/_ude_1.txt": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.6870052976004986,
+            "language": ""
+        },
+        "testdata/iso-8859-2-slovak/_ude_2.txt": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.7165761821366025,
+            "language": ""
+        },
+        "testdata/iso-8859-2-slovene/_ude_1.txt": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/iso-8859-5-bulgarian/aero-bg.com.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.99,
+            "language": "Bulgarian"
+        },
+        "testdata/iso-8859-5-bulgarian/bbc.co.uk.popshow.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.99,
+            "language": "Bulgarian"
+        },
+        "testdata/iso-8859-5-bulgarian/bpm.cult.bg.2.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.99,
+            "language": "Bulgarian"
+        },
+        "testdata/iso-8859-5-bulgarian/bpm.cult.bg.4.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.99,
+            "language": "Bulgarian"
+        },
+        "testdata/iso-8859-5-bulgarian/bpm.cult.bg.9.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/iso-8859-5-bulgarian/bpm.cult.bg.medusa.4.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.99,
+            "language": "Bulgarian"
+        },
+        "testdata/iso-8859-5-bulgarian/bpm.cult.bg.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.99,
+            "language": "Bulgarian"
+        },
+        "testdata/iso-8859-5-bulgarian/debian.gabrovo.com.news.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.99,
+            "language": "Bulgarian"
+        },
+        "testdata/iso-8859-5-bulgarian/debian.gabrovo.com.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.99,
+            "language": "Bulgarian"
+        },
+        "testdata/iso-8859-5-bulgarian/doncho.net.comments.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.99,
+            "language": "Bulgarian"
+        },
+        "testdata/iso-8859-5-bulgarian/ecloga.cult.bg.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/iso-8859-5-bulgarian/ide.li.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.99,
+            "language": "Bulgarian"
+        },
+        "testdata/iso-8859-5-bulgarian/linux-bg.org.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.9840018229422474,
+            "language": "Bulgarian"
+        },
+        "testdata/iso-8859-5-russian/aif.ru.health.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/iso-8859-5-russian/aug32.hole.ru.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.8239675159046529,
+            "language": "Russian"
+        },
+        "testdata/iso-8859-5-russian/aviaport.ru.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/iso-8859-5-russian/blog.mlmaster.com.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.9751996489671343,
+            "language": "Russian"
+        },
+        "testdata/iso-8859-5-russian/forum.template-toolkit.ru.1.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/iso-8859-5-russian/forum.template-toolkit.ru.4.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/iso-8859-5-russian/forum.template-toolkit.ru.6.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/iso-8859-5-russian/forum.template-toolkit.ru.8.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/iso-8859-5-russian/forum.template-toolkit.ru.9.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.9985247367248818,
+            "language": "Russian"
+        },
+        "testdata/iso-8859-5-russian/greek.ru.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.9087641728812483,
+            "language": "Russian"
+        },
+        "testdata/iso-8859-5-russian/intertat.ru.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.9571304076837278,
+            "language": "Russian"
+        },
+        "testdata/iso-8859-5-russian/janulalife.blogspot.com.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/iso-8859-5-russian/kapranoff.ru.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/iso-8859-5-russian/money.rin.ru.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/iso-8859-5-russian/music.peeps.ru.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/iso-8859-5-russian/newsru.com.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/iso-8859-5-russian/susu.ac.ru.xml": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.9715782179099619,
+            "language": "Russian"
+        },
+        "testdata/iso-8859-5-russian/_chromium_ISO-8859-5_with_no_encoding_specified.html": {
+            "encoding": "ISO-8859-5",
+            "confidence": 0.9783235475641042,
+            "language": "Russian"
+        },
+        "testdata/iso-8859-6-arabic/_chromium_ISO-8859-6_with_no_encoding_specified.html": {
+            "encoding": "MacCyrillic",
+            "confidence": 0.3338183413772114,
+            "language": "Russian"
+        },
+        "testdata/iso-8859-7-greek/disabled.gr.xml": {
+            "encoding": "ISO-8859-7",
+            "confidence": 0.99,
+            "language": "Greek"
+        },
+        "testdata/iso-8859-7-greek/hotstation.gr.xml": {
+            "encoding": "ISO-8859-7",
+            "confidence": 0.9636051568048493,
+            "language": "Greek"
+        },
+        "testdata/iso-8859-7-greek/naftemporiki.gr.bus.xml": {
+            "encoding": "ISO-8859-7",
+            "confidence": 0.6581036595025802,
+            "language": "Greek"
+        },
+        "testdata/iso-8859-7-greek/naftemporiki.gr.cmm.xml": {
+            "encoding": "ISO-8859-7",
+            "confidence": 0.6634343503293377,
+            "language": "Greek"
+        },
+        "testdata/iso-8859-7-greek/naftemporiki.gr.fin.xml": {
+            "encoding": "ISO-8859-7",
+            "confidence": 0.7013139792713291,
+            "language": "Greek"
+        },
+        "testdata/iso-8859-7-greek/naftemporiki.gr.mrk.xml": {
+            "encoding": "ISO-8859-7",
+            "confidence": 0.6414028761361147,
+            "language": "Greek"
+        },
+        "testdata/iso-8859-7-greek/naftemporiki.gr.mrt.xml": {
+            "encoding": "ISO-8859-7",
+            "confidence": 0.7287003565124427,
+            "language": "Greek"
+        },
+        "testdata/iso-8859-7-greek/naftemporiki.gr.spo.xml": {
+            "encoding": "ISO-8859-7",
+            "confidence": 0.6274789077194077,
+            "language": "Greek"
+        },
+        "testdata/iso-8859-7-greek/naftemporiki.gr.wld.xml": {
+            "encoding": "ISO-8859-7",
+            "confidence": 0.6891189562101737,
+            "language": "Greek"
+        },
+        "testdata/iso-8859-7-greek/_chromium_ISO-8859-7_with_no_encoding_specified.html": {
+            "encoding": "ISO-8859-7",
+            "confidence": 0.9778469415113554,
+            "language": "Greek"
+        },
+        "testdata/iso-8859-7-greek/_ude_1.txt": {
+            "encoding": "ISO-8859-7",
+            "confidence": 0.99,
+            "language": "Greek"
+        },
+        "testdata/iso-8859-7-greek/_ude_2.txt": {
+            "encoding": "ISO-8859-7",
+            "confidence": 0.9814912798215337,
+            "language": "Greek"
+        },
+        "testdata/iso-8859-7-greek/_ude_3.txt": {
+            "encoding": "ISO-8859-7",
+            "confidence": 0.9620948189728451,
+            "language": "Greek"
+        },
+        "testdata/iso-8859-7-greek/_ude_greek.txt": {
+            "encoding": "ISO-8859-7",
+            "confidence": 0.9620948189728451,
+            "language": "Greek"
+        },
+        "testdata/iso-8859-9-turkish/divxplanet.com.xml": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/iso-8859-9-turkish/subtitle.srt": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/iso-8859-9-turkish/wikitop_tr_ISO-8859-9.txt": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/iso-8859-9-turkish/_ude_1.txt": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/iso-8859-9-turkish/_ude_2.txt": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.7296965918536991,
+            "language": ""
+        },
+        "testdata/Johab/hlpro-readme.txt": {
+            "encoding": "Johab",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/Johab/iyagi-readme.txt": {
+            "encoding": "Johab",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/Johab/mdir-doc.txt": {
+            "encoding": "Johab",
+            "confidence": 0.99,
+            "language": "Korean"
+        },
+        "testdata/KOI8-R/aif.ru.health.xml": {
+            "encoding": "KOI8-R",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/KOI8-R/aug32.hole.ru.xml": {
+            "encoding": "KOI8-R",
+            "confidence": 0.8239675159046529,
+            "language": "Russian"
+        },
+        "testdata/KOI8-R/aviaport.ru.xml": {
+            "encoding": "KOI8-R",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/KOI8-R/blog.mlmaster.com.xml": {
+            "encoding": "KOI8-R",
+            "confidence": 0.9751996489671343,
+            "language": "Russian"
+        },
+        "testdata/KOI8-R/forum.template-toolkit.ru.1.xml": {
+            "encoding": "KOI8-R",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/KOI8-R/forum.template-toolkit.ru.4.xml": {
+            "encoding": "KOI8-R",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/KOI8-R/forum.template-toolkit.ru.6.xml": {
+            "encoding": "KOI8-R",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/KOI8-R/forum.template-toolkit.ru.8.xml": {
+            "encoding": "KOI8-R",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/KOI8-R/forum.template-toolkit.ru.9.xml": {
+            "encoding": "KOI8-R",
+            "confidence": 0.9985247367248818,
+            "language": "Russian"
+        },
+        "testdata/KOI8-R/greek.ru.xml": {
+            "encoding": "KOI8-R",
+            "confidence": 0.9105907196658134,
+            "language": "Russian"
+        },
+        "testdata/KOI8-R/intertat.ru.xml": {
+            "encoding": "KOI8-R",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/KOI8-R/janulalife.blogspot.com.xml": {
+            "encoding": "KOI8-R",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/KOI8-R/kapranoff.ru.xml": {
+            "encoding": "KOI8-R",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/KOI8-R/koi.kinder.ru.xml": {
+            "encoding": "KOI8-R",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/KOI8-R/money.rin.ru.xml": {
+            "encoding": "KOI8-R",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/KOI8-R/music.peeps.ru.xml": {
+            "encoding": "KOI8-R",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/KOI8-R/newsru.com.xml": {
+            "encoding": "KOI8-R",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/KOI8-R/susu.ac.ru.xml": {
+            "encoding": "KOI8-R",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/KOI8-R/_chromium_KOI8-R_with_no_encoding_specified.html": {
+            "encoding": "KOI8-R",
+            "confidence": 0.9783235475641042,
+            "language": "Russian"
+        },
+        "testdata/KOI8-R/_ude_1.txt": {
+            "encoding": "KOI8-R",
+            "confidence": 0.9675376749057197,
+            "language": "Russian"
+        },
+        "testdata/MacCyrillic/aif.ru.health.xml": {
+            "encoding": "MacCyrillic",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/MacCyrillic/aug32.hole.ru.xml": {
+            "encoding": "MacCyrillic",
+            "confidence": 0.8239675159046529,
+            "language": "Russian"
+        },
+        "testdata/MacCyrillic/aviaport.ru.xml": {
+            "encoding": "MacCyrillic",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/MacCyrillic/blog.mlmaster.com.xml": {
+            "encoding": "MacCyrillic",
+            "confidence": 0.9751996489671343,
+            "language": "Russian"
+        },
+        "testdata/MacCyrillic/forum.template-toolkit.ru.4.xml": {
+            "encoding": "MacCyrillic",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/MacCyrillic/forum.template-toolkit.ru.6.xml": {
+            "encoding": "MacCyrillic",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/MacCyrillic/forum.template-toolkit.ru.8.xml": {
+            "encoding": "MacCyrillic",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/MacCyrillic/forum.template-toolkit.ru.9.xml": {
+            "encoding": "MacCyrillic",
+            "confidence": 0.9985247367248818,
+            "language": "Russian"
+        },
+        "testdata/MacCyrillic/greek.ru.xml": {
+            "encoding": "MacCyrillic",
+            "confidence": 0.9087641728812483,
+            "language": "Russian"
+        },
+        "testdata/MacCyrillic/intertat.ru.xml": {
+            "encoding": "MacCyrillic",
+            "confidence": 0.9571304076837278,
+            "language": "Russian"
+        },
+        "testdata/MacCyrillic/kapranoff.ru.xml": {
+            "encoding": "MacCyrillic",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/MacCyrillic/koi.kinder.ru.xml": {
+            "encoding": "MacCyrillic",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/MacCyrillic/money.rin.ru.xml": {
+            "encoding": "MacCyrillic",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/MacCyrillic/music.peeps.ru.xml": {
+            "encoding": "MacCyrillic",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/MacCyrillic/newsru.com.xml": {
+            "encoding": "MacCyrillic",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/MacCyrillic/susu.ac.ru.xml": {
+            "encoding": "MacCyrillic",
+            "confidence": 0.9715782179099619,
+            "language": "Russian"
+        },
+        "testdata/MacCyrillic/_ude_1.txt": {
+            "encoding": "MacCyrillic",
+            "confidence": 0.9675376749057197,
+            "language": "Russian"
+        },
+        "testdata/MacRoman/ioreg_output.txt": {
+            "encoding": "MacRoman",
+            "confidence": 0.7299896597197926,
+            "language": ""
+        },
+        "testdata/SHIFT_JIS/10e.org.xml": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/1affliate.com.xml": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/accessories-brand.com.xml": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/amefoot.net.xml": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/andore.com.inami.xml": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/andore.com.money.xml": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/andore.com.xml": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/blog.inkase.net.xml": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/blog.paseri.ne.jp.xml": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/bloglelife.com.xml": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/brag.zaka.to.xml": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/celeb.lalalu.com.xml": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/clickablewords.com.xml": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/do.beginnersrack.com.xml": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/dogsinn.jp.xml": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/grebeweb.net.xml": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/milliontimes.jp.xml": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/moon-light.ne.jp.xml": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/nextbeaut.com.xml": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/ooganemochi.com.xml": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/perth-on.net.xml": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/sakusaka-silk.net.xml": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/setsuzei119.jp.xml": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.8936752136752136,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/tamuyou.haun.org.xml": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/yasuhisa.com.xml": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/_chromium_Shift-JIS_with_no_encoding_specified.html": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.3101851851851852,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/_ude_1.txt": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/_ude_2.txt": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/_ude_3.txt": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/SHIFT_JIS/_ude_4.txt": {
+            "encoding": "SHIFT_JIS",
+            "confidence": 0.99,
+            "language": "Japanese"
+        },
+        "testdata/TIS-620/opentle.org.xml": {
+            "encoding": "TIS-620",
+            "confidence": 0.8257490748003632,
+            "language": "Thai"
+        },
+        "testdata/TIS-620/pharmacy.kku.ac.th.analyse1.xml": {
+            "encoding": "TIS-620",
+            "confidence": 0.8488457475028961,
+            "language": "Thai"
+        },
+        "testdata/TIS-620/pharmacy.kku.ac.th.centerlab.xml": {
+            "encoding": "TIS-620",
+            "confidence": 0.886899828657486,
+            "language": "Thai"
+        },
+        "testdata/TIS-620/pharmacy.kku.ac.th.healthinfo-ne.xml": {
+            "encoding": "TIS-620",
+            "confidence": 0.8103557620331113,
+            "language": "Thai"
+        },
+        "testdata/TIS-620/trickspot.boxchart.com.xml": {
+            "encoding": "TIS-620",
+            "confidence": 0.8259206089405948,
+            "language": "Thai"
+        },
+        "testdata/TIS-620/_mozilla_bug488426_text.html": {
+            "encoding": "TIS-620",
+            "confidence": 0.8309029304256143,
+            "language": "Thai"
+        },
+        "testdata/UTF-16/bom-utf-16-be.srt": {
+            "encoding": "UTF-16",
+            "confidence": 1.0,
+            "language": ""
+        },
+        "testdata/UTF-16/bom-utf-16-le.srt": {
+            "encoding": "UTF-16",
+            "confidence": 1.0,
+            "language": ""
+        },
+        "testdata/UTF-16BE/nobom-utf16be.txt": {
+            "encoding": "utf-16be",
+            "confidence": 0.85,
+            "language": ""
+        },
+        "testdata/UTF-16BE/plane1-utf-16be.html": {
+            "encoding": "utf-16be",
+            "confidence": 0.85,
+            "language": ""
+        },
+        "testdata/UTF-16LE/nobom-utf16le.txt": {
+            "encoding": "utf-16le",
+            "confidence": 0.85,
+            "language": ""
+        },
+        "testdata/UTF-16LE/plane1-utf-16le.html": {
+            "encoding": "utf-16le",
+            "confidence": 0.85,
+            "language": ""
+        },
+        "testdata/UTF-32/bom-utf-32-be.srt": {
+            "encoding": "UTF-32",
+            "confidence": 1.0,
+            "language": ""
+        },
+        "testdata/UTF-32/bom-utf-32-le.srt": {
+            "encoding": "UTF-32",
+            "confidence": 1.0,
+            "language": ""
+        },
+        "testdata/UTF-32BE/nobom-utf32be.txt": {
+            "encoding": "utf-32be",
+            "confidence": 0.85,
+            "language": ""
+        },
+        "testdata/UTF-32BE/plane1-utf-32be.html": {
+            "encoding": "utf-32be",
+            "confidence": 0.85,
+            "language": ""
+        },
+        "testdata/UTF-32LE/nobom-utf32le.txt": {
+            "encoding": "utf-32le",
+            "confidence": 0.85,
+            "language": ""
+        },
+        "testdata/UTF-32LE/plane1-utf-32le.html": {
+            "encoding": "utf-32le",
+            "confidence": 0.85,
+            "language": ""
+        },
+        "testdata/utf-8/anitabee.blogspot.com.xml": {
+            "encoding": "utf-8",
+            "confidence": 0.99,
+            "language": ""
+        },
+        "testdata/utf-8/balatonblog.typepad.com.xml": {
+            "encoding": "utf-8",
+            "confidence": 0.99,
+            "language": ""
+        },
+        "testdata/utf-8/boobooo.blogspot.com.xml": {
+            "encoding": "utf-8",
+            "confidence": 0.99,
+            "language": ""
+        },
+        "testdata/utf-8/linuxbox.hu.xml": {
+            "encoding": "utf-8",
+            "confidence": 0.99,
+            "language": ""
+        },
+        "testdata/utf-8/pihgy.hu.xml": {
+            "encoding": "utf-8",
+            "confidence": 0.99,
+            "language": ""
+        },
+        "testdata/utf-8/weblabor.hu.2.xml": {
+            "encoding": "utf-8",
+            "confidence": 0.99,
+            "language": ""
+        },
+        "testdata/utf-8/weblabor.hu.xml": {
+            "encoding": "utf-8",
+            "confidence": 0.99,
+            "language": ""
+        },
+        "testdata/utf-8/_chromium_UTF-8_with_no_encoding_specified.html": {
+            "encoding": "utf-8",
+            "confidence": 0.99,
+            "language": ""
+        },
+        "testdata/utf-8/_mozilla_bug306272_text.html": {
+            "encoding": "utf-8",
+            "confidence": 0.7525,
+            "language": ""
+        },
+        "testdata/utf-8/_mozilla_bug426271_text-utf-8.html": {
+            "encoding": "utf-8",
+            "confidence": 0.99,
+            "language": ""
+        },
+        "testdata/utf-8/_ude_1.txt": {
+            "encoding": "utf-8",
+            "confidence": 0.99,
+            "language": ""
+        },
+        "testdata/utf-8/_ude_2.txt": {
+            "encoding": "utf-8",
+            "confidence": 0.99,
+            "language": ""
+        },
+        "testdata/utf-8/_ude_3.txt": {
+            "encoding": "utf-8",
+            "confidence": 0.87625,
+            "language": ""
+        },
+        "testdata/utf-8/_ude_5.txt": {
+            "encoding": "utf-8",
+            "confidence": 0.99,
+            "language": ""
+        },
+        "testdata/utf-8/_ude_greek.txt": {
+            "encoding": "utf-8",
+            "confidence": 0.99,
+            "language": ""
+        },
+        "testdata/utf-8/_ude_he1.txt": {
+            "encoding": "utf-8",
+            "confidence": 0.99,
+            "language": ""
+        },
+        "testdata/utf-8/_ude_he2.txt": {
+            "encoding": "utf-8",
+            "confidence": 0.99,
+            "language": ""
+        },
+        "testdata/utf-8/_ude_he3.txt": {
+            "encoding": "utf-8",
+            "confidence": 0.99,
+            "language": ""
+        },
+        "testdata/utf-8/_ude_russian.txt": {
+            "encoding": "utf-8",
+            "confidence": 0.99,
+            "language": ""
+        },
+        "testdata/utf-8-sig/bom-utf-8.srt": {
+            "encoding": "UTF-8-SIG",
+            "confidence": 1.0,
+            "language": ""
+        },
+        "testdata/utf-8-sig/_ude_4.txt": {
+            "encoding": "UTF-8-SIG",
+            "confidence": 1.0,
+            "language": ""
+        },
+        "testdata/windows-1250-croatian/_ude_1.txt": {
+            "encoding": "Windows-1252",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/windows-1250-czech/_ude_1.txt": {
+            "encoding": "Windows-1254",
+            "confidence": 0.5264510393740367,
+            "language": "Turkish"
+        },
+        "testdata/windows-1250-czech/_ude_2.txt": {
+            "encoding": "Windows-1252",
+            "confidence": 0.6565188735769922,
+            "language": ""
+        },
+        "testdata/windows-1250-hungarian/bbc.co.uk.hu.forum.xml": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/windows-1250-hungarian/bbc.co.uk.hu.learningenglish.xml": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/windows-1250-hungarian/bbc.co.uk.hu.pressreview.xml": {
+            "encoding": "Windows-1252",
+            "confidence": 0.728056048693888,
+            "language": ""
+        },
+        "testdata/windows-1250-hungarian/bbc.co.uk.hu.xml": {
+            "encoding": "Windows-1252",
+            "confidence": 0.7278835710998619,
+            "language": ""
+        },
+        "testdata/windows-1250-hungarian/objektivhir.hu.xml": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.7260305541170378,
+            "language": ""
+        },
+        "testdata/windows-1250-hungarian/torokorszag.blogspot.com.xml": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.7291077436652298,
+            "language": ""
+        },
+        "testdata/windows-1250-hungarian/_ude_1.txt": {
+            "encoding": "Windows-1252",
+            "confidence": 0.7209343583678297,
+            "language": ""
+        },
+        "testdata/windows-1250-hungarian/_ude_2.txt": {
+            "encoding": "Windows-1252",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/windows-1250-hungarian/_ude_3.txt": {
+            "encoding": "Windows-1252",
+            "confidence": 0.7224108910891089,
+            "language": ""
+        },
+        "testdata/windows-1250-polish/_ude_1.txt": {
+            "encoding": "Windows-1252",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/windows-1250-romanian/_ude_1.txt": {
+            "encoding": "Windows-1252",
+            "confidence": 0.7298170884490103,
+            "language": ""
+        },
+        "testdata/windows-1250-slovak/_ude_1.txt": {
+            "encoding": "Windows-1254",
+            "confidence": 0.506762977196006,
+            "language": "Turkish"
+        },
+        "testdata/windows-1250-slovak/_ude_2.txt": {
+            "encoding": "Windows-1254",
+            "confidence": 0.5457342335189749,
+            "language": "Turkish"
+        },
+        "testdata/windows-1250-slovak/_ude_3.txt": {
+            "encoding": "Windows-1254",
+            "confidence": 0.5557018378097741,
+            "language": "Turkish"
+        },
+        "testdata/windows-1250-slovene/_ude_1.txt": {
+            "encoding": "Windows-1252",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/windows-1251-bulgarian/bbc.co.uk.popshow.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/windows-1251-bulgarian/bpm.cult.bg.2.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.99,
+            "language": "Bulgarian"
+        },
+        "testdata/windows-1251-bulgarian/bpm.cult.bg.3.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.99,
+            "language": "Bulgarian"
+        },
+        "testdata/windows-1251-bulgarian/bpm.cult.bg.4.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/windows-1251-bulgarian/bpm.cult.bg.9.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/windows-1251-bulgarian/bpm.cult.bg.medusa.4.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/windows-1251-bulgarian/bpm.cult.bg.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.99,
+            "language": "Bulgarian"
+        },
+        "testdata/windows-1251-bulgarian/debian.gabrovo.com.news.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.99,
+            "language": "Bulgarian"
+        },
+        "testdata/windows-1251-bulgarian/debian.gabrovo.com.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.99,
+            "language": "Bulgarian"
+        },
+        "testdata/windows-1251-bulgarian/doncho.net.comments.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.99,
+            "language": "Bulgarian"
+        },
+        "testdata/windows-1251-bulgarian/doncho.net.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.99,
+            "language": "Bulgarian"
+        },
+        "testdata/windows-1251-bulgarian/ecloga.cult.bg.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/windows-1251-bulgarian/ide.li.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.99,
+            "language": "Bulgarian"
+        },
+        "testdata/windows-1251-bulgarian/informator.org.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.8617776148227743,
+            "language": "Bulgarian"
+        },
+        "testdata/windows-1251-bulgarian/linux-bg.org.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.9840018229422474,
+            "language": "Bulgarian"
+        },
+        "testdata/windows-1251-bulgarian/rinennor.org.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.99,
+            "language": "Bulgarian"
+        },
+        "testdata/windows-1251-russian/aif.ru.health.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/windows-1251-russian/anthropology.ru.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.9388603353338804,
+            "language": "Russian"
+        },
+        "testdata/windows-1251-russian/aug32.hole.ru.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.8239675159046529,
+            "language": "Russian"
+        },
+        "testdata/windows-1251-russian/aviaport.ru.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/windows-1251-russian/blog.mlmaster.com.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.9751996489671343,
+            "language": "Russian"
+        },
+        "testdata/windows-1251-russian/forum.template-toolkit.ru.1.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/windows-1251-russian/forum.template-toolkit.ru.4.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/windows-1251-russian/forum.template-toolkit.ru.6.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/windows-1251-russian/forum.template-toolkit.ru.8.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/windows-1251-russian/forum.template-toolkit.ru.9.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.9985247367248818,
+            "language": "Russian"
+        },
+        "testdata/windows-1251-russian/greek.ru.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.9087641728812483,
+            "language": "Russian"
+        },
+        "testdata/windows-1251-russian/intertat.ru.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.9630351380644347,
+            "language": "Bulgarian"
+        },
+        "testdata/windows-1251-russian/janulalife.blogspot.com.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/windows-1251-russian/kapranoff.ru.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/windows-1251-russian/money.rin.ru.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/windows-1251-russian/music.peeps.ru.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/windows-1251-russian/newsru.com.xml": {
+            "encoding": "windows-1251",
+            "confidence": 0.99,
+            "language": "Russian"
+        },
+        "testdata/windows-1251-russian/_chromium_windows-1251_with_no_encoding_specified.html": {
+            "encoding": "windows-1251",
+            "confidence": 0.9783235475641042,
+            "language": "Russian"
+        },
+        "testdata/windows-1251-russian/_ude_1.txt": {
+            "encoding": "windows-1251",
+            "confidence": 0.9675376749057197,
+            "language": "Russian"
+        },
+        "testdata/windows-1252/github_bug_9.txt": {
+            "encoding": "Windows-1252",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/windows-1252/_mozilla_bug421271_text.html": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/windows-1252/_ude_1.txt": {
+            "encoding": "Windows-1252",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/windows-1252/_ude_2.txt": {
+            "encoding": "Windows-1252",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/windows-1254-turkish/_chromium_windows-1254_with_no_encoding_specified.html": {
+            "encoding": "ISO-8859-1",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/windows-1254-turkish/_ude_1.txt": {
+            "encoding": "Windows-1252",
+            "confidence": 0.73,
+            "language": ""
+        },
+        "testdata/windows-1255-hebrew/carshops.co.il.xml": {
+            "encoding": "windows-1255",
+            "confidence": 0.99,
+            "language": "Hebrew"
+        },
+        "testdata/windows-1255-hebrew/exego.net.2.xml": {
+            "encoding": "windows-1255",
+            "confidence": 0.99,
+            "language": "Hebrew"
+        },
+        "testdata/windows-1255-hebrew/hagada.org.il.xml": {
+            "encoding": "windows-1255",
+            "confidence": 0.99,
+            "language": "Hebrew"
+        },
+        "testdata/windows-1255-hebrew/halemo.net.edoar.xml": {
+            "encoding": "windows-1255",
+            "confidence": 0.99,
+            "language": "Hebrew"
+        },
+        "testdata/windows-1255-hebrew/hevra.org.il.xml": {
+            "encoding": "windows-1255",
+            "confidence": 0.99,
+            "language": "Hebrew"
+        },
+        "testdata/windows-1255-hebrew/hydepark.hevre.co.il.7957.xml": {
+            "encoding": "windows-1255",
+            "confidence": 0.99,
+            "language": "Hebrew"
+        },
+        "testdata/windows-1255-hebrew/info.org.il.xml": {
+            "encoding": "windows-1255",
+            "confidence": 0.99,
+            "language": "Hebrew"
+        },
+        "testdata/windows-1255-hebrew/infomed.co.il.xml": {
+            "encoding": "windows-1255",
+            "confidence": 0.99,
+            "language": "Hebrew"
+        },
+        "testdata/windows-1255-hebrew/law.co.il.xml": {
+            "encoding": "windows-1255",
+            "confidence": 0.99,
+            "language": "Hebrew"
+        },
+        "testdata/windows-1255-hebrew/maakav.org.xml": {
+            "encoding": "windows-1255",
+            "confidence": 0.99,
+            "language": "Hebrew"
+        },
+        "testdata/windows-1255-hebrew/neviim.net.xml": {
+            "encoding": "windows-1255",
+            "confidence": 0.99,
+            "language": "Hebrew"
+        },
+        "testdata/windows-1255-hebrew/notes.co.il.50.xml": {
+            "encoding": "windows-1255",
+            "confidence": 0.99,
+            "language": "Hebrew"
+        },
+        "testdata/windows-1255-hebrew/notes.co.il.6.xml": {
+            "encoding": "windows-1255",
+            "confidence": 0.99,
+            "language": "Hebrew"
+        },
+        "testdata/windows-1255-hebrew/notes.co.il.7.xml": {
+            "encoding": "windows-1255",
+            "confidence": 0.99,
+            "language": "Hebrew"
+        },
+        "testdata/windows-1255-hebrew/notes.co.il.8.xml": {
+            "encoding": "windows-1255",
+            "confidence": 0.99,
+            "language": "Hebrew"
+        },
+        "testdata/windows-1255-hebrew/pcplus.co.il.xml": {
+            "encoding": "windows-1255",
+            "confidence": 0.99,
+            "language": "Hebrew"
+        },
+        "testdata/windows-1255-hebrew/sharks.co.il.xml": {
+            "encoding": "windows-1255",
+            "confidence": 0.99,
+            "language": "Hebrew"
+        },
+        "testdata/windows-1255-hebrew/whatsup.org.il.xml": {
+            "encoding": "windows-1255",
+            "confidence": 0.99,
+            "language": "Hebrew"
+        },
+        "testdata/windows-1255-hebrew/_chromium_ISO-8859-8_with_no_encoding_specified.html": {
+            "encoding": "windows-1255",
+            "confidence": 0.99,
+            "language": "Hebrew"
+        },
+        "testdata/windows-1255-hebrew/_chromium_windows-1255_with_no_encoding_specified.html": {
+            "encoding": "windows-1255",
+            "confidence": 0.99,
+            "language": "Hebrew"
+        },
+        "testdata/windows-1255-hebrew/_ude_he1.txt": {
+            "encoding": "windows-1255",
+            "confidence": 0.99,
+            "language": "Hebrew"
+        },
+        "testdata/windows-1255-hebrew/_ude_he2.txt": {
+            "encoding": "windows-1255",
+            "confidence": 0.99,
+            "language": "Hebrew"
+        },
+        "testdata/windows-1255-hebrew/_ude_he3.txt": {
+            "encoding": "windows-1255",
+            "confidence": 0.99,
+            "language": "Hebrew"
+        },
+        "testdata/windows-1256-arabic/_chromium_windows-1256_with_no_encoding_specified.html": {
+            "encoding": "MacCyrillic",
+            "confidence": 0.2919595449764441,
+            "language": "Russian"
+        }
+    }
+}
