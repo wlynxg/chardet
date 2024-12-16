@@ -12,8 +12,9 @@ func NewSBCSGroupProbe() *SBCSGroupProbe {
 	p := &SBCSGroupProbe{}
 	p.CharSetGroupProbe = NewCharSetGroupProbe(consts.UnknownLangFilter, nil)
 	hp := NewHebrewProbe()
-	logical := NewSingleByteCharSetProbe(NewWindows1255HebrewModel(), false, hp)
-	visual := NewSingleByteCharSetProbe(NewWindows1255HebrewModel(), true, hp)
+	model := NewWindows1255HebrewModel()
+	logical := NewSingleByteCharSetProbe(model, false, hp)
+	visual := NewSingleByteCharSetProbe(model, true, hp)
 	hp.SetModelProbe(logical, visual)
 
 	p.probes = []Probe{
