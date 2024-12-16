@@ -4,8 +4,8 @@ import (
 	"github.com/wlynxg/chardet/consts"
 )
 
-func russianLangModel() map[int]map[int]int {
-	return map[int]map[int]int{
+var (
+	russianLangModel = map[int]map[int]int{
 		37: { // 'А'
 			37: 0, // 'А'
 			44: 1, // 'Б'
@@ -4102,7 +4102,7 @@ func russianLangModel() map[int]map[int]int {
 			16: 2, // 'я'
 		},
 	}
-}
+)
 
 func NewWindows1251RussianModel() *SingleByteCharSetModel {
 	return &SingleByteCharSetModel{
@@ -4366,7 +4366,7 @@ func NewWindows1251RussianModel() *SingleByteCharSetModel {
 			254: 27,  // 'ю'
 			255: 16,  // 'я'
 		},
-		LanguageModel:        russianLangModel(),
+		LanguageModel:        russianLangModel,
 		TypicalPositiveRatio: 0.976601,
 		KeepAsciiLetters:     false,
 		Alphabet:             "ЁАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюяё",
@@ -4635,7 +4635,7 @@ func NewKoi8RRussianModel() *SingleByteCharSetModel {
 			254: 50,  // 'Ч'
 			255: 70,  // 'Ъ'
 		},
-		LanguageModel:        russianLangModel(),
+		LanguageModel:        russianLangModel,
 		TypicalPositiveRatio: 0.976601,
 		KeepAsciiLetters:     false,
 		Alphabet:             "ЁАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюяё",
@@ -4904,7 +4904,7 @@ func NewISO88595RussianModel() *SingleByteCharSetModel {
 			254: 252, // 'ў'
 			255: 255, // 'џ'
 		},
-		LanguageModel:        russianLangModel(),
+		LanguageModel:        russianLangModel,
 		TypicalPositiveRatio: 0.976601,
 		KeepAsciiLetters:     false,
 		Alphabet:             "ЁАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюяё",
@@ -5173,7 +5173,7 @@ func NewMacCyrillicRussianModel() *SingleByteCharSetModel {
 			254: 27,  // 'ю'
 			255: 255, // '€'
 		},
-		LanguageModel:        russianLangModel(),
+		LanguageModel:        russianLangModel,
 		TypicalPositiveRatio: 0.976601,
 		KeepAsciiLetters:     false,
 		Alphabet:             "ЁАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюяё",
@@ -5442,7 +5442,7 @@ func NewIBM866RussianModel() *SingleByteCharSetModel {
 			254: 252, // '■'
 			255: 255, // '\xa0'
 		},
-		LanguageModel:        russianLangModel(),
+		LanguageModel:        russianLangModel,
 		TypicalPositiveRatio: 0.976601,
 		KeepAsciiLetters:     false,
 		Alphabet:             "ЁАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюяё",
@@ -5711,7 +5711,7 @@ func NewIBM855RussianModel() *SingleByteCharSetModel {
 			254: 252, // '■'
 			255: 255, // '\xa0'
 		},
-		LanguageModel:        russianLangModel(),
+		LanguageModel:        russianLangModel,
 		TypicalPositiveRatio: 0.976601,
 		KeepAsciiLetters:     false,
 		Alphabet:             "ЁАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюяё",
