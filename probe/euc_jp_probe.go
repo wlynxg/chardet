@@ -3,19 +3,15 @@ package probe
 import (
 	"github.com/wlynxg/chardet/cda"
 	"github.com/wlynxg/chardet/consts"
-	"github.com/wlynxg/chardet/log"
-	"go.uber.org/zap"
 )
 
 type EUCJPProbe struct {
 	MultiByteCharSetProbe
-	log             *zap.SugaredLogger
 	contextAnalyzer cda.Analyzer
 }
 
 func NewEUCJPProbe() *EUCJPProbe {
 	ep := &EUCJPProbe{
-		log:             log.New("EUCJPProbe"),
 		contextAnalyzer: cda.NewEUCJPContextAnalysis(),
 	}
 	ep.MultiByteCharSetProbe = NewMultiByteCharSetProbe(
@@ -40,7 +36,6 @@ loop:
 		codingState := e.codingSM.NextState(b)
 		switch codingState {
 		case consts.ErrorMachineState:
-			e.log.Debugf("%s %s prober hit error at byte %d", e.charsetName, e.language, i)
 			e.state = consts.NotMeProbingState
 			break loop
 		case consts.ItsMeMachineState:

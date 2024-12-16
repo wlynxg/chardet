@@ -4,9 +4,7 @@ import (
 	"bytes"
 
 	"github.com/wlynxg/chardet/consts"
-	"github.com/wlynxg/chardet/log"
 	"github.com/wlynxg/chardet/probe"
-	"go.uber.org/zap"
 )
 
 // Result represents the character encoding detection result
@@ -25,8 +23,6 @@ type UniversalDetector struct {
 	MinimumThreshold float64
 	// IsoWinMap maps ISO encodings to Windows encodings
 	IsoWinMap map[string]string
-
-	log *zap.SugaredLogger
 
 	// done indicates if detection is complete
 	done bool
@@ -70,7 +66,6 @@ func NewUniversalDetector(filter consts.LangFilter) *UniversalDetector {
 			consts.ISO885913: consts.Windows1257,
 		},
 
-		log:        log.New("UniversalDetector"),
 		inputState: consts.PureAsciiInputState,
 		lastChars:  []byte{},
 		filter:     filter,
@@ -241,7 +236,6 @@ func (u *UniversalDetector) GetResult() Result {
 
 	switch {
 	case !u.gotData:
-		u.log.Debug("no data received!")
 	case u.inputState == consts.PureAsciiInputState:
 		u.result = Result{
 			Encoding:   consts.Ascii,

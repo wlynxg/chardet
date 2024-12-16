@@ -2,8 +2,6 @@ package probe
 
 import (
 	"github.com/wlynxg/chardet/consts"
-	"github.com/wlynxg/chardet/log"
-	"go.uber.org/zap"
 )
 
 type SingleByteCharSetModel struct {
@@ -22,7 +20,6 @@ type SingleByteCharSetProbe struct {
 	SampleSize, SBEnoughRelThreshold                     int
 	PositiveShortcutThreshold, NegativeShortcutThreshold float64
 
-	log         *zap.SugaredLogger
 	model       *SingleByteCharSetModel
 	reversed    bool
 	nameProbe   Probe
@@ -41,7 +38,6 @@ func NewSingleByteCharSetProbe(model *SingleByteCharSetModel, reversed bool, nam
 		SBEnoughRelThreshold:      1024, // 0.25 * SampleSize^2
 		PositiveShortcutThreshold: 0.95,
 		NegativeShortcutThreshold: 0.05,
-		log:                       log.New("SingleByteCharSetProbe"),
 		model:                     model,
 		// TRUE if we need to reverse every pair in the model lookup
 		reversed: reversed,
@@ -123,16 +119,12 @@ func (s *SingleByteCharSetProbe) Feed(buf []byte) consts.ProbingState {
 		s.lastOrder = order
 	}
 
-	charsetName := s.model.CharsetName
 	if s.state == consts.DetectingProbingState {
 		if s.totalSeqs > s.SBEnoughRelThreshold {
 			confidence := s.GetConfidence()
 			if confidence > s.PositiveShortcutThreshold {
-				s.log.Debugf("%s confidence = %f, we have a winner", charsetName, confidence)
 				s.state = consts.FoundItProbingState
 			} else if confidence < s.NegativeShortcutThreshold {
-				s.log.Debugf("%s confidence = %f, below negative shortcut threshhold %f",
-					charsetName, confidence, s.NegativeShortcutThreshold)
 				s.state = consts.NotMeProbingState
 			}
 		}

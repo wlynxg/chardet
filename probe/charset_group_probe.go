@@ -2,14 +2,11 @@ package probe
 
 import (
 	"github.com/wlynxg/chardet/consts"
-	"github.com/wlynxg/chardet/log"
-	"go.uber.org/zap"
 )
 
 type CharSetGroupProbe struct {
 	CharSetProbe
 
-	log            *zap.SugaredLogger
 	filter         consts.LangFilter
 	activeNum      int
 	bestGuessProbe Probe
@@ -19,7 +16,6 @@ type CharSetGroupProbe struct {
 func NewCharSetGroupProbe(filter consts.LangFilter, probes []Probe) CharSetGroupProbe {
 	p := CharSetGroupProbe{
 		CharSetProbe:   NewCharSetProbe(filter),
-		log:            log.New("CharSetGroupProbe"),
 		filter:         filter,
 		activeNum:      0,
 		bestGuessProbe: nil,
@@ -69,7 +65,6 @@ func (c *CharSetGroupProbe) Feed(buf []byte) consts.ProbingState {
 		}
 
 		if !probe.IsActive() {
-			c.log.Debugf("%s not active", probe.CharSetName())
 			continue
 		}
 
@@ -110,12 +105,10 @@ func (c *CharSetGroupProbe) GetConfidence() float64 {
 		}
 
 		if !probe.IsActive() {
-			c.log.Debugf("%s not active", probe.CharSetName())
 			continue
 		}
 
 		conf := probe.GetConfidence()
-		c.log.Debugf("%s %s confidence = %f", probe.CharSetName(), probe.Language(), conf)
 		if bestConf < conf {
 			bestConf = conf
 			c.bestGuessProbe = probe

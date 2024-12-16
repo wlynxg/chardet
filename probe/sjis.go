@@ -3,14 +3,11 @@ package probe
 import (
 	"github.com/wlynxg/chardet/cda"
 	"github.com/wlynxg/chardet/consts"
-	"github.com/wlynxg/chardet/log"
-	"go.uber.org/zap"
 )
 
 type SJISProbe struct {
 	MultiByteCharSetProbe
 
-	log             *zap.SugaredLogger
 	state           consts.ProbingState
 	contextAnalyzer cda.Analyzer
 }
@@ -24,7 +21,6 @@ func NewSJISProbe() *SJISProbe {
 			cda.NewSJISDistributionAnalysis(),
 			NewCodingStateMachine(SjisSmModel()),
 		),
-		log:             log.New("SJISProbe"),
 		contextAnalyzer: cda.NewSJISContextAnalysis(),
 	}
 }
@@ -46,7 +42,6 @@ loop:
 		codingState := s.codingSM.NextState(buf[i])
 		switch codingState {
 		case consts.ErrorMachineState:
-			s.log.Debugf("%s %s prober hit error at byte %d", s.charsetName, s.language, i)
 			s.state = consts.NotMeProbingState
 			break loop
 		case consts.ItsMeMachineState:
