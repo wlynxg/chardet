@@ -9,7 +9,7 @@ import (
 type SingleByteCharSetModel struct {
 	CharsetName          string
 	Language             string
-	CharToOrderMap       map[int]int
+	CharToOrderMap       [256]int
 	LanguageModel        map[int]map[int]int
 	TypicalPositiveRatio float64
 	KeepAsciiLetters     bool
@@ -23,7 +23,7 @@ type SingleByteCharSetProbe struct {
 	PositiveShortcutThreshold, NegativeShortcutThreshold float64
 
 	log         *zap.SugaredLogger
-	model       SingleByteCharSetModel
+	model       *SingleByteCharSetModel
 	reversed    bool
 	nameProbe   Probe
 	lastOrder   int
@@ -34,7 +34,7 @@ type SingleByteCharSetProbe struct {
 	freqChar    int
 }
 
-func NewSingleByteCharSetProbe(model SingleByteCharSetModel, reversed bool, nameProbe Probe) *SingleByteCharSetProbe {
+func NewSingleByteCharSetProbe(model *SingleByteCharSetModel, reversed bool, nameProbe Probe) *SingleByteCharSetProbe {
 	sp := &SingleByteCharSetProbe{
 		CharSetProbe:              NewCharSetProbe(consts.UnknownLangFilter),
 		SampleSize:                64,
@@ -98,10 +98,7 @@ func (s *SingleByteCharSetProbe) Feed(buf []byte) consts.ProbingState {
 	}
 
 	for _, b := range buf {
-		order := int(consts.UndefinedCharacterCategory)
-		if o, ok := s.model.CharToOrderMap[int(b)]; ok {
-			order = o
-		}
+		order := s.model.CharToOrderMap[b]
 		// XXX: This was SYMBOL_CAT_ORDER before, with a value of 250, but
 		//      CharacterCategory.SYMBOL is actually 253, so we use CONTROL
 		//      to make it closer to the original intent. The only difference
