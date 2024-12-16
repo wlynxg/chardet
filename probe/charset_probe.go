@@ -4,7 +4,6 @@ import (
 	"bytes"
 
 	"github.com/wlynxg/chardet/consts"
-	"github.com/wlynxg/chardet/util"
 )
 
 type CharSetProbe struct {
@@ -77,47 +76,46 @@ by markers. This function works to filter all words that contain at
 least one international character. All contiguous sequences of markers
 are replaced by a single space ascii character.
 
-This filter applies to all scripts which do not use English characters.
+This filter applies to all scripts that do not use English characters.
 */
 func (p *CharSetProbe) FilterInternationalWords(buf []byte) []byte {
-	var filtered bytes.Buffer
-
-	var word bytes.Buffer
-	hasInternational := false
+	var (
+		filtered         = make([]byte, 0, len(buf))
+		word             = make([]byte, 0, 16)
+		hasInternational bool
+	)
 
 	for i := 0; i < len(buf); i++ {
 		b := buf[i]
 
 		// Check if the byte is an English alphabet
 		if (b >= 'a' && b <= 'z') || (b >= 'A' && b <= 'Z') {
-			word.WriteByte(b)
+			word = append(word, b)
 		} else if b >= 0x80 { // Check if the byte is an international character
-			word.WriteByte(b)
+			word = append(word, b)
 			hasInternational = true
 		} else { // It's a marker character
-			if hasInternational && word.Len() > 0 {
-				filtered.Write(word.Bytes())
+			if hasInternational {
+				filtered = append(filtered, word...)
 				// Replace the last character with a space if it's a marker
-				if word.Len() > 0 {
-					lastChar := word.Bytes()[word.Len()-1]
-					if (lastChar < 'a' || lastChar > 'z') && (lastChar < 'A' || lastChar > 'Z') {
-						filtered.WriteByte(' ')
-					} else {
-						filtered.WriteByte(lastChar)
-					}
+				if lastChar := word[len(word)-1]; (lastChar < 'a' || lastChar > 'z') &&
+					(lastChar < 'A' || lastChar > 'Z') {
+					filtered = append(filtered, ' ')
+				} else {
+					filtered = append(filtered, lastChar)
 				}
 			}
-			word.Reset()             // Reset the word buffer
+			word = word[:0]          // Reset the word buffer
 			hasInternational = false // Reset international flag
 		}
 	}
 
 	// Handle the last word if it was not followed by a marker
-	if hasInternational && word.Len() > 0 {
-		filtered.Write(word.Bytes())
+	if hasInternational && len(word) > 0 {
+		filtered = append(filtered, word...)
 	}
 
-	return filtered.Bytes()
+	return filtered
 }
 
 /*
@@ -127,16 +125,15 @@ alphabet and high byte characters that are not between <> characters.
 Also retains English alphabet and high byte characters immediately
 before occurrences of >.
 
-This filter can be applied to all scripts which contain both English
+This filter can be applied to all scripts that contain both English
 characters and extended ASCII characters, but is currently only used by
 "Latin1Probe".
 */
 func (p *CharSetProbe) FilterWithEnglishLetters(buf []byte) []byte {
-	var (
-		filtered bytes.Buffer
-		inTag    bool
-		prev     int
-	)
+	// Pre-allocate a buffer based on an estimate of the filtered content size
+	filtered := make([]byte, 0, len(buf))
+	inTag := false
+	prev := 0
 
 	for curr := 0; curr < len(buf); curr++ {
 		bufChar := buf[curr]
@@ -147,56 +144,69 @@ func (p *CharSetProbe) FilterWithEnglishLetters(buf []byte) []byte {
 			inTag = true
 		}
 
-		// If the current character is not extended-ASCII and not alphabetic...
-		if bufChar < 0x80 && !util.IsAlpha(bufChar) {
-			// ...and we're not in a tag
+		// Inline the check for alphabetic characters
+		if bufChar < 0x80 && !((bufChar >= 'a' && bufChar <= 'z') || (bufChar >= 'A' && bufChar <= 'Z')) {
+			// If we're not in a tag, and we've found some text to keep
 			if curr > prev && !inTag {
-				// Keep everything after last non-extended-ASCII, non-alphabetic character
-				filtered.Write(buf[prev:curr])
-				// Output a space to delimit stretch we kept
-				filtered.WriteByte(' ')
+				// Append the slice from prev to curr
+				filtered = append(filtered, buf[prev:curr]...)
+				filtered = append(filtered, ' ')
 			}
 			prev = curr + 1
 		}
 	}
 
-	// If we're not in a tag...
-	if !inTag {
-		// Keep everything after last non-extended-ASCII, non-alphabetic character
-		filtered.Write(buf[prev:])
+	// If we're not in a tag, and we've got some remaining text to keep
+	if !inTag && prev < len(buf) {
+		filtered = append(filtered, buf[prev:]...)
 	}
 
-	return filtered.Bytes()
+	// If no filtering occurred, return the original buffer
+	if len(filtered) == 0 {
+		return buf
+	}
+
+	return filtered
 }
 
 // RemoveXMLTags removes XML tags from the input buffer and retains only the sequences
 // of English alphabet and high byte characters that are not between <> characters.
 func (p *CharSetProbe) RemoveXMLTags(buf []byte) []byte {
-	var filtered bytes.Buffer
+	// Pre-allocate a buffer based on an estimate of the filtered content size
+	filtered := make([]byte, 0, len(buf))
 	inTag := false
 	prev := 0
 
 	for curr := 0; curr < len(buf); curr++ {
 		bufChar := buf[curr]
 
-		if bufChar == '>' { // End of a tag
-			prev = curr + 1
+		// Check for end of tag
+		if bufChar == '>' {
 			inTag = false
-		} else if bufChar == '<' { // Start of a tag
+			prev = curr + 1
+			continue
+		}
+
+		// Check to begin tag
+		if bufChar == '<' {
 			if curr > prev && !inTag {
-				// Keep everything after last non-extended-ASCII, non-alphabetic character
-				filtered.Write(buf[prev:curr])
-				// Output a space to delimit stretch we kept
-				filtered.WriteByte(' ')
+				// Append the slice from prev to curr
+				filtered = append(filtered, buf[prev:curr]...)
+				filtered = append(filtered, ' ')
 			}
 			inTag = true
 		}
 	}
 
-	// If we're not in a tag, keep everything after last non-extended-ASCII, non-alphabetic character
-	if !inTag {
-		filtered.Write(buf[prev:])
+	// If we're not in a tag, and we've got some remaining text to keep
+	if !inTag && prev < len(buf) {
+		filtered = append(filtered, buf[prev:]...)
 	}
 
-	return filtered.Bytes()
+	// If no filtering occurred, return the original buffer
+	if len(filtered) == 0 {
+		return buf
+	}
+
+	return filtered
 }
