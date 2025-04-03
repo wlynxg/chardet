@@ -72,8 +72,8 @@ const (
 	UTF8BOM     = "\xEF\xBB\xBF"
 	UTF32LEBOM  = "\xFF\xFE\x00\x00"
 	UTF32BEBOM  = "\x00\x00\xFE\xFF"
-	UTF16LEBOM  = "\xFE\xFF"
-	UTF16BEBOM  = "\xFF\xFE"
+	UTF16LEBOM  = "\xFF\xFE"
+	UTF16BEBOM  = "\xFE\xFF"
 	UCS43412BOM = "\xFE\xFF\x00\x00"
 	UCS42143BOM = "\x00\x00\xFF\xFE"
 )
