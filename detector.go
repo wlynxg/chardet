@@ -107,26 +107,22 @@ func (u *UniversalDetector) Feed(buf []byte) {
 	if !u.gotData {
 		// If the buf starts with BOM, we know it is UTF
 		var encoding string
-
-		if bytes.HasPrefix(buf, []byte(consts.UTF8BOM)) {
-			// EF BB BF  UTF-8 with BOM
-			encoding = consts.UTF8SIG
-		} else if bytes.HasPrefix(buf, []byte(consts.UTF32LEBOM)) || bytes.HasPrefix(buf, []byte(consts.UTF32BEBOM)) {
-			// FF FE 00 00  UTF-32, little-endian BOM
-			// 00 00 FE FF  UTF-32, big-endian BOM
-			encoding = consts.UTF32
-		} else if bytes.HasPrefix(buf, []byte(consts.UCS43412BOM)) {
-			// FE FF 00 00  UCS-4, unusual octet order BOM (3412)
-			encoding = consts.UCS43412
-		} else if bytes.HasPrefix(buf, []byte(consts.UCS42143BOM)) {
-			// 00 00 FF FE  UCS-4, unusual octet order BOM (2143)
-			encoding = consts.UCS42143
-		} else if bytes.HasPrefix(buf, []byte(consts.UTF16LEBOM)) || bytes.HasPrefix(buf, []byte(consts.UTF16BEBOM)) {
-			// FF FE  UTF-16, little endian BOM
-			// FE FF  UTF-16, big endian BOM
-			encoding = consts.UTF16
+		switch {
+		case bytes.HasPrefix(buf, []byte(consts.UTF8BOM)):
+			encoding = consts.UTF8SIG // EF BB BF  UTF-8 with BOM
+		case bytes.HasPrefix(buf, []byte(consts.UTF32LEBOM)):
+			encoding = consts.UTF32Le // FF FE 00 00  UTF-32, little-endian BOM
+		case bytes.HasPrefix(buf, []byte(consts.UTF32BEBOM)):
+			encoding = consts.UTF32Be // 00 00 FE FF  UTF-32, big-endian BOM
+		case bytes.HasPrefix(buf, []byte(consts.UCS43412BOM)):
+			encoding = consts.UCS43412 // FE FF 00 00  UCS-4, unusual octet order BOM (3412)
+		case bytes.HasPrefix(buf, []byte(consts.UCS42143BOM)):
+			encoding = consts.UCS42143 // 00 00 FF FE  UCS-4, unusual octet order BOM (2143)
+		case bytes.HasPrefix(buf, []byte(consts.UTF16LEBOM)):
+			encoding = consts.UTF16Le // FF FE  UTF-16, little endian BOM
+		case bytes.HasPrefix(buf, []byte(consts.UTF16BEBOM)):
+			encoding = consts.UTF16Be // FE FF  UTF-16, big endian BOM
 		}
-
 		u.gotData = true
 		if encoding != "" {
 			u.result = Result{
