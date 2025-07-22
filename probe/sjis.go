@@ -65,7 +65,10 @@ loop:
 		}
 	}
 
-	s.lastChar[0] = buf[1]
+	// fix https://github.com/wlynxg/chardet/issues/7
+	if len(buf) > 1 {
+		s.lastChar[0] = buf[1]
+	}
 	if s.state == consts.DetectingProbingState &&
 		s.contextAnalyzer.GotEnoughData() &&
 		(s.GetConfidence() > s.ShortcutThreshold) {
