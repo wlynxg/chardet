@@ -98,9 +98,9 @@ func (u *UniversalDetector) Reset() {
 
 // Feed processes a chunk of bytes for character encoding detection
 // It analyzes the input data and updates the internal state accordingly
-func (u *UniversalDetector) Feed(buf []byte) {
+func (u *UniversalDetector) Feed(buf []byte) bool {
 	if u.done || len(buf) == 0 {
-		return
+		return false
 	}
 
 	// First check for known BOMs, since these are guaranteed to be correct
@@ -131,7 +131,7 @@ func (u *UniversalDetector) Feed(buf []byte) {
 				Language:   "",
 			}
 			u.done = true
-			return
+			return false
 		}
 	}
 
@@ -161,7 +161,7 @@ func (u *UniversalDetector) Feed(buf []byte) {
 				Language:   "",
 			}
 			u.done = true
-			return
+			return false
 		}
 	}
 
@@ -220,6 +220,7 @@ func (u *UniversalDetector) Feed(buf []byte) {
 		}
 	default:
 	}
+	return !u.done
 }
 
 // GetResult returns the final character encoding detection result
