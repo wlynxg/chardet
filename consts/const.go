@@ -12,8 +12,11 @@ const (
 	Turkish   = "Turkish"
 )
 
+// Please use IANA names when extending this
+//
+// http://www.iana.org/assignments/character-sets/character-sets.xhtml
 const (
-	Ascii   = "Ascii"
+	Ascii   = "US-ASCII"  // IANA Name
 	UTF8    = "UTF-8"
 	UTF8SIG = "UTF-8-SIG"
 	UTF16   = "UTF-16"
@@ -25,21 +28,21 @@ const (
 
 	GB2312   = "GB2312"
 	HzGB2312 = "HZ-GB-2312"
-	ShiftJis = "SHIFT_JIS"
+	ShiftJis = "Shift_JIS"
 	Big5     = "Big5"
-	Johab    = "Johab"
+	Johab    = "KS_C_5601-1987"  // IANA name
 	Koi8R    = "KOI8-R"
 	TIS620   = "TIS-620"
 
-	MacCyrillic = "MacCyrillic"
-	MacRoman    = "MacRoman"
+	MacCyrillic = "MacCyrillic"  // Not in IANA
+	MacRoman    = "macintosh"    // IANA name
 
-	EucTw = "EUC-TW"
+	EucTw = "EUC-TW"  // Not in IANA
 	EucKr = "EUC-KR"
 	EucJp = "EUC-JP"
 
-	CP932 = "CP932"
-	CP949 = "CP949"
+	CP932 = "CP932"  // Not in IANA
+	CP949 = "CP949"  // Not in IANA
 
 	Windows1250 = "Windows-1250"
 	Windows1251 = "Windows-1251"
@@ -61,8 +64,8 @@ const (
 	ISO2022CN = "ISO-2022-CN"
 	ISO2022JP = "ISO-2022-JP"
 	ISO2022KR = "ISO-2022-KR"
-	UCS43412  = "X-ISO-10646-UCS-4-3412"
-	UCS42143  = "X-ISO-10646-UCS-4-2143"
+	UCS43412  = "X-ISO-10646-UCS-4-3412"  // Testing “Unusual Octet” byte order
+	UCS42143  = "X-ISO-10646-UCS-4-2143"  // Testing “Unusual Octet” byte order
 
 	IBM855 = "IBM855"
 	IBM866 = "IBM866"

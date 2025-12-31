@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="shift_jis"?>
 <!--
 Source: http://do.beginnersrack.com/atom.xml
-Expect: SHIFT_JIS
+Expect: Shift_JIS
 -->
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title>ダッチオーブンで作るテキトウ料理レシピ集</title>

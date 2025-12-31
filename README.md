@@ -28,7 +28,7 @@ go get github.com/wlynxg/chardet
 <details>
   <summary>Expand the list of supported encodings</summary>
 
-- **Ascii**
+- **ASCII** (“US-ASCII”)
 - **UTF-8**
 - **UTF-8-SIG**
 - **UTF-16**
@@ -39,13 +39,13 @@ go get github.com/wlynxg/chardet
 - **UTF-32LE**
 - **GB2312**
 - **HZ-GB-2312**
-- **SHIFT_JIS**
+- **Shift_JIS**
 - **Big5**
-- **Johab**
+- **Johab** (“KS_C_5601-1987”)
 - **KOI8-R**
 - **TIS-620**
 - **MacCyrillic**
-- **MacRoman**
+- **MacRoman** (“macintosh”)
 - **EUC-TW**
 - **EUC-KR**
 - **EUC-JP**
@@ -110,7 +110,7 @@ func main() {
 	data := []byte("Your text data here...")
 	result := chardet.Detect(data)
 	fmt.Printf("Detected result: %+v\n", result) 
-    //Output: Detected result: {Encoding:Ascii Confidence:1 Language:}
+    //Output: Detected result: {Encoding:US-ASCII Confidence:1 Language:}
 }
 ```
 
@@ -136,7 +136,7 @@ func main() {
 	// Get the result
 	result := detector.GetResult()
 	fmt.Printf("Detected result: %+v\n", result)
-	// Output: Detected result: {Encoding:Ascii Confidence:1 Language:}
+	// Output: Detected result: {Encoding:US-ASCII Confidence:1 Language:}
 }
 ```
 

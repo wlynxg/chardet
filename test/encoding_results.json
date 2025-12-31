@@ -5,22 +5,22 @@
     },
     "results": {
         "testdata/README.txt": {
-            "encoding": "ascii",
+            "encoding": "US-ASCII",
             "confidence": 1.0,
             "language": ""
         },
         "testdata/Ascii/howto.diveintomark.org.xml": {
-            "encoding": "ascii",
+            "encoding": "US-ASCII",
             "confidence": 1.0,
             "language": ""
         },
         "testdata/Ascii/_chromium_iso-8859-1_with_no_encoding_specified.html": {
-            "encoding": "ascii",
+            "encoding": "US-ASCII",
             "confidence": 1.0,
             "language": ""
         },
         "testdata/Ascii/_mozilla_bug638318_text.html": {
-            "encoding": "ascii",
+            "encoding": "US-ASCII",
             "confidence": 1.0,
             "language": ""
         },
@@ -1170,17 +1170,17 @@
             "language": ""
         },
         "testdata/Johab/hlpro-readme.txt": {
-            "encoding": "Johab",
+            "encoding": "KS_C_5601-1987",
             "confidence": 0.99,
             "language": "Korean"
         },
         "testdata/Johab/iyagi-readme.txt": {
-            "encoding": "Johab",
+            "encoding": "KS_C_5601-1987",
             "confidence": 0.99,
             "language": "Korean"
         },
         "testdata/Johab/mdir-doc.txt": {
-            "encoding": "Johab",
+            "encoding": "KS_C_5601-1987",
             "confidence": 0.99,
             "language": "Korean"
         },
@@ -1370,157 +1370,157 @@
             "language": "Russian"
         },
         "testdata/MacRoman/ioreg_output.txt": {
-            "encoding": "MacRoman",
+            "encoding": "macintosh",
             "confidence": 0.7299896597197926,
             "language": ""
         },
         "testdata/SHIFT_JIS/10e.org.xml": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/1affliate.com.xml": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/accessories-brand.com.xml": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/amefoot.net.xml": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/andore.com.inami.xml": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/andore.com.money.xml": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/andore.com.xml": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/blog.inkase.net.xml": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/blog.paseri.ne.jp.xml": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/bloglelife.com.xml": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/brag.zaka.to.xml": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/celeb.lalalu.com.xml": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/clickablewords.com.xml": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/do.beginnersrack.com.xml": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/dogsinn.jp.xml": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/grebeweb.net.xml": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/milliontimes.jp.xml": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/moon-light.ne.jp.xml": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/nextbeaut.com.xml": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/ooganemochi.com.xml": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/perth-on.net.xml": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/sakusaka-silk.net.xml": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/setsuzei119.jp.xml": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.8936752136752136,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/tamuyou.haun.org.xml": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/yasuhisa.com.xml": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/_chromium_Shift-JIS_with_no_encoding_specified.html": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.3101851851851852,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/_ude_1.txt": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/_ude_2.txt": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/_ude_3.txt": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },
         "testdata/SHIFT_JIS/_ude_4.txt": {
-            "encoding": "SHIFT_JIS",
+            "encoding": "Shift_JIS",
             "confidence": 0.99,
             "language": "Japanese"
         },

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="shift_jis"?><?xml-stylesheet href="css/rss.css" type="text/css"?>
 <!--
 Source: http://www.yasuhisa.com/could/rss.xml
-Expect: SHIFT_JIS
+Expect: Shift_JIS
 -->
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:admin="http://webns.net/mvcb/" xmlns="http://purl.org/rss/1.0/">
 <channel>
