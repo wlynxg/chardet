@@ -10,7 +10,7 @@ import (
 	"golang.org/x/text/encoding/unicode/utf32"
 )
 
-// Looks up an `golang.org/x/text/encoding` encoding by name
+// Looks up an `golang.org/x/text/encoding` encoding by charset name
 //
 // Recognizes all encodings returned by this library for which a corresponding
 // or compatible superset encoder exists.

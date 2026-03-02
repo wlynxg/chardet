@@ -9,8 +9,10 @@ import (
 
 // Result represents the character encoding detection result
 type Result struct {
-	// Encoding is the detected character encoding name
+	// Encoding is the detected legacy character encoding name (prefer `Charset` in new applications)
 	Encoding string `json:"encoding,omitempty"`
+	// Charset is the detected character encoding name using IANA-compliant naming where specified
+	Charset string `json:"charset,omitempty"`
 	// Confidence indicates how confident the detector is about the result (0.0-1.0)
 	Confidence float64 `json:"confidence,omitempty"`
 	// Language represents the detected language (if applicable)
@@ -23,6 +25,8 @@ type UniversalDetector struct {
 	MinimumThreshold float64
 	// IsoWinMap maps ISO encodings to Windows encodings
 	IsoWinMap map[string]string
+	// CharsetLegacyEncMap maps IANA charset names to their legacy equivalents
+	CharsetLegacyEncMap map[string]string
 
 	// done indicates if detection is complete
 	done bool
@@ -65,6 +69,12 @@ func NewUniversalDetector(filter consts.LangFilter) *UniversalDetector {
 			consts.ISO88599:  consts.Windows1254,
 			consts.ISO885913: consts.Windows1257,
 		},
+		CharsetLegacyEncMap: map[string]string{
+			consts.Ascii:    "Ascii",
+			consts.ShiftJIS: "Shift_JIS",
+			consts.Johab:    "Johab",
+			consts.MacRoman: "MacRoman",
+		},
 
 		inputState: consts.PureAsciiInputState,
 		lastChars:  []byte{},
@@ -106,27 +116,28 @@ func (u *UniversalDetector) Feed(buf []byte) bool {
 	// First check for known BOMs, since these are guaranteed to be correct
 	if !u.gotData {
 		// If the buf starts with BOM, we know it is UTF
-		var encoding string
+		var charset string
 		switch {
 		case bytes.HasPrefix(buf, []byte(consts.UTF8BOM)):
-			encoding = consts.UTF8SIG // EF BB BF  UTF-8 with BOM
+			charset = consts.UTF8SIG // EF BB BF  UTF-8 with BOM
 		case bytes.HasPrefix(buf, []byte(consts.UTF32LEBOM)):
-			encoding = consts.UTF32Le // FF FE 00 00  UTF-32, little-endian BOM
+			charset = consts.UTF32Le // FF FE 00 00  UTF-32, little-endian BOM
 		case bytes.HasPrefix(buf, []byte(consts.UTF32BEBOM)):
-			encoding = consts.UTF32Be // 00 00 FE FF  UTF-32, big-endian BOM
+			charset = consts.UTF32Be // 00 00 FE FF  UTF-32, big-endian BOM
 		case bytes.HasPrefix(buf, []byte(consts.UCS43412BOM)):
-			encoding = consts.UCS43412 // FE FF 00 00  UCS-4, unusual octet order BOM (3412)
+			charset = consts.UCS43412 // FE FF 00 00  UCS-4, unusual octet order BOM (3412)
 		case bytes.HasPrefix(buf, []byte(consts.UCS42143BOM)):
-			encoding = consts.UCS42143 // 00 00 FF FE  UCS-4, unusual octet order BOM (2143)
+			charset = consts.UCS42143 // 00 00 FF FE  UCS-4, unusual octet order BOM (2143)
 		case bytes.HasPrefix(buf, []byte(consts.UTF16LEBOM)):
-			encoding = consts.UTF16Le // FF FE  UTF-16, little endian BOM
+			charset = consts.UTF16Le // FF FE  UTF-16, little endian BOM
 		case bytes.HasPrefix(buf, []byte(consts.UTF16BEBOM)):
-			encoding = consts.UTF16Be // FE FF  UTF-16, big endian BOM
+			charset = consts.UTF16Be // FE FF  UTF-16, big endian BOM
 		}
 		u.gotData = true
-		if encoding != "" {
+		if charset != "" {
 			u.result = Result{
-				Encoding:   encoding,
+				Encoding:  charset,
+				Charset:   charset,
 				Confidence: 1.0,
 				Language:   "",
 			}
@@ -157,6 +168,7 @@ func (u *UniversalDetector) Feed(buf []byte) bool {
 		if u.utf1632Probe.Feed(buf) == consts.FoundItProbingState {
 			u.result = Result{
 				Encoding:   u.utf1632Probe.CharSetName(),
+				Charset:    u.utf1632Probe.CharSetName(),
 				Confidence: u.utf1632Probe.GetConfidence(),
 				Language:   "",
 			}
@@ -178,6 +190,7 @@ func (u *UniversalDetector) Feed(buf []byte) bool {
 		if u.escCharsetProbe.Feed(buf) == consts.FoundItProbingState {
 			u.result = Result{
 				Encoding:   u.escCharsetProbe.CharSetName(),
+				Charset:    u.escCharsetProbe.CharSetName(),
 				Confidence: u.escCharsetProbe.GetConfidence(),
 				Language:   u.escCharsetProbe.Language(),
 			}
@@ -205,8 +218,13 @@ func (u *UniversalDetector) Feed(buf []byte) bool {
 			}
 
 			if charsetProbe.Feed(buf) == consts.FoundItProbingState {
+				legacyName := charsetProbe.CharSetName()
+				if n, ok := u.CharsetLegacyEncMap[charsetName]; ok {
+					legacyName = n
+				}
 				u.result = Result{
-					Encoding:   charsetProbe.CharSetName(),
+					Encoding:   legacyName,
+					Charset:    charsetProbe.CharSetName(),
 					Confidence: charsetProbe.GetConfidence(),
 					Language:   charsetProbe.Language(),
 				}
@@ -235,7 +253,8 @@ func (u *UniversalDetector) GetResult() Result {
 	case !u.gotData:
 	case u.inputState == consts.PureAsciiInputState:
 		u.result = Result{
-			Encoding:   consts.Ascii,
+			Encoding:   "Ascii", // Legacy name
+			Charset:    consts.Ascii,
 			Confidence: 1.0,
 			Language:   "",
 		}
@@ -268,8 +287,16 @@ func (u *UniversalDetector) GetResult() Result {
 					charsetName = n
 				}
 			}
+
+			// Map legacy names from before this library defaulted to IANA names
+			legacyName := charsetName
+			if n, ok := u.CharsetLegacyEncMap[charsetName]; ok {
+				legacyName = n
+			}
+
 			u.result = Result{
-				Encoding:   charsetName,
+				Encoding:   legacyName,
+				Charset:    charsetName,
 				Confidence: confidence,
 				Language:   maxConfidenceProbe.Language(),
 			}

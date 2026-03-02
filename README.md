@@ -110,7 +110,44 @@ func main() {
 	data := []byte("Your text data here...")
 	result := chardet.Detect(data)
 	fmt.Printf("Detected result: %+v\n", result) 
-    //Output: Detected result: {Encoding:US-ASCII Confidence:1 Language:}
+    //Output: Detected result: {Encoding:Ascii Charset:US-ASCII Confidence:1 Language:}
+}
+```
+
+Note that `Encoding` returns the legacy encoding name and should not be used in new applications, prefer `Charset` – which uses IANA character encoding names – instead!
+
+## Decoding Text
+
+To decode text according to the character encoding returned by chardet use the included `lookup` subpackage:
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/wlynxg/chardet"
+	"github.com/wlynxg/chardet/lookup"
+)
+
+func main() {
+	data := []byte("Your text data here...")
+	result := chardet.Detect(data)
+
+	// LookupEncoding returns golang.org/x/text/encoding.Encoding instance on success
+	encoding, err := lookup.LookupEncoding(result.Charset)
+	if encoding == nil {
+		fmt.Printf("No decoder for charset %s available!\n", result.Charset)
+		return
+	}
+
+	decoder := encoding.NewDecoder()
+	message, err := decoder.String(string(data))
+	if err != nil {
+		fmt.Printf("Failed to decode with charset %s!\n", result.Charset)
+		return
+	}
+
+	fmt.Printf("Decoded string: %s\n", message)
 }
 ```
 
@@ -136,7 +173,7 @@ func main() {
 	// Get the result
 	result := detector.GetResult()
 	fmt.Printf("Detected result: %+v\n", result)
-	// Output: Detected result: {Encoding:US-ASCII Confidence:1 Language:}
+	// Output: Detected result: {Encoding:Ascii Charset:US-ASCII Confidence:1 Language:}
 }
 ```
 

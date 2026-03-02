@@ -44,8 +44,13 @@ func DetectAll(buf []byte) []Result {
 						charsetName = n
 					}
 				}
+				legacyName := charsetName
+				if n, ok := d.CharsetLegacyEncMap[charsetName]; ok {
+					legacyName = n
+				}
 				results = append(results, Result{
-					Encoding:   charsetName,
+					Encoding:   legacyName,
+					Charset:    charsetName,
 					Confidence: setProbe.GetConfidence(),
 					Language:   setProbe.Language(),
 				})
