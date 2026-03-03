@@ -44,11 +44,7 @@ func DetectAll(buf []byte) []Result {
 						charsetName = n
 					}
 				}
-				results = append(results, Result{
-					Encoding:   charsetName,
-					Confidence: setProbe.GetConfidence(),
-					Language:   setProbe.Language(),
-				})
+				results = append(results, newResult(charsetName, setProbe.GetConfidence(), setProbe.Language()))
 			}
 		}
 
