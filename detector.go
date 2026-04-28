@@ -11,6 +11,8 @@ import (
 type Result struct {
 	// Encoding is the detected character encoding name
 	Encoding string `json:"encoding,omitempty"`
+	// Charset is the detected charset name using IANA-compliant naming
+	Charset string `json:"charset,omitempty"`
 	// Confidence indicates how confident the detector is about the result (0.0-1.0)
 	Confidence float64 `json:"confidence,omitempty"`
 	// Language represents the detected language (if applicable)
@@ -125,11 +127,7 @@ func (u *UniversalDetector) Feed(buf []byte) bool {
 		}
 		u.gotData = true
 		if encoding != "" {
-			u.result = Result{
-				Encoding:   encoding,
-				Confidence: 1.0,
-				Language:   "",
-			}
+			u.result = newResult(encoding, 1.0, "")
 			u.done = true
 			return false
 		}
@@ -155,11 +153,7 @@ func (u *UniversalDetector) Feed(buf []byte) bool {
 
 	if u.utf1632Probe.State() == consts.DetectingProbingState {
 		if u.utf1632Probe.Feed(buf) == consts.FoundItProbingState {
-			u.result = Result{
-				Encoding:   u.utf1632Probe.CharSetName(),
-				Confidence: u.utf1632Probe.GetConfidence(),
-				Language:   "",
-			}
+			u.result = newResult(u.utf1632Probe.CharSetName(), u.utf1632Probe.GetConfidence(), "")
 			u.done = true
 			return false
 		}
@@ -176,11 +170,7 @@ func (u *UniversalDetector) Feed(buf []byte) bool {
 		}
 
 		if u.escCharsetProbe.Feed(buf) == consts.FoundItProbingState {
-			u.result = Result{
-				Encoding:   u.escCharsetProbe.CharSetName(),
-				Confidence: u.escCharsetProbe.GetConfidence(),
-				Language:   u.escCharsetProbe.Language(),
-			}
+			u.result = newResult(u.escCharsetProbe.CharSetName(), u.escCharsetProbe.GetConfidence(), u.escCharsetProbe.Language())
 			u.done = true
 		}
 	case consts.HighByteInputState:
@@ -205,11 +195,7 @@ func (u *UniversalDetector) Feed(buf []byte) bool {
 			}
 
 			if charsetProbe.Feed(buf) == consts.FoundItProbingState {
-				u.result = Result{
-					Encoding:   charsetProbe.CharSetName(),
-					Confidence: charsetProbe.GetConfidence(),
-					Language:   charsetProbe.Language(),
-				}
+				u.result = newResult(charsetProbe.CharSetName(), charsetProbe.GetConfidence(), charsetProbe.Language())
 				u.done = true
 				break
 			}
@@ -234,11 +220,7 @@ func (u *UniversalDetector) GetResult() Result {
 	switch {
 	case !u.gotData:
 	case u.inputState == consts.PureAsciiInputState:
-		u.result = Result{
-			Encoding:   consts.Ascii,
-			Confidence: 1.0,
-			Language:   "",
-		}
+		u.result = newResult(consts.Ascii, 1.0, "")
 	case u.inputState == consts.HighByteInputState:
 		var (
 			confidence, maxProbeConfidence float64
@@ -268,11 +250,7 @@ func (u *UniversalDetector) GetResult() Result {
 					charsetName = n
 				}
 			}
-			u.result = Result{
-				Encoding:   charsetName,
-				Confidence: confidence,
-				Language:   maxConfidenceProbe.Language(),
-			}
+			u.result = newResult(charsetName, confidence, maxConfidenceProbe.Language())
 		}
 	}
 	return u.result

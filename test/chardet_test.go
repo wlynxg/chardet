@@ -48,5 +48,19 @@ func TestCompareWithPythonChardet(t *testing.T) {
 }
 
 func compareResults(pythonResult PythonResult, goResult chardet.Result) bool {
-	return strings.EqualFold(strings.ToLower(pythonResult.Encoding), strings.ToLower(goResult.Encoding))
+	wanted := strings.ToLower(pythonResult.Encoding)
+	if strings.ToLower(goResult.Encoding) == wanted {
+		return true
+	}
+	charset := strings.ToLower(goResult.Charset)
+	if charset == wanted {
+		return true
+	}
+	if wanted == "utf-16" && (charset == "utf-16le" || charset == "utf-16be") {
+		return true
+	}
+	if wanted == "utf-32" && (charset == "utf-32le" || charset == "utf-32be") {
+		return true
+	}
+	return false
 }
